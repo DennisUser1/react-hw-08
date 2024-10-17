@@ -1,0 +1,155 @@
+.contactCardWrapper {
+    display: flex;
+    flex-direction: column;
+    row-gap: 14px;
+}
+  
+.name {
+    font-size: 18px;
+    line-height: 1.4;
+    word-wrap: break-word; 
+    word-break: break-all;
+    /* word-break: keep-all; */
+    hyphens: auto;
+    white-space: normal;
+    max-width: 165px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;  
+}
+  
+.number {
+    font-size: 15.5px;
+    width: 185px;
+    transition: color 0.25s ease-in-out;
+    color: #6e57f4;
+    font-weight: 500;
+}
+
+.iconCardWrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+    max-width: 190px; 
+}
+
+.number:hover {
+    color: #0a3dca;
+}
+
+@media (hover: none) {
+    .number:hover {
+        color: #0a3dca;
+    }
+}
+  
+@media screen and (max-width: 1024px) {
+    .number:active {
+        color: #0a3dca;
+    }
+}  
+
+.iconCardWrapper:first-of-type {
+    padding-bottom: 6px;
+    border-bottom: 0.5px solid #6e57f4;
+}
+
+.iconCardWrapperPhone {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+    max-width: 230px; 
+}
+
+.iconReUser, .iconIphone {
+    width: 16px;
+    height: 16px;
+}
+
+.deleteButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* padding: 10px; */
+    width: 70px;
+    height: 40px;
+    border-radius: 8px;
+    border: none;
+    background-color: #6e57f4;
+    color: #f8f7ff;
+    cursor: pointer;
+    position: absolute;
+    top: 30%;
+    right: 12px;
+    transition: all 0.25s cubic-bezier(0.7, 0.98, 0.86, 0.98);
+}
+
+.deleteButton:hover {
+    background-color: #5a4cfa;
+}
+
+@media (hover: none) {
+    .deleteButton:hover {
+        background-color: #5a4cfa;
+    }
+}
+  
+@media screen and (max-width: 1024px) {
+    .deleteButton:active {
+        background-color: #5a4cfa;
+    }
+}  
+  
+@media screen and (min-width: 360px) and (max-width: 460px) {
+    .name {
+        font-size: 17.5px;
+        line-height: 1.2;
+    }
+
+    .number {
+        font-size: 16px;
+        min-width: 180px;
+    }
+
+    .iconCardWrapper {
+        max-width: 185px; 
+    }
+
+    .iconCardWrapperPhone {
+        max-width: 240px; 
+    }
+}  
+
+@media screen and (min-width: 300px) and (max-width: 359px) {
+    .iconCardWrapper {
+        max-width: 160px; 
+    }
+
+    .iconCardWrapperPhone {
+        max-width: 180px; 
+    }
+    
+    .name {
+        max-width: 136px;
+        font-size: 15px;
+        line-height: 1.2;
+    }
+
+    .number {
+        font-size: 13.5px;
+        width: 100%;
+        min-width: 160px;
+    }    
+
+    .iconReUser, .iconIphone {
+        width: 13px;
+        height: 13px;
+    }
+}
+
+@media screen and (min-width: 1050px) {
+    .iconCardWrapper:first-of-type {
+       padding-bottom: 10px;
+    }
+}

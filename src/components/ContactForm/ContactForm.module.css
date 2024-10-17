@@ -1,0 +1,197 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 0 30px 0;
+  padding-bottom: 20px;
+  /* border-top-left-radius: 8px;
+  border-top-right-radius: 8px; */
+  margin: 0 auto;
+  background-color: #f8f7ff;
+}
+
+.label {
+  font-weight: 600; 
+  color: #9381ff;
+}
+
+.labelName {
+  margin-bottom: 10px;
+}
+
+.inputWrapper {
+  position: relative;
+  max-width: 280px;
+  width: 100%; 
+}
+
+.numberLabelWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+  gap: 5px;
+  margin-left: 35px;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.spanWrapper {
+  display: flex;  
+  justify-content: center;
+  align-items: center; 
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+
+.infoIcon {
+  display: flex;  
+  justify-content: center;
+  align-items: center; 
+  width: 23px;
+  height: 23px;
+  color: #6e57f4;
+}
+
+.input {
+  width: 100%; 
+  padding: 10px 35px 10px 12px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  outline: none;
+  border: 1px solid black;
+  transition: all 0.25s cubic-bezier(0.7, 0.98, 0.86, 0.98);
+}
+
+.input:hover,
+.input:focus {
+  border: 1px solid #9381ff;
+}
+
+.iconName, .iconNumber {
+  position: absolute;
+  right: 10px;
+  top: 40%;
+  transform: translateY(-50%);
+  width: 16px; 
+  height: 16px;
+  color: #333;
+}
+
+.input:focus + .iconName,
+.input:focus + .iconNumber {
+  color: #9381ff; 
+}
+  
+.error {
+  font-size: 14px;
+  color: red;
+  margin-bottom: 10px;
+  white-space: pre-line; 
+  text-align: center;
+  width: 220px;
+}
+  
+.addButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 280px;
+  height: 40px;
+  /* padding: 10px; */
+  border-radius: 9px;
+  border: none;
+  background-color: #6e57f4;
+  color:  #f8f7ff;
+  cursor: pointer;
+  margin-top: 14px;
+  transition: all 0.25s cubic-bezier(0.7, 0.98, 0.86, 0.98);
+  position: relative; 
+  overflow: hidden;
+  margin-bottom: 15px;
+}
+
+.addButton:after {
+  content: '';
+  width: 100%;
+  height: 200%;
+  position: absolute;
+  top: 0;
+  left: -100%; 
+  background: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.5) 50%,
+      rgba(255, 255, 255, 0) 100%
+    );
+  opacity: 0.6;
+  transform: skewX(-20deg);
+  transition: none;
+  animation: blink 3s infinite;
+  }
+
+.addButton:hover {
+  background-color: #5a4cfa;
+}
+
+.resetButton {
+  cursor: pointer;
+  width: 280px;
+  height: 40px;
+  border: 1.5px solid #6e57f4;
+  border-radius: 9px;
+  color: #6e57f4;
+  transition: all 0.25s cubic-bezier(0.7, 0.98, 0.86, 0.98);
+}
+
+.resetButton:hover {
+  background-color: #6e57f4;
+  color: #f8f7ff;
+}
+
+@keyframes blink {
+  0% {
+    left: -100%;
+  }
+  50% {
+    left: 100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+@media screen and (min-width: 300px) and (max-width: 359px) {
+  .inputWrapper {
+    max-width: 240px;
+  }
+
+  .addButton, .resetButton {
+    width: 240px;
+  }
+}
+  
+@media (hover: none) {
+  .resetButton:hover {
+    background-color: transparent;
+    border: 1.5px solid #6e57f4;
+    color: #6e57f4;
+  }
+  .addButton:hover {
+    background-color: #5a4cfa;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .resetButton:active {
+    background-color: #6e57f4;
+    border: 1.5px solid #6e57f4;
+    color: #f8f7ff;
+  }
+
+  .addButton:active {
+    background-color: #5a4cfa;
+    color:  #f8f7ff;
+  }
+}

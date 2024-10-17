@@ -1,0 +1,65 @@
+@import './variables.css';
+
+.tippy-box {
+  background-color: var(--tippy-bg);
+  color: var(--tippy-text);
+  border-radius: 4px;
+  padding: 8px;
+  opacity: 1; 
+  font-size: 13px;
+  line-height: 1.4;
+  width: 290px;
+}
+
+.tippy-box[data-placement^="bottom"] > .tippy-arrow:before {
+  border-color: transparent transparent var(--tippy-bg) transparent; 
+}
+  
+.tippy-box[data-placement^="top"] > .tippy-arrow:before {
+  border-color: var(--tippy-bg) transparent transparent transparent; 
+}
+  
+.tippy-box[data-placement^="left"] > .tippy-arrow:before {
+  border-color: transparent transparent transparent var(--tippy-bg); 
+}
+  
+.tippy-box[data-placement^="right"] > .tippy-arrow:before {
+  border-color: transparent var(--tippy-bg) transparent transparent; 
+}
+
+.tippy-box .marginTitleInfoTippy {
+  margin-bottom: 10px; 
+}
+
+.tippy-box .titleInfoTippy {
+  color: #3a2a9b;
+}
+  
+.textInfoTippy {
+  width: 235px;
+}
+
+.boldCountryInfo {
+  font-weight: 600; 
+}
+
+@media screen and (max-width: 767px) {
+    .tippy-box {
+        background-color: var(--tippy-bg);
+        color: var(--tippy-text);
+        border-radius: 4px;
+        padding: 8px;
+        opacity: 1; 
+        font-size: 12px;
+        line-height: 1.3;
+        width: 230px;
+    }
+
+    .textInfoTippy {
+        width: 185px;
+    }
+}
+
+.flag-icon {
+  margin-right: 8px;
+}
