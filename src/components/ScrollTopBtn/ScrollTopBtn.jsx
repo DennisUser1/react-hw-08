@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./ScrollTopBtn.module.css";
 import { GrUpgrade } from "react-icons/gr";
-import { setVisible, setIsOnClick } from "../../redux/scrollActions.js"; 
+import { setVisible, setIsOnClick } from "../../redux/scroll/scrollActions.js"; 
 
 const ScrollTopBtn = () => {
 

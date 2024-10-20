@@ -22,6 +22,12 @@ const isTemporaryEmail = (email) => {
 };
 
 export const schemaRegistration = Yup.object().shape({
+  name: Yup.string()
+    .trim()
+    .matches(/^[\p{L}\s'-]+$/u, "Invalid name field symbols! Please, use only letters, spaces, or hyphens")
+    .min(3, 'Too Short Name! Minimum characters: 3')
+    .max(28, 'Too Long Name! Maximum characters: 28')
+    .required('Here is a required field!'),
   email: Yup.string()
     .trim()
     .required('The field cannot be empty')
@@ -47,7 +53,7 @@ export const schemaRegistration = Yup.object().shape({
         return requiredSpecialChars.test(value || '');
       }
     ),
-  confirmPass: Yup.string()
+  confirmPassword: Yup.string()
     .trim()
     .required('The field cannot be empty')
     .oneOf([Yup.ref('password')], 'The passwords must match'),

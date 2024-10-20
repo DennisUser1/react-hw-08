@@ -1,5 +1,6 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { toastError } from "../../shared/helpers/toastConfig.js";
 
 axios.defaults.baseURL = "https://connections-api.goit.global";
 
@@ -19,6 +20,7 @@ export const register = createAsyncThunk(
       setAuthHeader(data.token);
       return data;
     } catch (error) {
+      toastError("Email already registered.");
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -32,6 +34,7 @@ export const logIn = createAsyncThunk(
       setAuthHeader(data.token);
       return data;
     } catch (error) {
+      toastError("Invalid email or password.");
       return thunkAPI.rejectWithValue(error.message);
     }
   }

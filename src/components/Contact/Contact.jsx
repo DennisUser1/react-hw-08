@@ -2,7 +2,7 @@ import { FaRegUser } from "react-icons/fa";
 import { MdPhoneIphone } from "react-icons/md";
 import styles from "./Contact.module.css";
 import { useDispatch } from "react-redux";
-import { deleteContact } from "../../redux/contactsOps.js";
+import { deleteContact } from "../../redux/contacts/operations.js";
 
 export default function Contact({ id, name, number }) {
 
@@ -32,6 +32,12 @@ export default function Contact({ id, name, number }) {
   
         <button className={styles.deleteButton} onClick={handleDelete}>
           Delete
+        </button>
+
+        <button className={styles.changeButton}
+          onClick={() => dispatch(setCurrentContact({ id, name, number }))}
+        >
+          Update
         </button>
       </>
     );
