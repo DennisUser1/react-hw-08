@@ -10,7 +10,7 @@ import { fetchContacts, undoDeleteContact } from "./redux/contactsOps.js";
 import { selectIsError, selectIsLoading, selectContacts } from "./redux/contactsSlice.js";
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
-import "./App.css";
+import styles from "./ContactsPage.module.css";
 
 export default function App() {
   const dispatch = useDispatch();
@@ -46,17 +46,17 @@ export default function App() {
   };
 
   return (
-    <div className="cardBox">
-      <FaAddressBook className="iconBook" />
-      <h1 className="mainTitle">Phonebook</h1>
+    <div className={styles.cardBox}>
+      <FaAddressBook className={styles.iconBook} />
+      <h1 className={styles.mainTitle}>Phonebook</h1>
       <ContactForm /> 
       <SearchBox />
-      <div className="boxShadow">
-        <div className="boxBackground">
+      <div className={styles.boxShadow}>
+        <div className={styles.boxBackground}>
           <div className={noContacts || !deletedContact ? "centeredTitleWrapper" : "subtitleWrapper"}>
-            <h2 className="preTitle">Contacts</h2>
+            <h2 className={styles.preTitle}>Contacts</h2>
             {!noContacts && deletedContact && (
-              <button className="undoButton" onClick={handleUndoDelete}>
+                <button className={styles.undoButton} onClick={handleUndoDelete}>
                 Undo
               </button>
             )}

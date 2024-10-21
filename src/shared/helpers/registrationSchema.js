@@ -26,7 +26,7 @@ export const schemaRegistration = Yup.object().shape({
     .trim()
     .matches(/^[\p{L}\s'-]+$/u, "Invalid name field symbols! Please, use only letters, spaces, or hyphens")
     .min(3, 'Too Short Name! Minimum characters: 3')
-    .max(28, 'Too Long Name! Maximum characters: 28')
+    .max(20, 'Too Long Name! Maximum characters: 20')
     .required('Here is a required field!'),
   email: Yup.string()
     .trim()
