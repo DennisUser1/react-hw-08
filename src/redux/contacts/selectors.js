@@ -1,5 +1,5 @@
 import { createSelector } from "@reduxjs/toolkit";
-import { selectNameFilter } from "../filters/selectors.js";
+import { selectNameFilter, selectNumberFilter } from "../filters/selectors.js";
 
 export const selectContacts = (state) => state.contacts.items;
 export const selectCurrentContact = (state) => state.contacts.currentEditingContact;
@@ -7,15 +7,17 @@ export const selectIsLoading = (state) => state.contacts.loading;
 export const selectIsError = (state) => state.contacts.error;
 
 export const selectFilteredContacts = createSelector(
-    [selectContacts, selectNameFilter],
-    (contacts, filter) => {
-      const lowercasedFilter = filter.toLowerCase();
-      return contacts
-        .filter(
-          (contact) =>
-            contact.name.toLowerCase().includes(lowercasedFilter) ||
-            contact.number.includes(lowercasedFilter)
-        )
-        .sort((a, b) => a.name.localeCompare(b.name));
-    }
+  [selectContacts, selectNameFilter, selectNumberFilter],
+  (contacts, nameFilter, numberFilter) => {
+    const nameFilterLower = nameFilter.toLowerCase();
+    const numberFilterLower = numberFilter.replace(/\D/g, ''); 
+    return contacts
+      .filter((contact) => {
+        const matchesName = contact.name.toLowerCase().includes(nameFilterLower);
+        const cleanedContactNumber = contact.number.replace(/\D/g, '');
+        const matchesNumber = cleanedContactNumber.includes(numberFilterLower);
+        return matchesName && matchesNumber;
+      })
+      .sort((a, b) => a.name.localeCompare(b.name));
+  }  
 );

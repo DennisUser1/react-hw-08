@@ -8,9 +8,10 @@ import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
 import "flag-icon-css/css/flag-icons.css";
 import { validationContactSchema } from "../../shared/helpers/contactSchema.js";
-import styles from "./ContactForm.module.css";
+import styles from "./ContactUpdateForm.module.css";
 import { useDispatch } from "react-redux";
-import { addContact } from "../../redux/contacts/operations.js";
+import { updateContact } from "../../redux/contacts/operations.js";
+import { setCurrentEditingContact } from "../../redux/contacts/slice.js";
 
 const formatPhoneNumber = (value) => {
   const allowedCodes = ["+38", "+1", "+49", "+48", "+33"];
@@ -67,20 +68,15 @@ const formatPhoneNumber = (value) => {
   return value;
 };
 
-export default function ContactForm() {
+export default function ContactUpdateForm() {
   const dispatch = useDispatch();
 
   const nameFieldId = useId();
   const numberFieldId = useId();
 
-  const handleSubmit = (values, actions) => {
-    dispatch(
-      addContact({
-        name: values.name,
-        number: values.number,
-      })
-    );
-    actions.resetForm();
+  const handleSubmit = (values, options) => {
+    dispatch(updateContact({ name: values.name, number: values.number, id }));
+    options.resetForm();
   };
 
   const handleNumberChange = (event, setFieldValue) => {
@@ -176,7 +172,6 @@ export default function ContactForm() {
               }
               arrow
               placement="top"
-              appendTo={document.body}
             >
               <span className={styles.spanWrapper}>
                 <HiInformationCircle
@@ -205,11 +200,15 @@ export default function ContactForm() {
             className={styles.error}
           />
 
-          <button type="submit" className={clsx(styles.addButton)}>
-            Add Contact
+          <button type="submit" className={styles.updateButton}>
+            Update Contact
           </button>
-          <button type="reset" className={clsx(styles.resetButton)}>
-            Reset
+          <button
+            type="button"
+            className={styles.cancelButton}
+            onClick={() => dispatch(setCurrentEditingContact(null))}
+          >
+            Cancel
           </button>
         </Form>
       )}

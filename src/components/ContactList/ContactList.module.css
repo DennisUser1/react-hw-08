@@ -1,45 +1,80 @@
 .contactsList {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px 30px;
-    background-color: #b8b8ff87;   
-    padding: 10px 40px 40px 40px;
-    border-radius: 0 0 8px 8px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px 30px;
+  background-color: #b8b8ff87;
+  padding: 10px 40px 40px 40px;
+  border-radius: 0 0 8px 8px;
 }
-  
+
 .contactItem {
-    max-height: 170px;
-    min-width: 320px;
-    max-width: 100%;
-    border-radius: 16px;
-    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
-    background-color: #f8f7ff;
-    padding: 20px;
-    position: relative;
+  max-height: 170px;
+  min-width: 320px;
+  max-width: 100%;
+  border-radius: 16px;
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+  background-color: #f8f7ff;
+  padding: 20px;
+  position: relative;
+}
+
+.messageWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* background-color: #b8b8ff87; */
+}
+
+.messageContentWrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 25px 18px 25px 18px;
+  gap: 8px;
+  background-color: #f8f7ff;
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+  width: 300px;
+  border-radius: 16px;
+  margin-bottom: 35px;
+}
+
+.messageInfo {
+  text-align: center;
+  color: red;
+  width: 240px;
+}
+
+.messageIconInfo {
+  color: red;
 }
 
 @media screen and (min-width: 300px) and (max-width: 359px) {
-    .contactsList {
-        padding: 10px 10px 40px 10px; 
-        gap: 20px;
-    }
+  .contactsList {
+    padding: 10px 10px 40px 10px;
+    gap: 20px;
+  }
 
-    .contactItem {
-        min-width: 260px;
-        padding: 8px;
-    }
+  .contactItem {
+    min-width: 260px;
+    padding: 8px;
+  }
 }
 
 @media screen and (min-width: 360px) and (max-width: 380px) {
-    .contactItem {
-        min-width: 300px;
-    }
+  .contactItem {
+    min-width: 300px;
+  }
 }
 
 @media screen and (min-width: 300px) and (max-width: 359px) {
-    .contactItem {
-        min-width: 260px;
-    }
+  .contactItem {
+    min-width: 260px;
+  }
 }
 
+@media screen and (min-width: 300px) and (max-width: 359px) {
+  .messageContentWrapper {
+    width: 260px;
+  }
+}

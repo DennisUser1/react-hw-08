@@ -6,7 +6,7 @@ import UserMenu from "../UserMenu/UserMenu";
 import AuthNav from "../AuthNav/AuthNav";
 import styles from "./AppBar.module.css";
 
-export default function AppBar () {
+export default function AppBar() {
   const user = useSelector(selectUser);
   const isLoggedIn = useSelector(selectIsLoggedIn);
 
@@ -19,10 +19,10 @@ export default function AppBar () {
           Phonebook
         </Link>
       )}
-      <div className={styles.navigation}>
+      <div className={styles.navigationItems}>
         <Navigation />
         {isLoggedIn ? <UserMenu /> : <AuthNav />}
       </div>
     </header>
   );
-};
+}

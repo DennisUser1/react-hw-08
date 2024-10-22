@@ -7,6 +7,7 @@ import Layout from "components/Layout/Layout";
 import Loader from "components/Loader/Loader";
 import { selectIsRefreshing } from "./redux/auth/selectors.js";
 import { refreshUser } from "./redux/auth/operations.js";
+import "flag-icon-css/css/flag-icons.css";
 
 const HomePage = lazy(() => import("./pages/HomePage/HomePage"));
 const RegistrationPage = lazy(() =>
@@ -33,28 +34,25 @@ const App = () => {
             <Route
               path="register"
               element={
-                <RestrictedRoute
-                  redirectTo="/contacts"
-                  component={<RegistrationPage />}
-                />
+                <RestrictedRoute>
+                  <RegistrationPage />
+                </RestrictedRoute>
               }
             />
             <Route
               path="login"
               element={
-                <RestrictedRoute
-                  redirectTo="/contacts"
-                  component={<LoginPage />}
-                />
+                <RestrictedRoute>
+                  <LoginPage />
+                </RestrictedRoute>
               }
             />
             <Route
               path="contacts"
               element={
-                <PrivateRoute
-                  redirectTo="/login"
-                  component={<ContactsPage />}
-                />
+                <PrivateRoute>
+                  <ContactsPage />
+                </PrivateRoute>
               }
             />
           </Route>

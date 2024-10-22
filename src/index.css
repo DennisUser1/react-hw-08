@@ -1,0 +1,25 @@
+body,
+html {
+  overflow-x: hidden;
+  background-color: #313131;
+}
+
+.active {
+  border-bottom: 1px solid #f8f7ff;
+}
+
+.loginPageWrapper,
+.registrationPageWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  padding: 20px;
+  height: 100vh;
+}
+
+.pageTitle {
+  color: #ffffff;
+  font-size: 25px;
+}

@@ -30,15 +30,16 @@ export const schemaRegistration = Yup.object().shape({
     .required('Here is a required field!'),
   email: Yup.string()
     .trim()
-    .required('The field cannot be empty')
+    .required('Here is a required field!')
     .email('Incorrect e-mail format')
     .test('is-temp-email', 'Temporary mailboxes cannot be used', (value) => {
       return !isTemporaryEmail(value);
     }),
   password: Yup.string()
     .trim()
-    .required('The field cannot be empty')
+    .required('Here is a required field!')
     .min(8, 'The password must contain at least 8 characters')
+    .max(20, 'The password must contain no more than 20 characters')
     .matches(
       /^[A-Za-z0-9\s"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]*$/,
       'The password contains invalid characters'
@@ -55,6 +56,6 @@ export const schemaRegistration = Yup.object().shape({
     ),
   confirmPassword: Yup.string()
     .trim()
-    .required('The field cannot be empty')
+    .required('Here is a required field!')
     .oneOf([Yup.ref('password')], 'The passwords must match'),
 });

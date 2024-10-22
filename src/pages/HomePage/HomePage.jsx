@@ -6,8 +6,8 @@ import styles from "./HomePage.module.css";
 export default function HomePage() {
   const isLoggedIn = useSelector(selectIsLoggedIn);
   return (
-    <>
-      <div className={styles.homePage}>
+    <section className={styles.homePage}>
+      <div className={styles.homePageWrapper}>
         <h1 className={styles.title}>Welcome to Your Personal Phonebook!</h1>
         {isLoggedIn ? (
           <Link className={styles.button} to="/contacts">
@@ -19,6 +19,6 @@ export default function HomePage() {
           </Link>
         )}
       </div>
-    </>
+    </section>
   );
 }

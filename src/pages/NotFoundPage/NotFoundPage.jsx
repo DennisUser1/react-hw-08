@@ -12,12 +12,12 @@ export default function NotFoundPage() {
 
   return (
     <section className={styles.NotFoundPage}>
-      <a
+      <NavLink
         className={styles.linkContacts}
-        href="#"
+        to="/contacts"
         data-ribbon="Back to Contacts"
         title="Back to Contacts"
-      ></a>
+      ></NavLink>
       <h1 className={styles.titlePage}>404</h1>
       <div className={styles.cloakWrapper}>
         <div className={styles.cloakContainer}>
