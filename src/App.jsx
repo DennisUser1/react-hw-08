@@ -7,7 +7,7 @@ import Layout from "components/Layout/Layout";
 import Loader from "components/Loader/Loader";
 import { selectIsRefreshing } from "./redux/auth/selectors.js";
 import { refreshUser } from "./redux/auth/operations.js";
-import "flag-icon-css/css/flag-icons.css";
+
 
 const HomePage = lazy(() => import("./pages/HomePage/HomePage"));
 const RegistrationPage = lazy(() =>

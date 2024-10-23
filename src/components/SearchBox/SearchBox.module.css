@@ -53,7 +53,7 @@ input:focus::placeholder {
 .iconSearch {
     position: absolute;
     right: 10px;
-    top: 50%;
+    top: 40%;
     transform: translateY(-50%);
     color: #333;
     width: 16px;

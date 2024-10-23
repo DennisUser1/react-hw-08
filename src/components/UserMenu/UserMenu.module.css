@@ -1,3 +1,8 @@
+.wrapperButton {
+  display: flex;
+  align-items: center;
+}
+
 .buttonLogOut {
   text-transform: uppercase;
   font-size: 18px;
