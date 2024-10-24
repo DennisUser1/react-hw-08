@@ -8,7 +8,6 @@ import Loader from "components/Loader/Loader";
 import { selectIsRefreshing } from "./redux/auth/selectors.js";
 import { refreshUser } from "./redux/auth/operations.js";
 
-
 const HomePage = lazy(() => import("./pages/HomePage/HomePage"));
 const RegistrationPage = lazy(() =>
   import("./pages/RegistrationPage/RegistrationPage")
@@ -19,13 +18,13 @@ const NotFoundPage = lazy(() => import("./pages/NotFoundPage/NotFoundPage"));
 
 const App = () => {
   const dispatch = useDispatch();
-  const isRefreshing = useSelector(selectIsRefreshing);
+  const isRefresh = useSelector(selectIsRefreshing);
 
   useEffect(() => {
     dispatch(refreshUser());
   }, [dispatch]);
 
-  return isRefreshing ? null : (
+  return isRefresh ? null : (
     <>
       <Suspense fallback={<Loader />}>
         <Routes>

@@ -105,7 +105,7 @@ const contactsSlice = createSlice({
       })
       .addCase(updateContact.fulfilled, (state, action) => {
         state.items = state.items.map((item) =>
-          item.id === state.currentEditingContact.id ? { ...action.payload } : item
+          item.id == state.currentEditingContact.id ? { ...action.payload } : item
         );
         state.currentEditingContact = null;
       });

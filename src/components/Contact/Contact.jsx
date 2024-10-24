@@ -3,42 +3,41 @@ import { MdPhoneIphone } from "react-icons/md";
 import styles from "./Contact.module.css";
 import { useDispatch } from "react-redux";
 import { deleteContact } from "../../redux/contacts/operations.js";
+import { setCurrentEditingContact } from "../../redux/contacts/slice.js";
 
 export default function Contact({ id, name, number }) {
+  const dispatch = useDispatch();
+  const handleDelete = () => {
+    dispatch(deleteContact(id));
+  };
 
-    const dispatch = useDispatch();
-    const handleDelete = () => {
-      dispatch(deleteContact(id));
-    };
-    
-    return (
-      <>
-        <div className={styles.contactCardWrapper}>
-          <div className={styles.iconCardWrapper}>
-              <FaRegUser className={styles.iconReUser}/>
-              <p className={styles.name}>
-              {name}
-              </p>
-          </div>
-          <div className={styles.iconCardWrapperPhone}>
-              <MdPhoneIphone className={styles.iconIphone}/>
-              <p className={styles.number}>
-              <a href={`tel:${number}`} className={styles.phoneLink}>
+  return (
+    <>
+      <div className={styles.contactCardWrapper}>
+        <div className={styles.iconCardWrapper}>
+          <FaRegUser className={styles.iconReUser} />
+          <p className={styles.name}>{name}</p>
+        </div>
+        <div className={styles.iconCardWrapperPhone}>
+          <MdPhoneIphone className={styles.iconIphone} />
+          <p className={styles.number}>
+            <a href={`tel:${number}`} className={styles.phoneLink}>
               {number}
             </a>
-              </p>
-          </div>
+          </p>
         </div>
-  
-        <button className={styles.deleteButton} onClick={handleDelete}>
-          Delete
-        </button>
+      </div>
 
-        <button className={styles.changeButton}
-          onClick={() => dispatch(setCurrentContact({ id, name, number }))}
-        >
-          Update
-        </button>
-      </>
-    );
-  };
+      <button className={styles.deleteButton} onClick={handleDelete}>
+        Delete
+      </button>
+
+      <button
+        className={styles.updateButton}
+        onClick={() => dispatch(setCurrentEditingContact({ id, name, number }))}
+      >
+        Update
+      </button>
+    </>
+  );
+}

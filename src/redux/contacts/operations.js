@@ -49,6 +49,7 @@ export const undoDeleteContact = createAsyncThunk(
             const response = await axios.post("/contacts", contact); 
             return response.data; 
         } catch (error) {
+            toastError("Error undoing contact deletion.");
             return thunkAPI.rejectWithValue(error.message);
         }
     }
@@ -56,9 +57,9 @@ export const undoDeleteContact = createAsyncThunk(
 
 export const updateContact = createAsyncThunk(
     "contacts/updateContact",
-    async ({ name, number, contactId }, thunkAPI) => {
+    async ({ name, number, id }, thunkAPI) => {
       try {
-            const response = await axios.patch(`/contacts/${contactId}`, { name, number });
+            const response = await axios.patch(`/contacts/${id}`, { name, number });
             toastSuccess("Contact successfully updated!");
             return response.data;
       } catch (error) {

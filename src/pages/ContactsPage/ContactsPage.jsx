@@ -24,7 +24,7 @@ import styles from "./ContactsPage.module.css";
 export default function App() {
   const dispatch = useDispatch();
   const contacts = useSelector(selectContacts);
-  const noContacts = contacts.length == 0;
+  const noContacts = !contacts || contacts.length == 0;
   const deletedContact = useSelector((state) => state.contacts.deletedContact);
   const isLoading = useSelector(selectIsLoading);
   const isError = useSelector(selectIsError);
