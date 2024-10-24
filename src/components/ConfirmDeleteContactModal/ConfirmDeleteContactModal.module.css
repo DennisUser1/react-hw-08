@@ -1,0 +1,62 @@
+.modalBackdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+
+.modalContent {
+  position: relative;
+  padding: 20px;
+  width: 300px;
+  border-radius: 16px;
+  overflow: hidden;
+  background: linear-gradient(145deg, #dce9f5, #f5f3ed);
+  box-shadow: 6px 6px 12px rgba(34, 45, 65, 0.4),
+    -6px -6px 12px rgba(240, 248, 255, 0.2);
+}
+
+.message {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.btnPanel {
+  display: flex;
+  justify-content: space-around;
+
+  gap: 40px;
+}
+
+.btn {
+  width: 110px;
+  gap: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: transparent;
+  padding: 10px;
+  border-radius: 16px;
+  border: none;
+  height: 48px;
+  background-color: #dce9f5;
+  color: #052a4b;
+  font-weight: 600;
+  box-shadow: 6px 6px 12px rgba(34, 45, 65, 0.4),
+    -6px -6px 12px rgba(240, 248, 255, 0.2);
+  transition: all 350ms linear;
+}
+
+.btn:hover {
+  background-color: #065096;
+  color: #dce9f5;
+}

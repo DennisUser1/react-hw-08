@@ -2,14 +2,18 @@ import { FaRegUser } from "react-icons/fa";
 import { MdPhoneIphone } from "react-icons/md";
 import styles from "./Contact.module.css";
 import { useDispatch } from "react-redux";
-import { deleteContact } from "../../redux/contacts/operations.js";
 import { setCurrentEditingContact } from "../../redux/contacts/slice.js";
+import ConfirmDeleteModal from "../ConfirmDeleteContactModal/ConfirmDeleteContactModal";
+import { useToggle } from "../../shared/hooks/useToggleState";
 
 export default function Contact({ id, name, number }) {
   const dispatch = useDispatch();
-  const handleDelete = () => {
-    dispatch(deleteContact(id));
-  };
+
+  const {
+    isOpen: isDeleteOpen,
+    openModal: openDeleteModal,
+    closeModal: closeDeleteModal,
+  } = useToggle();
 
   return (
     <>
@@ -28,10 +32,12 @@ export default function Contact({ id, name, number }) {
         </div>
       </div>
 
-      <button className={styles.deleteButton} onClick={handleDelete}>
+      <button className={styles.deleteButton} onClick={openDeleteModal}>
         Delete
       </button>
-
+      {isDeleteOpen && (
+        <ConfirmDeleteModal id={id} onClose={closeDeleteModal} />
+      )}
       <button
         className={styles.updateButton}
         onClick={() => dispatch(setCurrentEditingContact({ id, name, number }))}
