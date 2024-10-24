@@ -88,6 +88,7 @@
 .link {
   color: #0a4b9a;
   margin-left: 8px;
+  font-weight: 600;
 }
 
 .link:hover {

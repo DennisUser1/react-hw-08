@@ -7,14 +7,26 @@ import {
 import { useSelector } from "react-redux";
 import { FaChess } from "react-icons/fa";
 
+const groupContactsByLetter = (contacts) => {
+  return contacts.reduce((groups, contact) => {
+    const letter = contact.name[0].toUpperCase();
+    if (!groups[letter]) {
+      groups[letter] = [];
+    }
+    groups[letter].push(contact);
+    return groups;
+  }, {});
+};
+
 export default function ContactList() {
   const filteredContacts = useSelector(selectFilteredContacts);
   const isLoading = useSelector(selectIsLoading);
+  const groupedContacts = groupContactsByLetter(filteredContacts);
 
   return (
     <>
       <ul className={styles.contactsList}>
-        {filteredContacts.length == 0 && !isLoading ? (
+        {Object.keys(groupedContacts).length == 0 && !isLoading ? (
           <div className={styles.messageWrapper}>
             <div className={styles.messageContentWrapper}>
               <FaChess className={styles.messageIconInfo} size="16" />
@@ -26,13 +38,19 @@ export default function ContactList() {
             </div>
           </div>
         ) : (
-          filteredContacts.map(({ id, name, number }) => {
-            return (
-              <li className={styles.contactItem} key={id}>
-                <Contact id={id} name={name} number={number} />
-              </li>
-            );
-          })
+          Object.entries(groupedContacts).map(([letter, contacts]) => (
+            <div key={letter}>
+              <div className={styles.letterDivider}>
+                <span className={styles.letter}>{letter}</span>
+                <hr className={styles.dividerLine} />
+              </div>
+              {contacts.map(({ id, name, number }) => (
+                <li className={styles.contactItem} key={id}>
+                  <Contact id={id} name={name} number={number} />
+                </li>
+              ))}
+            </div>
+          ))
         )}
       </ul>
     </>
