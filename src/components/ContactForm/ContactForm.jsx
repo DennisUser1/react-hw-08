@@ -5,8 +5,6 @@ import { FaRegUser } from "react-icons/fa";
 import { MdPhoneIphone } from "react-icons/md";
 import { HiInformationCircle } from "react-icons/hi";
 import Tippy from "@tippyjs/react";
-import "tippy.js/dist/tippy.css";
-import "flag-icon-css/css/flag-icons.css";
 import { validationContactSchema } from "../../shared/helpers/contactSchema.js";
 import styles from "./ContactForm.module.css";
 import { useDispatch } from "react-redux";
@@ -138,28 +136,28 @@ export default function ContactForm() {
                     <strong className="titleInfoTippy">
                       Supported Countries:
                     </strong>
-                    <ul>
-                      <li>
+                    <ul className="listTippyCountry">
+                      <li className="itemTippyCountry">
                         <span className="flag-icon flag-icon-ua"></span>
                         <span className="boldCountryInfo">Ukraine:</span> +38
                         (xxx)-xxx-xx-xx
                       </li>
-                      <li>
+                      <li className="itemTippyCountry">
                         <span className="flag-icon flag-icon-us"></span>
                         <span className="boldCountryInfo">USA:</span> +1
                         (xxx)-xxx-xxxx
                       </li>
-                      <li>
+                      <li className="itemTippyCountry">
                         <span className="flag-icon flag-icon-de"></span>
                         <span className="boldCountryInfo">Germany:</span> +49
                         (xxx)-xxx-xxxx
                       </li>
-                      <li>
+                      <li className="itemTippyCountry">
                         <span className="flag-icon flag-icon-pl"></span>
                         <span className="boldCountryInfo">Poland:</span> +48
                         (xxx)-xxx-xxx
                       </li>
-                      <li>
+                      <li className="itemTippyCountry">
                         <span className="flag-icon flag-icon-fr"></span>
                         <span className="boldCountryInfo">France:</span> +33
                         (xx)-xx-xx-xx-xx

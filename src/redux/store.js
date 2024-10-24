@@ -17,14 +17,14 @@ import storage from "redux-persist/lib/storage";
 import { combineReducers } from "redux";
 import logger from 'redux-logger';
 
-const contactsPersistConfig = {
-  key: "contacts",
+const authPersistConfig = {
+  key: "auth",
   version: 1,
   storage,
-  whitelist: ["items"],
+  whitelist: ["token"],
 };
 
-const persistedAuthReducer = persistReducer(contactsPersistConfig, authReducer);
+const persistedAuthReducer = persistReducer(authPersistConfig, authReducer);
 
 const rootReducer = combineReducers({
   auth: persistedAuthReducer,
