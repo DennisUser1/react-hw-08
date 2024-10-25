@@ -1,5 +1,6 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { selectIsLoading } from "./selectors.js"; 
 import { toastSuccess, toastError } from "../../shared/helpers/toastConfig.js";
 
 export const fetchContacts = createAsyncThunk(
@@ -39,6 +40,14 @@ export const deleteContact = createAsyncThunk(
             toastError("Error deleting contact.");
             return thunkAPI.rejectWithValue(error.message);
         }
+    },
+    {
+        condition: (_, thunkAPI) => {
+            const isLoading = selectIsLoading(thunkAPI.getState()); 
+            if (isLoading) {
+                return false;
+            }
+        },
     }
 );
 

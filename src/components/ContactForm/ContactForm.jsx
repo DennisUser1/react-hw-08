@@ -7,8 +7,10 @@ import { HiInformationCircle } from "react-icons/hi";
 import Tippy from "@tippyjs/react";
 import { validationContactSchema } from "../../shared/helpers/contactSchema.js";
 import styles from "./ContactForm.module.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addContact } from "../../redux/contacts/operations.js";
+import { selectContacts } from "../../redux/contacts/selectors.js";
+import { toastInfoDuplicate } from "../../shared/helpers/toastConfig.js";
 
 const formatPhoneNumber = (value) => {
   const allowedCodes = ["+38", "+1", "+49", "+48", "+33"];
@@ -67,18 +69,36 @@ const formatPhoneNumber = (value) => {
 
 export default function ContactForm() {
   const dispatch = useDispatch();
+  const contacts = useSelector(selectContacts);
 
   const nameFieldId = useId();
   const numberFieldId = useId();
 
   const handleSubmit = (values, actions) => {
-    dispatch(
-      addContact({
-        name: values.name,
-        number: values.number,
-      })
+    const existingContactByNameAndNumber = contacts.find(
+      (contact) =>
+        contact.name == values.name && contact.number == values.number
     );
-    actions.resetForm();
+    const existingContactByNumber = contacts.find(
+      (contact) =>
+        contact.number == values.number && contact.name !== values.name
+    );
+
+    if (existingContactByNameAndNumber) {
+      toastInfoDuplicate(
+        "The contact already exists with this name and number"
+      );
+    } else if (existingContactByNumber) {
+      toastInfoDuplicate("This number is already in the system");
+    } else {
+      dispatch(
+        addContact({
+          name: values.name,
+          number: values.number,
+        })
+      );
+      actions.resetForm();
+    }
   };
 
   const handleNumberChange = (event, setFieldValue) => {

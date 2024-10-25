@@ -1,5 +1,4 @@
 import iziToast from 'izitoast';
-import 'izitoast/dist/css/iziToast.min.css';
 
 const toastSuccessConfig = {
     timeout: 5000,
@@ -26,6 +25,19 @@ const toastErrorConfig = {
     borderColor: '#e74c3c',
     title: 'Error', 
 };
+
+const toastInfoDuplicateConfig = {
+  timeout: 5000,
+  progressBar: true,
+  close: true,
+  position: window.innerWidth <= 768 ? 'bottomCenter' : 'topCenter',
+  color: 'blue',
+  backgroundColor: '#f0f4f8',
+  messageColor: '#1e90ff',
+  titleColor: '#1e90ff',
+  borderColor: '#4682b4',
+  title: 'Duplicate',
+};
   
 const toastSuccess = (message) => {
     iziToast.show({
@@ -40,5 +52,13 @@ const toastError = (message) => {
       message: message,
     });
 };
+
+const toastInfoDuplicate = (message) => {
+  iziToast.show({
+    ...toastInfoDuplicateConfig,
+    message: message,
+  });
+};
+
   
-export { toastSuccess, toastError };
+export { toastSuccess, toastError, toastInfoDuplicate };

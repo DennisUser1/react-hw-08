@@ -45,6 +45,7 @@
 
 .boldCountryInfo {
   font-weight: 600;
+  margin-right: 4px;
 }
 
 @media screen and (max-width: 767px) {

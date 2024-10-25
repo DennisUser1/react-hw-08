@@ -5,8 +5,6 @@ import { FaRegUser } from "react-icons/fa";
 import { MdPhoneIphone } from "react-icons/md";
 import { HiInformationCircle } from "react-icons/hi";
 import Tippy from "@tippyjs/react";
-import "tippy.js/dist/tippy.css";
-import "flag-icon-css/css/flag-icons.css";
 import { validationContactSchema } from "../../shared/helpers/contactSchema.js";
 import styles from "./ContactUpdateForm.module.css";
 import { useDispatch } from "react-redux";

@@ -1,7 +1,7 @@
 .contactsList {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 20px 30px;
   background-color: #b8b8ff87;
   padding: 10px 40px 40px 40px;
@@ -50,6 +50,10 @@
   color: red;
 }
 
+.letter {
+  font-weight: 500;
+}
+
 @media screen and (min-width: 300px) and (max-width: 359px) {
   .contactsList {
     padding: 10px 10px 40px 10px;
@@ -77,5 +81,22 @@
 @media screen and (min-width: 300px) and (max-width: 359px) {
   .messageContentWrapper {
     width: 260px;
+  }
+}
+
+/* @media screen and (max-width: 600px) {
+  .contactsList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+} */
+
+@media screen and (max-width: 790px) {
+  .contactsList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px 20px;
   }
 }

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import styles from "./NotFoundPage.module.css";
 import { NavLink } from "react-router-dom";
+import styles from "./NotFoundPage.module.css";
 
 export default function NotFoundPage() {
   useEffect(() => {

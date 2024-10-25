@@ -18,7 +18,6 @@ import {
   selectCurrentContact,
 } from "../../redux/contacts/selectors.js";
 import iziToast from "izitoast";
-import "izitoast/dist/css/iziToast.min.css";
 import styles from "./ContactsPage.module.css";
 
 export default function App() {
