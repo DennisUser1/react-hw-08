@@ -86,10 +86,12 @@ export default function ContactForm() {
 
     if (existingContactByNameAndNumber) {
       toastInfoDuplicate(
-        "The contact already exists with this name and number"
+        `The contact already exists with this name: <strong>${values.name}</strong> and number: <strong>${values.number}</strong>`
       );
     } else if (existingContactByNumber) {
-      toastInfoDuplicate("This number is already in the system");
+      toastInfoDuplicate(
+        `This number: <strong>${values.number}</strong> is already in the system`
+      );
     } else {
       dispatch(
         addContact({

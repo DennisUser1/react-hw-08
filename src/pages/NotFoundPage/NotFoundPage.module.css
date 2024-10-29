@@ -5,6 +5,10 @@
   transform-style: preserve-3d;
 }
 
+.noBorder {
+  border-bottom: none;
+}
+
 .bodyNotFound {
   min-height: 100vh;
   display: flex;

@@ -13,7 +13,7 @@ export default function NotFoundPage() {
   return (
     <section className={styles.NotFoundPage}>
       <NavLink
-        className={styles.linkContacts}
+        className={`${styles.linkContacts} ${styles.noBorder}`}
         to="/contacts"
         data-ribbon="Back to Contacts"
         title="Back to Contacts"
