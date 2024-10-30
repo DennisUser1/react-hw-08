@@ -5,6 +5,7 @@ import Navigation from "../Navigation/Navigation";
 import UserMenu from "../UserMenu/UserMenu";
 import AuthNav from "../AuthNav/AuthNav";
 import styles from "./AppBar.module.css";
+import logo from "../../assets/images/logo.png";
 
 export default function AppBar() {
   const user = useSelector(selectUser);
@@ -15,8 +16,9 @@ export default function AppBar() {
       {isLoggedIn ? (
         <p className={styles.text}>Welcome, {user.name}</p>
       ) : (
-        <Link className={styles.text} to="/">
-          Phonebook
+        <Link className={styles.headerLogo} to="/">
+          <img src={logo} className={styles.logo} alt="Phonebook Logo" />
+          <p className={styles.phonebookText}>Phonebook</p>
         </Link>
       )}
       <div className={styles.navigationItems}>

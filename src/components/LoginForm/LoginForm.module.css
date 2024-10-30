@@ -105,3 +105,16 @@
   background-color: #f8f7ff;
   padding: 16px;
 }
+
+@media screen and (max-width: 359px) {
+  .form {
+    width: 280px;
+    height: 480px;
+    padding: 0 28px;
+  }
+
+  .boxLogIn {
+    width: 280px;
+    padding: 8px;
+  }
+}

@@ -104,3 +104,15 @@
   border-radius: 8px;
   background-color: #f8f7ff;
 }
+
+@media screen and (max-width: 359px) {
+  .form {
+    width: 280px;
+    height: 480px;
+    padding: 0 28px;
+  }
+
+  .boxRegister {
+    width: 280px;
+  }
+}
