@@ -60,8 +60,8 @@ const contactsSlice = createSlice({
         state.isError = null;
       })
       .addCase(deleteContact.fulfilled, (state, action) => {
-        const indexToDelete = state.items.findIndex(contact => contact.id == action.payload);
-        if (indexToDelete == -1) {
+        const indexToDelete = state.items.findIndex(contact => contact.id === action.payload);
+        if (indexToDelete === -1) {
           return;
         }
         const contactToDelete = state.items[indexToDelete];
@@ -69,7 +69,7 @@ const contactsSlice = createSlice({
         if (contactToDelete) {
           state.deletedContact = contactToDelete;
           state.deletedContactIndex = indexToDelete;
-          state.wasLastDeleted = state.items.length == 1; 
+          state.wasLastDeleted = state.items.length === 1; 
           state.items.splice(indexToDelete, 1);
         }
 
@@ -105,7 +105,7 @@ const contactsSlice = createSlice({
       })
       .addCase(updateContact.fulfilled, (state, action) => {
         state.items = state.items.map((item) =>
-          item.id == state.currentEditingContact.id ? { ...action.payload } : item
+          item.id === state.currentEditingContact.id ? { ...action.payload } : item
         );
         state.currentEditingContact = null;
       });

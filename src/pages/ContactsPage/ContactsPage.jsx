@@ -23,7 +23,7 @@ import styles from "./ContactsPage.module.css";
 export default function App() {
   const dispatch = useDispatch();
   const contacts = useSelector(selectContacts);
-  const noContacts = !contacts || contacts.length == 0;
+  const noContacts = !contacts || contacts.length === 0;
   const deletedContact = useSelector((state) => state.contacts.deletedContact);
   const isLoading = useSelector(selectIsLoading);
   const isError = useSelector(selectIsError);
@@ -41,7 +41,7 @@ export default function App() {
 
       iziToast.error({
         title: "Something went wrong...",
-        message: "Please check your internet connection",
+        message: "Please check your internet connection.",
         position: toastPosition,
         timeout: 5000,
         progressBar: true,

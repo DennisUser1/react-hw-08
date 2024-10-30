@@ -3,7 +3,7 @@ import { useEffect } from "react";
 const useCloseModal = (onClose) => {
   useEffect(() => {
     const handleKeyDown = (e) => {
-      if (e.code == "Escape") {
+      if (e.code === "Escape") {
         onClose();
       }
     };
@@ -15,11 +15,10 @@ const useCloseModal = (onClose) => {
   }, [onClose]);
 
   const handleBackdropClick = (e) => {
-    if (e.target == e.currentTarget) {
+    if (e.target === e.currentTarget) {
       onClose();
     }
   };
-
   return { handleBackdropClick };
 };
 

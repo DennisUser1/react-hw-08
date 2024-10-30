@@ -7,9 +7,11 @@ import { HiInformationCircle } from "react-icons/hi";
 import Tippy from "@tippyjs/react";
 import { validationContactSchema } from "../../shared/helpers/contactSchema.js";
 import styles from "./ContactUpdateForm.module.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { updateContact } from "../../redux/contacts/operations.js";
+import { selectContacts } from "../../redux/contacts/selectors.js";
 import { setCurrentEditingContact } from "../../redux/contacts/slice.js";
+import { toastInfoDuplicate } from "../../shared/helpers/toastConfig.js";
 
 const formatPhoneNumber = (value) => {
   const allowedCodes = ["+38", "+1", "+49", "+48", "+33"];
@@ -68,19 +70,44 @@ const formatPhoneNumber = (value) => {
 
 export default function ContactUpdateForm({ name, number, id }) {
   const dispatch = useDispatch();
+  const contacts = useSelector(selectContacts);
 
   const nameFieldId = useId();
   const numberFieldId = useId();
 
   const handleSubmit = (values, options) => {
-    dispatch(updateContact({ name: values.name, number: values.number, id }));
-    options.resetForm();
+    const existingContactByNameAndNumber = contacts.find(
+      (contact) =>
+        contact.name === values.name &&
+        contact.number === values.number &&
+        contact.id !== id
+    );
+
+    const existingContactByNumber = contacts.find(
+      (contact) =>
+        contact.number === values.number &&
+        contact.name !== values.name &&
+        contact.id !== id
+    );
+
+    if (existingContactByNameAndNumber) {
+      toastInfoDuplicate(
+        `The contact already exists with this name: <strong>${values.name}</strong> and number: <strong>${values.number}</strong>.`
+      );
+    } else if (existingContactByNumber) {
+      toastInfoDuplicate(
+        `This number: <strong>${values.number}</strong> is already in the system.`
+      );
+    } else {
+      dispatch(updateContact({ name: values.name, number: values.number, id }));
+      options.resetForm();
+    }
   };
 
   const handleNumberChange = (event, setFieldValue) => {
     let value = event.target.value;
 
-    if (value == "") {
+    if (value === "") {
       setFieldValue("number", "");
       return;
     }
@@ -133,28 +160,28 @@ export default function ContactUpdateForm({ name, number, id }) {
                     <strong className="titleInfoTippy">
                       Supported Countries:
                     </strong>
-                    <ul>
-                      <li>
+                    <ul className="listTippyCountry">
+                      <li className="itemTippyCountry">
                         <span className="flag-icon flag-icon-ua"></span>
                         <span className="boldCountryInfo">Ukraine:</span> +38
                         (xxx)-xxx-xx-xx
                       </li>
-                      <li>
+                      <li className="itemTippyCountry">
                         <span className="flag-icon flag-icon-us"></span>
                         <span className="boldCountryInfo">USA:</span> +1
                         (xxx)-xxx-xxxx
                       </li>
-                      <li>
+                      <li className="itemTippyCountry">
                         <span className="flag-icon flag-icon-de"></span>
                         <span className="boldCountryInfo">Germany:</span> +49
                         (xxx)-xxx-xxxx
                       </li>
-                      <li>
+                      <li className="itemTippyCountry">
                         <span className="flag-icon flag-icon-pl"></span>
                         <span className="boldCountryInfo">Poland:</span> +48
                         (xxx)-xxx-xxx
                       </li>
-                      <li>
+                      <li className="itemTippyCountry">
                         <span className="flag-icon flag-icon-fr"></span>
                         <span className="boldCountryInfo">France:</span> +33
                         (xx)-xx-xx-xx-xx

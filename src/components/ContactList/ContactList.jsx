@@ -26,7 +26,7 @@ export default function ContactList() {
   return (
     <>
       <ul className={styles.contactsList}>
-        {Object.keys(groupedContacts).length == 0 && !isLoading ? (
+        {Object.keys(groupedContacts).length === 0 && !isLoading ? (
           <div className={styles.messageWrapper}>
             <div className={styles.messageContentWrapper}>
               <FaChess className={styles.messageIconInfo} size="16" />

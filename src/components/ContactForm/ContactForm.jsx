@@ -77,20 +77,20 @@ export default function ContactForm() {
   const handleSubmit = (values, actions) => {
     const existingContactByNameAndNumber = contacts.find(
       (contact) =>
-        contact.name == values.name && contact.number == values.number
+        contact.name === values.name && contact.number === values.number
     );
     const existingContactByNumber = contacts.find(
       (contact) =>
-        contact.number == values.number && contact.name !== values.name
+        contact.number === values.number && contact.name !== values.name
     );
 
     if (existingContactByNameAndNumber) {
       toastInfoDuplicate(
-        `The contact already exists with this name: <strong>${values.name}</strong> and number: <strong>${values.number}</strong>`
+        `The contact already exists with this name: <strong>${values.name}</strong> and number: <strong>${values.number}</strong>.`
       );
     } else if (existingContactByNumber) {
       toastInfoDuplicate(
-        `This number: <strong>${values.number}</strong> is already in the system`
+        `This number: <strong>${values.number}</strong> is already in the system.`
       );
     } else {
       dispatch(
@@ -106,7 +106,7 @@ export default function ContactForm() {
   const handleNumberChange = (event, setFieldValue) => {
     let value = event.target.value;
 
-    if (value == "") {
+    if (value === "") {
       setFieldValue("number", "");
       return;
     }
