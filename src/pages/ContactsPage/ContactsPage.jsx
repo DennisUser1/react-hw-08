@@ -7,10 +7,7 @@ import Loader from "components/Loader/Loader";
 import ContactUpdateForm from "components/ContactUpdateForm/ContactUpdateForm";
 import { FaAddressBook } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  fetchContacts,
-  undoDeleteContact,
-} from "../../redux/contacts/operations.js";
+import { fetchContacts } from "../../redux/contacts/operations.js";
 import {
   selectIsError,
   selectIsLoading,
@@ -23,8 +20,6 @@ import styles from "./ContactsPage.module.css";
 export default function App() {
   const dispatch = useDispatch();
   const contacts = useSelector(selectContacts);
-  const noContacts = !contacts || contacts.length === 0;
-  const deletedContact = useSelector((state) => state.contacts.deletedContact);
   const isLoading = useSelector(selectIsLoading);
   const isError = useSelector(selectIsError);
   const currentContact = useSelector(selectCurrentContact);
@@ -36,7 +31,6 @@ export default function App() {
   useEffect(() => {
     if (isError) {
       const screenWidth = window.innerWidth;
-
       const toastPosition = screenWidth < 768 ? "bottomCenter" : "topRight";
 
       iziToast.error({
@@ -50,10 +44,6 @@ export default function App() {
     }
   }, [isError]);
 
-  const handleUndoDelete = () => {
-    dispatch(undoDeleteContact(deletedContact));
-  };
-
   return (
     <div className={styles.cardBox}>
       <FaAddressBook className={styles.iconBook} />
@@ -65,26 +55,10 @@ export default function App() {
       )}
       <SearchBox />
       <div className={styles.boxShadow}>
-        <div className={styles.boxBackground}>
-          <div
-            className={
-              noContacts || !deletedContact
-                ? styles.centeredTitleWrapper
-                : styles.subtitleWrapper
-            }
-          >
-            <h2 className={styles.preTitle}>Contacts</h2>
-            {!noContacts && deletedContact && (
-              <button className={styles.undoButton} onClick={handleUndoDelete}>
-                Undo
-              </button>
-            )}
-          </div>
-        </div>
         <ContactList />
-        {isLoading && !isError && <Loader />}
       </div>
       <ScrollTopBtn />
+      {isLoading && !isError && <Loader />}
     </div>
   );
 }

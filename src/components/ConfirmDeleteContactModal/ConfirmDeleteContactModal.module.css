@@ -14,10 +14,10 @@
 .modalContent {
   position: relative;
   padding: 20px;
-  width: 300px;
+  width: 320px;
   border-radius: 16px;
   overflow: hidden;
-  background: linear-gradient(145deg, #dce9f5, #f5f3ed);
+  background: linear-gradient(145deg, #f8f7ff, #f1f1f3);
   box-shadow: 6px 6px 12px rgba(34, 45, 65, 0.4),
     -6px -6px 12px rgba(240, 248, 255, 0.2);
 }
@@ -30,7 +30,6 @@
 .btnPanel {
   display: flex;
   justify-content: space-around;
-
   gap: 40px;
 }
 
@@ -48,7 +47,7 @@
   border-radius: 16px;
   border: none;
   height: 48px;
-  background-color: #dce9f5;
+  background-color: #f8f7ff;
   color: #052a4b;
   font-weight: 600;
   box-shadow: 6px 6px 12px rgba(34, 45, 65, 0.4),
@@ -59,4 +58,21 @@
 .btn:hover {
   background-color: #6e57f4;
   color: #dce9f5;
+}
+
+@media screen and (min-width: 359px) and (max-width: 380px) {
+  .modalContent {
+    width: 300px;
+  }
+}
+
+@media screen and (max-width: 359px) {
+  .modalContent {
+    width: 260px;
+    padding: 12px;
+  }
+
+  .btnPanel {
+    gap: 10px;
+  }
 }

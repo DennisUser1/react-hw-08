@@ -28,11 +28,11 @@ const ConfirmDeleteModal = ({ id, onClose }) => {
         </p>
         <div className={styles.btnPanel}>
           <button className={styles.btn} type="button" onClick={handleDelete}>
-            Yes
+            Delete
             <FcOk size="25px" />
           </button>
           <button className={styles.btn} type="button" onClick={handleCancel}>
-            No
+            Cancel
             <FcCancel size="25px" />
           </button>
         </div>

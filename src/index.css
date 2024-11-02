@@ -16,7 +16,14 @@ html {
   align-items: center;
   gap: 24px;
   padding: 20px;
+}
+
+.loginPageWrapper {
   height: 88vh;
+}
+
+.registrationPageWrapper {
+  height: 94vh;
 }
 
 .pageTitle {

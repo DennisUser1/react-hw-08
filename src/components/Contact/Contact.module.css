@@ -125,7 +125,7 @@
   }
 }
 
-@media screen and (min-width: 360px) and (max-width: 460px) {
+@media screen and (min-width: 359px) and (max-width: 460px) {
   .name {
     font-size: 17.5px;
     line-height: 1.2;
