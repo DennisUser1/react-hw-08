@@ -41,7 +41,8 @@
   margin-top: 30px;
 }
 
-.messageInfo, .messageWarning {
+.messageInfo,
+.messageWarning {
   text-align: center;
   color: red;
   width: 240px;
@@ -86,7 +87,7 @@
   color: #3a2a9b;
   text-transform: uppercase;
   margin: 0;
-  line-height: 1;
+  line-height: 0.9;
 }
 
 .titleList {

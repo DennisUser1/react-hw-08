@@ -13,6 +13,8 @@ import {
 import { undoDeleteContact } from "../../redux/contacts/operations.js";
 import { FaChess } from "react-icons/fa";
 import { GiBoomerang } from "react-icons/gi";
+import { useState } from "react";
+import { TypeAnimation } from "react-type-animation";
 
 const groupContactsByLetter = (contacts) => {
   return contacts.reduce((groups, contact) => {
@@ -34,6 +36,7 @@ export default function ContactList() {
   const noContacts = !contacts || contacts.length === 0;
   const nameFilter = useSelector(selectNameFilter);
   const numberFilter = useSelector(selectNumberFilter);
+  const [textColor, setTextColor] = useState("#ff0000");
 
   const groupedContacts = groupContactsByLetter(filteredContacts);
 
@@ -59,7 +62,7 @@ export default function ContactList() {
                   : styles.titleList
               }
             >
-              List
+              List of
             </span>
             <br />
             Contacts
@@ -72,7 +75,7 @@ export default function ContactList() {
         </div>
       </div>
 
-      {filteredContacts.length === 0 ? (
+      {!isLoading && filteredContacts.length === 0 ? (
         nameFilter || numberFilter ? (
           <div className={styles.messageWrapper}>
             <div className={styles.messageContentWrapper}>
@@ -91,7 +94,39 @@ export default function ContactList() {
               <p className={styles.messageInfo}>
                 No contacts are available at the moment.
                 <br />
-                Please, add some contacts to view them here.
+                <span
+                  style={{
+                    color: textColor,
+                  }}
+                >
+                  <TypeAnimation
+                    sequence={[
+                      "Please,",
+                      800,
+                      () => setTextColor("#313131"),
+                      "Please, add",
+                      800,
+                      () => setTextColor("#0000ff"),
+                      "Please, add some",
+                      800,
+                      () => setTextColor("#ff00ff"),
+                      "Please, add some contacts",
+                      800,
+                      () => setTextColor("#7b2cb3"),
+                      "Please, add some contacts to view",
+                      800,
+                      () => setTextColor("#ff0000"),
+                      "Please, add some contacts to view them",
+                      800,
+                      () => setTextColor("#b91b6a"),
+                      "Please, add some contacts to view them here.",
+                      1000,
+                      () => setTextColor("#313131"),
+                      "",
+                    ]}
+                    repeat={Infinity}
+                  />
+                </span>
               </p>
             </div>
           </div>
