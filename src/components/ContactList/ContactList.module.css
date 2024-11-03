@@ -41,13 +41,14 @@
   margin-top: 30px;
 }
 
-.messageInfo {
+.messageInfo, .messageWarning {
   text-align: center;
   color: red;
   width: 240px;
 }
 
-.messageIconInfo {
+.messageIconInfo,
+.messageIconWarning {
   color: red;
 }
 

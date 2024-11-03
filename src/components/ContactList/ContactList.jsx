@@ -1,13 +1,18 @@
 import Contact from "../Contact/Contact";
 import styles from "./ContactList.module.css";
+import { useDispatch, useSelector } from "react-redux";
 import {
   selectFilteredContacts,
   selectIsLoading,
   selectContacts,
 } from "../../redux/contacts/selectors.js";
-import { useDispatch, useSelector } from "react-redux";
+import {
+  selectNameFilter,
+  selectNumberFilter,
+} from "../../redux/filters/selectors.js";
 import { undoDeleteContact } from "../../redux/contacts/operations.js";
 import { FaChess } from "react-icons/fa";
+import { GiBoomerang } from "react-icons/gi";
 
 const groupContactsByLetter = (contacts) => {
   return contacts.reduce((groups, contact) => {
@@ -27,6 +32,8 @@ export default function ContactList() {
   const contacts = useSelector(selectContacts);
   const deletedContact = useSelector((state) => state.contacts.deletedContact);
   const noContacts = !contacts || contacts.length === 0;
+  const nameFilter = useSelector(selectNameFilter);
+  const numberFilter = useSelector(selectNumberFilter);
 
   const groupedContacts = groupContactsByLetter(filteredContacts);
 
@@ -64,33 +71,48 @@ export default function ContactList() {
           )}
         </div>
       </div>
-      {Object.keys(groupedContacts).length === 0 && !isLoading && (
-        <div className={styles.messageWrapper}>
-          <div className={styles.messageContentWrapper}>
-            <FaChess className={styles.messageIconInfo} size="16" />
-            <p className={styles.messageInfo}>
-              No contacts are available at the moment.
-              <br />
-              Please, add some contacts to view them here.
-            </p>
-          </div>
-        </div>
-      )}
-      <ul className={styles.contactsList}>
-        {Object.entries(groupedContacts).map(([letter, contacts]) => (
-          <div key={letter}>
-            <div className={styles.letterDivider}>
-              <span className={styles.letter}>{letter}</span>
-              <hr className={styles.dividerLine} />
+
+      {filteredContacts.length === 0 ? (
+        nameFilter || numberFilter ? (
+          <div className={styles.messageWrapper}>
+            <div className={styles.messageContentWrapper}>
+              <GiBoomerang className={styles.messageIconWarning} size="24" />
+              <p className={styles.messageWarning}>
+                No contacts found matching your search criteria.
+                <br />
+                Try refining your search.
+              </p>
             </div>
-            {contacts.map(({ id, name, number }) => (
-              <li className={styles.contactItem} key={id}>
-                <Contact id={id} name={name} number={number} />
-              </li>
-            ))}
           </div>
-        ))}
-      </ul>
+        ) : (
+          <div className={styles.messageWrapper}>
+            <div className={styles.messageContentWrapper}>
+              <FaChess className={styles.messageIconInfo} size="16" />
+              <p className={styles.messageInfo}>
+                No contacts are available at the moment.
+                <br />
+                Please, add some contacts to view them here.
+              </p>
+            </div>
+          </div>
+        )
+      ) : (
+        <ul className={styles.contactsList}>
+          {Object.entries(groupedContacts).map(([letter, contacts]) => (
+            <div key={letter}>
+              <div className={styles.letterDivider}>
+                <span className={styles.letter}>{letter}</span>
+                <hr className={styles.dividerLine} />
+              </div>
+              {contacts.map(({ id, name, number }) => (
+                <li className={styles.contactItem} key={id}>
+                  <Contact id={id} name={name} number={number} />
+                </li>
+              ))}
+            </div>
+          ))}
+        </ul>
+      )}
     </>
   );
 }
