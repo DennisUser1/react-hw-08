@@ -11,7 +11,6 @@ import { fetchContacts } from "../../redux/contacts/operations.js";
 import {
   selectIsError,
   selectIsLoading,
-  selectContacts,
   selectCurrentContact,
 } from "../../redux/contacts/selectors.js";
 import iziToast from "izitoast";
@@ -19,7 +18,6 @@ import styles from "./ContactsPage.module.css";
 
 export default function App() {
   const dispatch = useDispatch();
-  const contacts = useSelector(selectContacts);
   const isLoading = useSelector(selectIsLoading);
   const isError = useSelector(selectIsError);
   const currentContact = useSelector(selectCurrentContact);

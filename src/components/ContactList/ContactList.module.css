@@ -90,13 +90,13 @@
 
 .titleList {
   position: absolute;
-  right: 94px;
+  right: 98px;
   font-size: 24px;
 }
 
 .subtitleWrapper .titleWithUndo {
   position: absolute;
-  right: 144px;
+  right: 156px;
 }
 
 .undoButton {
@@ -167,13 +167,13 @@
 
   .titleList {
     position: absolute;
-    right: 86px;
+    right: 92px;
     font-size: 22px;
   }
 
   .subtitleWrapper .titleWithUndo {
     position: absolute;
-    right: 134px;
+    right: 143px;
   }
 
   .undoButton {
@@ -186,13 +186,13 @@
 @media screen and (min-width: 380px) and (max-width: 768px) {
   .titleList {
     position: absolute;
-    right: 100px;
+    right: 106px;
     font-size: 22px;
   }
 
   .subtitleWrapper .titleWithUndo {
     position: absolute;
-    right: 163px;
+    right: 173px;
   }
 
   .preTitle {
@@ -243,20 +243,16 @@
     min-width: 260px;
     padding: 8px;
   }
+
+  .messageContentWrapper {
+    width: 260px;
+  }
 }
 
 @media screen and (min-width: 359px) and (max-width: 380px) {
   .contactItem {
     min-width: 300px;
-  }
-}
-
-@media screen and (min-width: 300px) and (max-width: 359px) {
-  .contactItem {
-    min-width: 260px;
-  }
-  .messageContentWrapper {
-    width: 260px;
+    padding: 20px 12px 20px 12px;
   }
 }
 
