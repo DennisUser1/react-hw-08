@@ -4,6 +4,7 @@ import clsx from "clsx";
 import { FaRegUser } from "react-icons/fa";
 import { MdPhoneIphone } from "react-icons/md";
 import { HiInformationCircle } from "react-icons/hi";
+import { FiChevronDown } from "react-icons/fi";
 import Tippy from "@tippyjs/react";
 import { validationContactSchema } from "../../shared/helpers/contactSchema.js";
 import styles from "./ContactForm.module.css";
@@ -11,6 +12,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { addContact } from "../../redux/contacts/operations.js";
 import { selectContacts } from "../../redux/contacts/selectors.js";
 import { toastInfoDuplicate } from "../../shared/helpers/toastConfig.js";
+import {
+  Accordion as MuiAccordion,
+  AccordionDetails,
+  AccordionSummary,
+} from "@mui/material";
+import { styled } from "@mui/material/styles";
 
 const formatPhoneNumber = (value) => {
   const allowedCodes = ["+38", "+1", "+49", "+48", "+33"];
@@ -75,11 +82,11 @@ export default function ContactForm() {
   const numberFieldId = useId();
 
   const handleSubmit = (values, actions) => {
-    const existingContactByNameAndNumber = contacts.find(
+    const existingContactByNameAndNumber = contacts.some(
       (contact) =>
         contact.name === values.name && contact.number === values.number
     );
-    const existingContactByNumber = contacts.find(
+    const existingContactByNumber = contacts.some(
       (contact) =>
         contact.number === values.number && contact.name !== values.name
     );
@@ -118,121 +125,154 @@ export default function ContactForm() {
     setFieldValue("number", formatted);
   };
 
+  const Accordion = styled(MuiAccordion)(() => ({
+    boxShadow:
+      "0px 1px 0.5px -0.5px rgba(0, 0, 0, 0.1), 0px 0.5px 0.5px 0px rgba(0, 0, 0, 0.07), 0px 0.5px 1.5px 0px rgba(0, 0, 0, 0.06)",
+    "&.Mui-expanded": {
+      margin: 0,
+    },
+    "&:first-of-type": {
+      borderTopLeftRadius: 0,
+      borderTopRightRadius: 0,
+    },
+  }));
+
   return (
-    <Formik
-      initialValues={{ name: "", number: "" }}
-      validationSchema={validationContactSchema}
-      onSubmit={handleSubmit}
-    >
-      {({ setFieldValue }) => (
-        <Form className={styles.form}>
-          <label
-            className={`${styles.label} ${styles.labelName}`}
-            htmlFor={nameFieldId}
-          >
-            Name
-          </label>
-          <div className={styles.inputWrapper}>
-            <Field
-              type="text"
-              name="name"
-              id={nameFieldId}
-              className={styles.input}
-              autoComplete="off"
-              autoFocus
-              placeholder="Enter full name"
-            />
-            <FaRegUser className={clsx(styles.iconName)} />
-          </div>
-          <ErrorMessage name="name" component="span" className={styles.error} />
-
-          <div className={styles.numberLabelWrapper}>
-            <label className={styles.label} htmlFor={numberFieldId}>
-              Number
-            </label>
-
-            <Tippy
-              content={
-                <div>
-                  <div className="marginTitleInfoTippy">
-                    <strong className="titleInfoTippy">
-                      Supported Countries:
-                    </strong>
-                    <ul className="listTippyCountry">
-                      <li className="itemTippyCountry">
-                        <span className="flag-icon flag-icon-ua"></span>
-                        <span className="boldCountryInfo">Ukraine:</span> +38
-                        (xxx)-xxx-xx-xx
-                      </li>
-                      <li className="itemTippyCountry">
-                        <span className="flag-icon flag-icon-us"></span>
-                        <span className="boldCountryInfo">USA:</span> +1
-                        (xxx)-xxx-xxxx
-                      </li>
-                      <li className="itemTippyCountry">
-                        <span className="flag-icon flag-icon-de"></span>
-                        <span className="boldCountryInfo">Germany:</span> +49
-                        (xxx)-xxx-xxxx
-                      </li>
-                      <li className="itemTippyCountry">
-                        <span className="flag-icon flag-icon-pl"></span>
-                        <span className="boldCountryInfo">Poland:</span> +48
-                        (xxx)-xxx-xxx
-                      </li>
-                      <li className="itemTippyCountry">
-                        <span className="flag-icon flag-icon-fr"></span>
-                        <span className="boldCountryInfo">France:</span> +33
-                        (xx)-xx-xx-xx-xx
-                      </li>
-                    </ul>
-                  </div>
-                  <strong className="titleInfoTippy">Input Format:</strong>
-                  <p className="textInfoTippy">
-                    Just type the numbers, the “+” symbol, spaces, and other
-                    characters will be added automatically. For example,
-                    14155551234.
-                  </p>
-                </div>
-              }
-              arrow
-              placement="top"
-              appendTo={document.body}
-            >
-              <span className={styles.spanWrapper}>
-                <HiInformationCircle
-                  className={styles.infoIcon}
-                  aria-label="Help information for phone input"
+    <Accordion className={styles.accordion} defaultExpanded>
+      <AccordionSummary
+        expandIcon={<FiChevronDown style={{ color: "#000" }} />}
+        aria-controls="panel-content"
+        id="panel-accordion"
+        className={styles.accordionSummary}
+      >
+        <h2 className={styles.accordionText}>Add new contact</h2>
+      </AccordionSummary>
+      <AccordionDetails className={styles.accordionDetails}>
+        <Formik
+          initialValues={{ name: "", number: "" }}
+          validationSchema={validationContactSchema}
+          onSubmit={handleSubmit}
+        >
+          {({ setFieldValue }) => (
+            <Form className={styles.form}>
+              <label
+                className={`${styles.label} ${styles.labelName}`}
+                htmlFor={nameFieldId}
+              >
+                Name
+              </label>
+              <div className={styles.inputWrapper}>
+                <Field
+                  type="text"
+                  name="name"
+                  id={nameFieldId}
+                  className={styles.input}
+                  autoComplete="off"
+                  autoFocus
+                  placeholder="Enter full name"
                 />
-              </span>
-            </Tippy>
-          </div>
+                <FaRegUser className={clsx(styles.iconName)} />
+              </div>
+              <ErrorMessage
+                name="name"
+                component="span"
+                className={styles.error}
+              />
 
-          <div className={styles.inputWrapper}>
-            <Field
-              type="tel"
-              name="number"
-              id={numberFieldId}
-              className={styles.input}
-              autoComplete="off"
-              placeholder="Enter number phone"
-              onChange={(event) => handleNumberChange(event, setFieldValue)}
-            />
-            <MdPhoneIphone className={clsx(styles.iconNumber)} />
-          </div>
-          <ErrorMessage
-            name="number"
-            component="span"
-            className={styles.error}
-          />
+              <div className={styles.numberLabelWrapper}>
+                <label className={styles.label} htmlFor={numberFieldId}>
+                  Number
+                </label>
 
-          <button type="submit" className={clsx(styles.addButton)}>
-            Add Contact
-          </button>
-          <button type="reset" className={clsx(styles.resetButton)}>
-            Reset
-          </button>
-        </Form>
-      )}
-    </Formik>
+                <Tippy
+                  content={
+                    <div>
+                      <div className="marginTitleInfoTippy">
+                        <strong className="titleInfoTippy">
+                          Supported Countries:
+                        </strong>
+                        <ul className="listTippyCountry">
+                          <li className="itemTippyCountry">
+                            <span className="flag-icon flag-icon-ua"></span>
+                            <span className="boldCountryInfo">
+                              Ukraine:
+                            </span>{" "}
+                            +38 (xxx)-xxx-xx-xx
+                          </li>
+                          <li className="itemTippyCountry">
+                            <span className="flag-icon flag-icon-us"></span>
+                            <span className="boldCountryInfo">USA:</span> +1
+                            (xxx)-xxx-xxxx
+                          </li>
+                          <li className="itemTippyCountry">
+                            <span className="flag-icon flag-icon-de"></span>
+                            <span className="boldCountryInfo">
+                              Germany:
+                            </span>{" "}
+                            +49 (xxx)-xxx-xxxx
+                          </li>
+                          <li className="itemTippyCountry">
+                            <span className="flag-icon flag-icon-pl"></span>
+                            <span className="boldCountryInfo">Poland:</span> +48
+                            (xxx)-xxx-xxx
+                          </li>
+                          <li className="itemTippyCountry">
+                            <span className="flag-icon flag-icon-fr"></span>
+                            <span className="boldCountryInfo">France:</span> +33
+                            (xx)-xx-xx-xx-xx
+                          </li>
+                        </ul>
+                      </div>
+                      <strong className="titleInfoTippy">Input Format:</strong>
+                      <p className="textInfoTippy">
+                        Just type the numbers, the “+” symbol, spaces, and other
+                        characters will be added automatically. For example,
+                        14155551234.
+                      </p>
+                    </div>
+                  }
+                  arrow
+                  placement="top"
+                  appendTo={document.body}
+                >
+                  <span className={styles.spanWrapper}>
+                    <HiInformationCircle
+                      className={styles.infoIcon}
+                      aria-label="Help information for phone input"
+                    />
+                  </span>
+                </Tippy>
+              </div>
+
+              <div className={styles.inputWrapper}>
+                <Field
+                  type="tel"
+                  name="number"
+                  id={numberFieldId}
+                  className={styles.input}
+                  autoComplete="off"
+                  placeholder="Enter number phone"
+                  onChange={(event) => handleNumberChange(event, setFieldValue)}
+                  aria-labelledby="phone-input-label"
+                />
+                <MdPhoneIphone className={clsx(styles.iconNumber)} />
+              </div>
+              <ErrorMessage
+                name="number"
+                component="span"
+                className={styles.error}
+              />
+
+              <button type="submit" className={clsx(styles.addButton)}>
+                Add Contact
+              </button>
+              <button type="reset" className={clsx(styles.resetButton)}>
+                Reset
+              </button>
+            </Form>
+          )}
+        </Formik>
+      </AccordionDetails>
+    </Accordion>
   );
 }

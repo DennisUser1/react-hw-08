@@ -36,6 +36,7 @@ export default function ContactList() {
   const noContacts = !contacts || contacts.length === 0;
   const nameFilter = useSelector(selectNameFilter);
   const numberFilter = useSelector(selectNumberFilter);
+  const isSearching = nameFilter || numberFilter;
   const [textColor, setTextColor] = useState("#ff0000");
 
   const groupedContacts = groupContactsByLetter(filteredContacts);
@@ -76,7 +77,7 @@ export default function ContactList() {
       </div>
 
       {!isLoading && filteredContacts.length === 0 ? (
-        nameFilter || numberFilter ? (
+        isSearching ? (
           <div className={styles.messageWrapper}>
             <div className={styles.messageContentWrapper}>
               <GiBoomerang className={styles.messageIconWarning} size="24" />
@@ -121,7 +122,7 @@ export default function ContactList() {
                       () => setTextColor("#b91b6a"),
                       "Please, add some contacts to view them here.",
                       1000,
-                      () => setTextColor("#313131"),
+                      () => setTextColor("#000000"),
                       "",
                     ]}
                     repeat={Infinity}
@@ -132,7 +133,11 @@ export default function ContactList() {
           </div>
         )
       ) : (
-        <ul className={styles.contactsList}>
+        <ul
+          className={`${styles.contactsList} ${
+            isSearching ? styles.contactsListCentered : ""
+          }`}
+        >
           {Object.entries(groupedContacts).map(([letter, contacts]) => (
             <div key={letter}>
               <div className={styles.letterDivider}>

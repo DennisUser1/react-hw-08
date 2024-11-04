@@ -1,84 +1,84 @@
 .searchWrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 30px 0 30px 0;
-    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
-    border-bottom-left-radius: 8px;
-    border-bottom-right-radius: 8px;
-    margin: 0 auto;
-    background-color: #f8f7ff;
-    gap: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 0 30px 0;
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  margin: 0 auto;
+  background-color: #f8f7ff;
+  gap: 16px;
 }
-  
+
 label {
-    display: flex;
-    flex-direction: column-reverse;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    font-weight: 600; 
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-weight: 600;
 }
 
 .inputContainer {
-    position: relative;
-    width: 280px;
+  position: relative;
+  width: 280px;
 }
-  
+
 input {
-    width: 100%;
-    padding: 10px 35px 10px 12px; 
-    margin-bottom: 10px;
-    border-radius: 8px;
-    outline: none;
-    border: 1px solid black;
-    transition: all 0.25s cubic-bezier(0.7, 0.98, 0.86, 0.98);
+  width: 100%;
+  padding: 10px 35px 10px 12px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  outline: none;
+  border: 1px solid black;
+  transition: all 0.25s cubic-bezier(0.7, 0.98, 0.86, 0.98);
 }
 
 input:hover,
 input:focus {
-    border: 1px solid #9381ff;
+  border: 1px solid #9381ff;
 }
 
 input:focus + .iconSearch {
-    color: #9381ff; 
-    animation: spin 0.5s ease-in-out;
+  color: #9381ff;
+  animation: spin 0.5s ease-in-out;
 }
 
 input:focus::placeholder {
-    color: #9381ff; 
+  color: #9381ff;
 }
 
 .iconSearch {
-    position: absolute;
-    right: 10px;
-    top: 40%;
-    transform: translateY(-50%);
-    color: #333;
-    width: 16px;
-    height: 16px;
+  position: absolute;
+  right: 10px;
+  top: 40%;
+  transform: translateY(-50%);
+  color: #333;
+  width: 16px;
+  height: 16px;
 }
 
 @keyframes spin {
-    0% {
-      transform: translateY(-50%) rotate(0deg);
-    }
-    100% {
-      transform: translateY(-50%) rotate(360deg);
-    }
+  0% {
+    transform: translateY(-50%) rotate(0deg);
+  }
+  100% {
+    transform: translateY(-50%) rotate(360deg);
+  }
 }
 
 @media screen and (min-width: 300px) and (max-width: 359px) {
-    .inputContainer {
-        width: 240px;
-    }
+  .inputContainer {
+    width: 240px;
+  }
 
-    input {
-        padding: 10px 35px 10px 6px; 
-    }
+  input {
+    padding: 10px 35px 10px 6px;
+  }
 
-    input::placeholder {
-        font-size: 14px;
-    }
+  input::placeholder {
+    font-size: 14px;
+  }
 }

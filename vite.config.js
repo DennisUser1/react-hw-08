@@ -13,6 +13,7 @@ export default defineConfig({
   resolve: {
     alias: {
       components: '/src/components',
+      '@mui/styled-engine': '@mui/styled-engine-sc',
     },
   },
   optimizeDeps: {

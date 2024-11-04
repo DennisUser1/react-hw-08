@@ -8,6 +8,10 @@
   border-radius: 0 0 8px 8px;
 }
 
+.contactsListCentered {
+  justify-content: center;
+}
+
 .contactItem {
   max-height: 170px;
   min-width: 320px;
