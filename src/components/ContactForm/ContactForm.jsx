@@ -19,6 +19,18 @@ import {
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
+const Accordion = styled(MuiAccordion)(() => ({
+  boxShadow:
+    "0px 1px 0.5px -0.5px rgba(0, 0, 0, 0.1), 0px 0.5px 0.5px 0px rgba(0, 0, 0, 0.07), 0px 0.5px 1.5px 0px rgba(0, 0, 0, 0.06)",
+  "&.Mui-expanded": {
+    margin: 0,
+  },
+  "&:first-of-type": {
+    borderTopLeftRadius: 0,
+    borderTopRightRadius: 0,
+  },
+}));
+
 const formatPhoneNumber = (value) => {
   const allowedCodes = ["+38", "+1", "+49", "+48", "+33"];
   const cleaned = value.replace(/[^\d+]/g, "");
@@ -124,18 +136,6 @@ export default function ContactForm() {
     const formatted = formatPhoneNumber(value);
     setFieldValue("number", formatted);
   };
-
-  const Accordion = styled(MuiAccordion)(() => ({
-    boxShadow:
-      "0px 1px 0.5px -0.5px rgba(0, 0, 0, 0.1), 0px 0.5px 0.5px 0px rgba(0, 0, 0, 0.07), 0px 0.5px 1.5px 0px rgba(0, 0, 0, 0.06)",
-    "&.Mui-expanded": {
-      margin: 0,
-    },
-    "&:first-of-type": {
-      borderTopLeftRadius: 0,
-      borderTopRightRadius: 0,
-    },
-  }));
 
   return (
     <Accordion className={styles.accordion} defaultExpanded>

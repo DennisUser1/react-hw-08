@@ -1,9 +1,53 @@
 .contactCardWrapper {
   display: flex;
   flex-direction: column;
-  row-gap: 14px;
   justify-content: center;
   height: 100%;
+  transform-style: preserve-3d;
+}
+
+.frontSide,
+.backSide {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+
+.frontSide {
+  background-color: #f8f7ff;
+  z-index: 2;
+  transform: rotateY(0deg);
+}
+
+.backSide {
+  transform: rotateY(180deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wrapperTitleCard {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.textFrontSide {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 18px;
+  font-weight: 500;
+  height: 20px;
+  transform: translateZ(0);
+}
+
+.wrapperContacts {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  row-gap: 14px;
 }
 
 .name {
@@ -30,12 +74,18 @@
   justify-content: flex-start;
 }
 
-.iconCardWrapper {
+.iconCardWrapper,
+.wrapperTitleCard {
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 8px;
   max-width: 190px;
+  transform: translateZ(0);
+}
+
+.wrapperTitleCard {
+  padding-bottom: 10px;
 }
 
 .number:hover {
@@ -68,9 +118,11 @@
 }
 
 .iconReUser,
-.iconIphone {
+.iconIphone,
+.iconIdCard {
   width: 16px;
   height: 16px;
+  transform: translateZ(0);
 }
 
 .deleteButton {
@@ -91,7 +143,8 @@
   transition: all 0.25s cubic-bezier(0.7, 0.98, 0.86, 0.98);
 }
 
-.deleteButton:hover {
+.deleteButton:hover,
+.updateButton:hover {
   background-color: #5a4cfa;
 }
 

@@ -38,8 +38,16 @@ export default function ContactList() {
   const numberFilter = useSelector(selectNumberFilter);
   const isSearching = nameFilter || numberFilter;
   const [textColor, setTextColor] = useState("#ff0000");
+  const [flippedContacts, setFlippedContacts] = useState(false);
 
   const groupedContacts = groupContactsByLetter(filteredContacts);
+
+  const handleFlip = (id) => {
+    setFlippedContacts((prev) => ({
+      ...prev,
+      [id]: !prev[id],
+    }));
+  };
 
   const handleUndoDelete = () => {
     dispatch(undoDeleteContact(deletedContact));
@@ -145,7 +153,13 @@ export default function ContactList() {
                 <hr className={styles.dividerLine} />
               </div>
               {contacts.map(({ id, name, number }) => (
-                <li className={styles.contactItem} key={id}>
+                <li
+                  className={`${styles.contactItem} ${
+                    flippedContacts[id] ? styles.flipped : ""
+                  }`}
+                  onClick={() => handleFlip(id)}
+                  key={id}
+                >
                   <Contact id={id} name={name} number={number} />
                 </li>
               ))}

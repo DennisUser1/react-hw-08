@@ -9,12 +9,14 @@ const modalRoot = document.querySelector("#modal-root");
 const ConfirmDeleteModal = ({ id, onClose }) => {
   const dispatch = useDispatch();
 
-  const handleDelete = () => {
+  const handleDelete = (event) => {
+    event.stopPropagation();
     dispatch(deleteContact(id));
     onClose();
   };
 
-  const handleCancel = () => {
+  const handleCancel = (event) => {
+    event.stopPropagation();
     onClose();
   };
 

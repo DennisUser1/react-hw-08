@@ -71,6 +71,7 @@ const formatPhoneNumber = (value) => {
 export default function ContactUpdateForm({ name, number, id }) {
   const dispatch = useDispatch();
   const contacts = useSelector(selectContacts);
+  const updatedContact = contacts.find((contact) => contact.id === id);
 
   const nameFieldId = useId();
   const numberFieldId = useId();
@@ -121,7 +122,10 @@ export default function ContactUpdateForm({ name, number, id }) {
 
   return (
     <Formik
-      initialValues={{ name: name || "", number: number || "" }}
+      initialValues={{
+        name: updatedContact ? updatedContact.name : name || "",
+        number: updatedContact ? updatedContact.number : number || "",
+      }}
       validationSchema={validationContactSchema}
       onSubmit={handleSubmit}
       enableReinitialize
