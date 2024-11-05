@@ -1,30 +1,26 @@
 .contactCardWrapper {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* justify-content: center; */
   height: 100%;
   transform-style: preserve-3d;
+  pointer-events: auto;
 }
 
 .frontSide,
 .backSide {
   position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
   backface-visibility: hidden;
+  background-color: #f8f7ff;
 }
 
 .frontSide {
-  background-color: #f8f7ff;
   z-index: 2;
   transform: rotateY(0deg);
-}
-
-.backSide {
-  transform: rotateY(180deg);
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .wrapperTitleCard {
@@ -33,7 +29,17 @@
   align-items: center;
 }
 
-.textFrontSide {
+.backSide {
+  display: flex;
+  /* flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start; */
+  gap: 8px;
+  transform: rotateY(180deg);
+}
+
+.textFrontSide,
+.textBackSide {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -47,7 +53,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  row-gap: 14px;
+  row-gap: 12px;
 }
 
 .name {
@@ -71,7 +77,9 @@
   color: #6e57f4;
   font-weight: 500;
   display: flex;
+  align-items: center;
   justify-content: flex-start;
+  pointer-events: auto;
 }
 
 .iconCardWrapper,
@@ -122,7 +130,7 @@
 .iconIdCard {
   width: 16px;
   height: 16px;
-  transform: translateZ(0);
+  vertical-align: middle;
 }
 
 .deleteButton {
@@ -138,9 +146,10 @@
   color: #f8f7ff;
   cursor: pointer;
   position: absolute;
-  top: 22%;
-  right: 12px;
+  top: 28px;
+  right: 0;
   transition: all 0.25s cubic-bezier(0.7, 0.98, 0.86, 0.98);
+  pointer-events: auto;
 }
 
 .deleteButton:hover,
@@ -161,9 +170,10 @@
   color: #f8f7ff;
   cursor: pointer;
   position: absolute;
-  top: 55%;
-  right: 12px;
+  top: 75px;
+  right: 0;
   transition: all 0.25s cubic-bezier(0.7, 0.98, 0.86, 0.98);
+  pointer-events: auto;
 }
 
 @media (hover: none) {
@@ -231,7 +241,15 @@
 
   .deleteButton {
     position: absolute;
-    top: 25%;
+    top: 22px;
+  }
+
+  .updateButton {
+    top: 68px;
+  }
+
+  .wrapperTitleCard {
+    padding-bottom: 20px;
   }
 }
 

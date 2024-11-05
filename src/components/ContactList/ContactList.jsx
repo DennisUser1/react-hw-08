@@ -13,7 +13,7 @@ import {
 import { undoDeleteContact } from "../../redux/contacts/operations.js";
 import { FaChess } from "react-icons/fa";
 import { GiBoomerang } from "react-icons/gi";
-import { useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { TypeAnimation } from "react-type-animation";
 
 const groupContactsByLetter = (contacts) => {
@@ -39,7 +39,9 @@ export default function ContactList() {
   const isSearching = nameFilter || numberFilter;
   const [textColor, setTextColor] = useState("#ff0000");
   const [flippedContacts, setFlippedContacts] = useState(false);
+  const [contactHeights, setContactHeights] = useState({});
 
+  const contactRefs = useRef({});
   const groupedContacts = groupContactsByLetter(filteredContacts);
 
   const handleFlip = (id) => {
@@ -48,6 +50,33 @@ export default function ContactList() {
       [id]: !prev[id],
     }));
   };
+
+  const calculateHeight = (id, nameElement) => {
+    const lineHeight = parseFloat(getComputedStyle(nameElement).lineHeight);
+    const height = nameElement.offsetHeight;
+    const numberOfLines = Math.round(height / lineHeight);
+
+    if (numberOfLines === 2) {
+      return { maxHeight: "230px", height: "170px" };
+    } else if (numberOfLines === 3) {
+      return { maxHeight: "190px", height: "300px" };
+    }
+    return {};
+  };
+
+  const setHeights = (id, nameElement) => {
+    const newHeight = calculateHeight(id, nameElement);
+    setContactHeights((prev) => ({ ...prev, [id]: newHeight }));
+  };
+
+  useEffect(() => {
+    Object.keys(contactRefs.current).forEach((id) => {
+      const nameElement = contactRefs.current[id];
+      if (nameElement) {
+        setHeights(id, nameElement);
+      }
+    });
+  }, [filteredContacts]);
 
   const handleUndoDelete = () => {
     dispatch(undoDeleteContact(deletedContact));
@@ -152,17 +181,36 @@ export default function ContactList() {
                 <span className={styles.letter}>{letter}</span>
                 <hr className={styles.dividerLine} />
               </div>
-              {contacts.map(({ id, name, number }) => (
-                <li
-                  className={`${styles.contactItem} ${
-                    flippedContacts[id] ? styles.flipped : ""
-                  }`}
-                  onClick={() => handleFlip(id)}
-                  key={id}
-                >
-                  <Contact id={id} name={name} number={number} />
-                </li>
-              ))}
+              {contacts.map((contact, contactIndex) => {
+                const nextItem =
+                  contactIndex + 1 < contacts.length
+                    ? contacts[contactIndex + 1]
+                    : null;
+
+                const nextIsContact = nextItem && nextItem.id;
+                const marginBottom = nextIsContact ? "-8px" : "0px";
+
+                return (
+                  <li
+                    key={contact.id}
+                    className={`${styles.contactItem} ${
+                      flippedContacts[contact.id] ? styles.flipped : ""
+                    }`}
+                    style={{
+                      marginBottom,
+                      ...contactHeights[contact.id],
+                    }}
+                    onClick={() => handleFlip(contact.id)}
+                  >
+                    <Contact
+                      id={contact.id}
+                      name={contact.name}
+                      number={contact.number}
+                      nameRef={(el) => (contactRefs.current[contact.id] = el)}
+                    />
+                  </li>
+                );
+              })}
             </div>
           ))}
         </ul>

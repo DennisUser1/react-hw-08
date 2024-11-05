@@ -6,7 +6,7 @@ import { setCurrentEditingContact } from "../../redux/contacts/slice.js";
 import ConfirmDeleteModal from "../ConfirmDeleteContactModal/ConfirmDeleteContactModal";
 import { useToggle } from "../../shared/hooks/useToggleState";
 
-export default function Contact({ id, name, number }) {
+export default function Contact({ id, name, number, nameRef }) {
   const dispatch = useDispatch();
 
   const {
@@ -34,7 +34,9 @@ export default function Contact({ id, name, number }) {
           <div className={styles.wrapperContacts}>
             <div className={styles.iconCardWrapper}>
               <FaRegUser className={styles.iconReUser} />
-              <p className={styles.name}>{name}</p>
+              <p className={styles.name} ref={nameRef}>
+                {name}
+              </p>
             </div>
             <div className={styles.iconCardWrapperPhone}>
               <MdPhoneIphone className={styles.iconIphone} />
@@ -72,9 +74,13 @@ export default function Contact({ id, name, number }) {
             Update
           </button>
         </div>
-        <div className={styles.backSide}>
-          <FaIdCard className={styles.iconIdCard} />
-          <p className={styles.textBackSide}>Back Side</p>
+        <div className={styles.contactCardWrapper}>
+          <div className={styles.backSide}>
+            <div className={styles.wrapperTitleCard}>
+              <FaIdCard className={styles.iconIdCard} />
+              <p className={styles.textBackSide}>Back Side</p>
+            </div>
+          </div>
         </div>
       </div>
     </>

@@ -1,5 +1,5 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { useId } from "react";
+import { useId, useState } from "react";
 import clsx from "clsx";
 import { FaRegUser } from "react-icons/fa";
 import { MdPhoneIphone } from "react-icons/md";
@@ -72,6 +72,10 @@ export default function ContactUpdateForm({ name, number, id }) {
   const dispatch = useDispatch();
   const contacts = useSelector(selectContacts);
   const updatedContact = contacts.find((contact) => contact.id === id);
+  const [localContact, setLocalContact] = useState({
+    name: updatedContact ? updatedContact.name : name,
+    number: updatedContact ? updatedContact.number : number,
+  });
 
   const nameFieldId = useId();
   const numberFieldId = useId();
@@ -100,6 +104,7 @@ export default function ContactUpdateForm({ name, number, id }) {
         `This number: <strong>${values.number}</strong> is already in the system.`
       );
     } else {
+      setLocalContact({ name: values.name, number: values.number });
       dispatch(updateContact({ name: values.name, number: values.number, id }));
       options.resetForm();
     }
@@ -123,8 +128,8 @@ export default function ContactUpdateForm({ name, number, id }) {
   return (
     <Formik
       initialValues={{
-        name: updatedContact ? updatedContact.name : name || "",
-        number: updatedContact ? updatedContact.number : number || "",
+        name: localContact.name,
+        number: localContact.number,
       }}
       validationSchema={validationContactSchema}
       onSubmit={handleSubmit}
