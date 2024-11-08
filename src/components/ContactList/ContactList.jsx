@@ -206,6 +206,8 @@ export default function ContactList() {
                       id={contact.id}
                       name={contact.name}
                       number={contact.number}
+                      avatar={contact.avatar}
+                      gender={contact.gender}                            
                       nameRef={(el) => (contactRefs.current[contact.id] = el)}
                     />
                   </li>

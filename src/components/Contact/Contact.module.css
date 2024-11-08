@@ -133,6 +133,37 @@
   vertical-align: middle;
 }
 
+.avatarWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  right: 0;
+}
+
+.avatar {
+  display: flex;
+  align-items: center;
+  width: 65px;
+  height: 65px;
+  object-fit: cover;
+}
+
+.gender {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+}
+
+.genderLabel {
+  font-weight: 600;
+  color: #333;
+}
+
+.genderValue {
+  margin-top: 0;
+}
+
 .deleteButton {
   display: flex;
   justify-content: center;

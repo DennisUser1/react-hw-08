@@ -16,8 +16,13 @@
     <meta http-equiv="Cache-Control" content="no-cache" />
     <meta
       http-equiv="Content-Security-Policy"
-      content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://connections-api.goit.global/;"
+      content="default-src 'self'; 
+           style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; 
+           font-src 'self' https://fonts.gstatic.com; 
+           img-src 'self' data: https://api.dicebear.com; 
+           connect-src 'self' https://connections-api.goit.global/ https://api.dicebear.com https://api.genderapi.io;"
     />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
     <title>React-HW-08-Application Contact Phonebook</title>
   </head>
   <body>

@@ -26,6 +26,14 @@ export const addContact = createAsyncThunk(
             toastError("Error adding contact.");
             return thunkAPI.rejectWithValue(error.message);
         }
+    },   
+    {
+        condition: (_, thunkAPI) => {
+            const isLoading = selectIsLoading(thunkAPI.getState()); 
+            if (isLoading) {
+                return false;
+            }
+        },
     }
 );
 
@@ -61,6 +69,14 @@ export const undoDeleteContact = createAsyncThunk(
             toastError("Error undoing contact deletion.");
             return thunkAPI.rejectWithValue(error.message);
         }
+    },
+    {
+        condition: (_, thunkAPI) => {
+            const isLoading = selectIsLoading(thunkAPI.getState()); 
+            if (isLoading) {
+                return false;
+            }
+        },
     }
 );
 
@@ -75,5 +91,42 @@ export const updateContact = createAsyncThunk(
             toastError("Error updating contact.");
             return thunkAPI.rejectWithValue(error.message);
       }
+    },
+    {
+        condition: (_, thunkAPI) => {
+            const isLoading = selectIsLoading(thunkAPI.getState()); 
+            if (isLoading) {
+                return false;
+            }
+        },
     }
 );
+
+const genderAxios = axios.create({
+    baseURL: '/genderapi',
+});
+
+export async function determineGender(name) {
+    try {
+        const response = await genderAxios.get('', {
+            params: {
+                name: name,
+                key: import.meta.env.VITE_API_KEY,
+            },
+        });
+        // console.log(response.data);
+        if (response.data && response.data.gender) {
+            return response.data.gender;
+        } else {
+            return 'Unknown';  
+        }
+    } catch (error) {
+        return 'Unknown';
+    }
+}
+
+export async function generateAvatarUrl(name) {
+    const avatarUrl = `https://api.dicebear.com/6.x/adventurer/svg?seed=${name}`;
+    return avatarUrl;
+}
+

@@ -31,7 +31,7 @@ const Accordion = styled(MuiAccordion)(() => ({
   },
 }));
 
-const formatPhoneNumber = (value) => {
+export const formatPhoneNumber = (value) => {
   const allowedCodes = ["+38", "+1", "+49", "+48", "+33"];
   const cleaned = value.replace(/[^\d+]/g, "");
   const countryCode = allowedCodes.find((code) => cleaned.startsWith(code));
