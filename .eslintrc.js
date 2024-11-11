@@ -1,13 +1,13 @@
-import js from '@eslint/js'
-import globals from 'globals'
-import react from 'eslint-plugin-react'
-import reactHooks from 'eslint-plugin-react-hooks'
-import reactRefresh from 'eslint-plugin-react-refresh'
+import js from '@eslint/js';
+import globals from 'globals';
+import react from 'eslint-plugin-react';
+import reactHooks from 'eslint-plugin-react-hooks';
+import reactRefresh from 'eslint-plugin-react-refresh';
 
-module.exports = [
+export default [
   { 
     root: true,
-    ignores: ['dist', '.eslintrc.cjs'],
+    ignores: ['dist', 'node_modules', '.eslintrc.js'],
   },
   {
     files: ['**/*.{js,jsx}'],
@@ -20,7 +20,7 @@ module.exports = [
         sourceType: 'module',
       },
     },
-    settings: { react: { version: '18.3' } },
+    settings: { react: { version: 'detect' } },
     plugins: {
       react,
       'react-hooks': reactHooks,
@@ -36,6 +36,8 @@ module.exports = [
         'warn',
         { allowConstantExport: true },
       ],
+      'no-return-await': 'warn',
+      'promise/catch-or-return': 'warn',
       'react/prop-types': 0, 
     },
   },
