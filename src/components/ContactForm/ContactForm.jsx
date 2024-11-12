@@ -26,17 +26,17 @@ const Accordion = styled(MuiAccordion)(() => ({
   "&.Mui-expanded": {
     margin: 0,
   },
-  "& .QNGor": {
-    position: "absolute",
-    top: "42px",
-    right: "0",
-  },
   "&:first-of-type": {
     borderTopLeftRadius: 0,
     borderTopRightRadius: 0,
   },
+  "& .MuiAccordionSummary-root .MuiAccordionSummary-expandIconWrapper": {
+    position: "absolute",
+    top: "42px",
+    right: "0",
+  },
   [`@media screen and (min-width: 320px) and (max-width: 359px)`]: {
-    "& .bfeyHr": {
+    "& .MuiAccordionSummary-root .MuiAccordionSummary-expandIconWrapper": {
       padding: "0 12px 0 4px",
     },
   },
@@ -96,16 +96,7 @@ export default function ContactForm() {
   return (
     <Accordion className={styles.accordion} defaultExpanded>
       <AccordionSummary
-        expandIcon={
-          <FiChevronDown
-            style={{
-              color: "#000",
-              display: "flex",
-              alignItems: "flex-end",
-              justifyContent: "flex-end",
-            }}
-          />
-        }
+        expandIcon={<FiChevronDown style={{ color: "#000" }} />}
         aria-controls="panel-content"
         id="panel-accordion"
         className={styles.accordionSummary}
