@@ -16,6 +16,10 @@ const initialState = {
   deletedContactIndex: null,
   wasLastDeleted: false,
   currentEditingContact: null,
+
+  addedCount: 0,  
+  deletedCount: 0, 
+  updatedCount: 0,
 };
 
 const contactsSlice = createSlice({
@@ -24,6 +28,11 @@ const contactsSlice = createSlice({
   reducers: {
     setCurrentEditingContact(state, action) {
       state.currentEditingContact = action.payload;
+    },
+    resetStatistics(state) {
+      state.addedCount = 0;
+      state.deletedCount = 0;
+      state.updatedCount = 0;
     },
   },
   extraReducers: (builder) => {
@@ -50,6 +59,7 @@ const contactsSlice = createSlice({
       .addCase(addContact.fulfilled, (state, action) => {
         state.isLoading = false;
         state.items.push(action.payload);
+        state.addedCount += 1;
       })
       .addCase(addContact.rejected, (state, action) => {
         state.isLoading = false;
@@ -71,6 +81,7 @@ const contactsSlice = createSlice({
           state.deletedContactIndex = indexToDelete;
           state.wasLastDeleted = state.items.length === 1; 
           state.items.splice(indexToDelete, 1);
+          state.deletedCount += 1;  
         }
 
         state.isLoading = false;
@@ -98,6 +109,8 @@ const contactsSlice = createSlice({
         state.deletedContactIndex = null;   
         state.wasLastDeleted = false; 
         state.isLoading = false;
+
+        state.deletedCount = Math.max(0, state.deletedCount - 1);
       }) 
       .addCase(undoDeleteContact.rejected, (state, action) => {
         state.isLoading = false;
@@ -108,6 +121,7 @@ const contactsSlice = createSlice({
           item.id === state.currentEditingContact.id ? { ...action.payload } : item
         );
         state.currentEditingContact = null;
+        state.updatedCount += 1; 
       });
   },
 });

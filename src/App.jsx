@@ -14,6 +14,7 @@ const RegistrationPage = lazy(() =>
 );
 const LoginPage = lazy(() => import("./pages/LoginPage/LoginPage"));
 const ContactsPage = lazy(() => import("./pages/ContactsPage/ContactsPage"));
+const Statistics = lazy(() => import("./pages/Statistics/Statistics"));
 const NotFoundPage = lazy(() => import("./pages/NotFoundPage/NotFoundPage"));
 
 const App = () => {
@@ -51,6 +52,14 @@ const App = () => {
               element={
                 <PrivateRoute>
                   <ContactsPage />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="statistics"
+              element={
+                <PrivateRoute>
+                  <Statistics />
                 </PrivateRoute>
               }
             />

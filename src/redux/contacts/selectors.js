@@ -6,6 +6,10 @@ export const selectCurrentContact = (state) => state.contacts.currentEditingCont
 export const selectIsLoading = (state) => state.contacts.isLoading;
 export const selectIsError = (state) => state.contacts.isError;
 
+export const selectAddedContactsCount = (state) => state.contacts.addedCount;
+export const selectDeletedContactsCount = (state) => state.contacts.deletedCount;
+export const selectUpdatedContactsCount = (state) => state.contacts.updatedCount;
+
 export const selectFilteredContacts = createSelector(
   [selectContacts, selectNameFilter, selectNumberFilter],
   (contacts, nameFilter, numberFilter) => {

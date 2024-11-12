@@ -8,10 +8,12 @@ import {
   generateAvatarUrl,
   determineGender,
 } from "../../redux/contacts/operations.js";
+import { stringAvatar } from "../../shared/utils/avatarUtils.js";
+import { formatPhoneNumber } from "../../shared/utils/phoneUtils.js";
 import ConfirmDeleteModal from "../ConfirmDeleteContactModal/ConfirmDeleteContactModal";
 import { useToggle } from "../../shared/hooks/useToggleState";
 import { useState, useEffect } from "react";
-import { formatPhoneNumber } from "../ContactForm/ContactForm";
+import { Avatar } from "@mui/material";
 
 export default function Contact({ id, name, number, nameRef }) {
   const dispatch = useDispatch();
@@ -121,6 +123,16 @@ export default function Contact({ id, name, number, nameRef }) {
                 <span className={styles.genderLabel}>Gender:</span>
                 <span className={styles.genderValue}>{gender}</span>
               </p>
+              <Avatar
+                {...stringAvatar(name)}
+                className={styles.avatarBasic}
+                sx={{
+                  width: 62,
+                  height: 62,
+                  fontSize: 20,
+                  ...stringAvatar(name).sx,
+                }}
+              />
             </div>
           </div>
         </div>

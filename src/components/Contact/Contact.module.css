@@ -1,7 +1,7 @@
 .contactCardWrapper {
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
+  justify-content: center;
   height: 100%;
   transform-style: preserve-3d;
   pointer-events: auto;
@@ -139,6 +139,7 @@
   align-items: center;
   position: absolute;
   right: 0;
+  top: 9px;
 }
 
 .avatar {

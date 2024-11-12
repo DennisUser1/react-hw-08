@@ -17,6 +17,12 @@ export default function Navigation () {
           Contacts
         </NavLink>
       )}
+
+{isLoggedIn && (
+        <NavLink className={styles.link} to="/statistics">
+          Statistics
+        </NavLink>
+      )} 
     </nav>
   );
 };

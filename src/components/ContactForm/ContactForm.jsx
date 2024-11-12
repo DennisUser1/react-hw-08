@@ -2,7 +2,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useId } from "react";
 import clsx from "clsx";
 import { FaRegUser } from "react-icons/fa";
-import { MdPhoneIphone } from "react-icons/md";
+import { MdPhoneIphone, MdAddIcCall } from "react-icons/md";
 import { HiInformationCircle } from "react-icons/hi";
 import { FiChevronDown } from "react-icons/fi";
 import Tippy from "@tippyjs/react";
@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addContact } from "../../redux/contacts/operations.js";
 import { selectContacts } from "../../redux/contacts/selectors.js";
 import { toastInfoDuplicate } from "../../shared/helpers/toastConfig.js";
+import { formatPhoneNumber } from "../../shared/utils/phoneUtils.js";
 import {
   Accordion as MuiAccordion,
   AccordionDetails,
@@ -25,66 +26,21 @@ const Accordion = styled(MuiAccordion)(() => ({
   "&.Mui-expanded": {
     margin: 0,
   },
+  "& .QNGor": {
+    position: "absolute",
+    top: "42px",
+    right: "0",
+  },
   "&:first-of-type": {
     borderTopLeftRadius: 0,
     borderTopRightRadius: 0,
   },
+  [`@media screen and (min-width: 320px) and (max-width: 359px)`]: {
+    "& .bfeyHr": {
+      padding: "0 12px 0 4px",
+    },
+  },
 }));
-
-export const formatPhoneNumber = (value) => {
-  const allowedCodes = ["+38", "+1", "+49", "+48", "+33"];
-  const cleaned = value.replace(/[^\d+]/g, "");
-  const countryCode = allowedCodes.find((code) => cleaned.startsWith(code));
-
-  if (countryCode) {
-    const withoutCode = cleaned.slice(countryCode.length);
-    let formatted = "";
-
-    switch (countryCode) {
-      case "+38": // Ukraine
-        const matchUA = withoutCode.match(/^(\d{3})(\d{3})(\d{2})(\d{2})$/);
-        if (matchUA) {
-          formatted = `+38 (${matchUA[1]})-${matchUA[2]}-${matchUA[3]}-${matchUA[4]}`;
-        }
-        break;
-
-      case "+1": // USA
-        const matchUS = withoutCode.match(/^(\d{3})(\d{3})(\d{4})$/);
-        if (matchUS) {
-          formatted = `+1 (${matchUS[1]})-${matchUS[2]}-${matchUS[3]}`;
-        }
-        break;
-
-      case "+49": // Germany
-        const matchDE = withoutCode.match(/^(\d{3})(\d{3})(\d{4})$/);
-        if (matchDE) {
-          formatted = `+49 (${matchDE[1]})-${matchDE[2]}-${matchDE[3]}`;
-        }
-        break;
-
-      case "+48": // Poland
-        const matchPL = withoutCode.match(/^(\d{3})(\d{3})(\d{3})$/);
-        if (matchPL) {
-          formatted = `+48 (${matchPL[1]})-${matchPL[2]}-${matchPL[3]}`;
-        }
-        break;
-
-      case "+33": // France
-        const matchFR = withoutCode.match(
-          /^(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})$/
-        );
-        if (matchFR) {
-          formatted = `+33 (${matchFR[1]})-${matchFR[2]}-${matchFR[3]}-${matchFR[4]}-${matchFR[5]}`;
-        }
-        break;
-
-      default:
-        return value;
-    }
-    return formatted || value;
-  }
-  return value;
-};
 
 export default function ContactForm() {
   const dispatch = useDispatch();
@@ -140,12 +96,23 @@ export default function ContactForm() {
   return (
     <Accordion className={styles.accordion} defaultExpanded>
       <AccordionSummary
-        expandIcon={<FiChevronDown style={{ color: "#000" }} />}
+        expandIcon={
+          <FiChevronDown
+            style={{
+              color: "#000",
+              display: "flex",
+              alignItems: "flex-end",
+              justifyContent: "flex-end",
+            }}
+          />
+        }
         aria-controls="panel-content"
         id="panel-accordion"
         className={styles.accordionSummary}
       >
-        <h2 className={styles.accordionText}>Add new contact</h2>
+        <h2 className={styles.accordionText}>
+          <MdAddIcCall className={styles.iconAdded} /> Add new contact
+        </h2>
       </AccordionSummary>
       <AccordionDetails className={styles.accordionDetails}>
         <Formik
@@ -156,7 +123,7 @@ export default function ContactForm() {
           {({ setFieldValue }) => (
             <Form className={styles.form}>
               <label
-                className={`${styles.label} ${styles.labelName}`}
+                className={clsx(styles.label, styles.labelName)}
                 htmlFor={nameFieldId}
               >
                 Name
@@ -171,7 +138,7 @@ export default function ContactForm() {
                   autoFocus
                   placeholder="Enter full name"
                 />
-                <FaRegUser className={clsx(styles.iconName)} />
+                <FaRegUser className={styles.iconName} />
               </div>
               <ErrorMessage
                 name="name"
@@ -255,7 +222,7 @@ export default function ContactForm() {
                   onChange={(event) => handleNumberChange(event, setFieldValue)}
                   aria-labelledby="phone-input-label"
                 />
-                <MdPhoneIphone className={clsx(styles.iconNumber)} />
+                <MdPhoneIphone className={styles.iconNumber} />
               </div>
               <ErrorMessage
                 name="number"
@@ -263,10 +230,10 @@ export default function ContactForm() {
                 className={styles.error}
               />
 
-              <button type="submit" className={clsx(styles.addButton)}>
+              <button type="submit" className={styles.addButton}>
                 Add Contact
               </button>
-              <button type="reset" className={clsx(styles.resetButton)}>
+              <button type="reset" className={styles.resetButton}>
                 Reset
               </button>
             </Form>
