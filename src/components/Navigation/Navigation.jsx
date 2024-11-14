@@ -18,7 +18,7 @@ export default function Navigation () {
         </NavLink>
       )}
 
-{isLoggedIn && (
+      {isLoggedIn && (
         <NavLink className={styles.link} to="/statistics">
           Statistics
         </NavLink>

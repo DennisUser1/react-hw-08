@@ -7,6 +7,7 @@ import {
     updateContact,
 } from "./operations.js";
 import { logOut } from "../auth/operations.js";
+import { handlePending, handleRejected, handleFulfilled } from "../handlers.js";
 
 const initialState = {
   items: [],
@@ -45,34 +46,12 @@ const contactsSlice = createSlice({
           updatedCount: state.updatedCount,
         };
       })
-      .addCase(fetchContacts.pending, (state) => {
-        state.isLoading = true;
-        state.isError = null;
-      })
       .addCase(fetchContacts.fulfilled, (state, action) => {
-        state.isLoading = false;
         state.items = action.payload;
       })
-      .addCase(fetchContacts.rejected, (state, action) => {
-        state.isLoading = false;
-        state.isError = action.payload;
-      })
-      .addCase(addContact.pending, (state) => {
-        state.isLoading = true;
-        state.isError = null;
-      })
       .addCase(addContact.fulfilled, (state, action) => {
-        state.isLoading = false;
         state.items.push(action.payload);
         state.addedCount += 1;
-      })
-      .addCase(addContact.rejected, (state, action) => {
-        state.isLoading = false;
-        state.isError = action.payload;
-      })
-      .addCase(deleteContact.pending, (state) => {
-        state.isLoading = true;
-        state.isError = null;
       })
       .addCase(deleteContact.fulfilled, (state, action) => {
         const indexToDelete = state.items.findIndex(contact => contact.id === action.payload);
@@ -88,16 +67,6 @@ const contactsSlice = createSlice({
           state.items.splice(indexToDelete, 1);
           state.deletedCount += 1;  
         }
-
-        state.isLoading = false;
-      })
-      .addCase(deleteContact.rejected, (state, action) => {
-        state.isLoading = false;
-        state.isError = action.payload;
-      })
-      .addCase(undoDeleteContact.pending, (state) => {
-        state.isLoading = true;
-        state.isError = null;
       })
       .addCase(undoDeleteContact.fulfilled, (state, action) => {
         state.items.unshift(action.payload); 
@@ -112,22 +81,19 @@ const contactsSlice = createSlice({
         }
         state.deletedContact = null;
         state.deletedContactIndex = null;   
-        state.wasLastDeleted = false; 
-        state.isLoading = false;
-
+        state.wasLastDeleted = false;
         state.deletedCount = Math.max(0, state.deletedCount - 1);
       }) 
-      .addCase(undoDeleteContact.rejected, (state, action) => {
-        state.isLoading = false;
-        state.isError = action.payload; 
-      })
       .addCase(updateContact.fulfilled, (state, action) => {
         state.items = state.items.map((item) =>
           item.id === state.currentEditingContact.id ? { ...action.payload } : item
         );
         state.currentEditingContact = null;
         state.updatedCount += 1; 
-      });
+      })
+      .addMatcher(({ type }) => type.endsWith("pending"), handlePending)
+      .addMatcher(({ type }) => type.endsWith("rejected"), handleRejected)
+      .addMatcher(({ type }) => type.endsWith("fulfilled"), handleFulfilled)
   },
 });
 

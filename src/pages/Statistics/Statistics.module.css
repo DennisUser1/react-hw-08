@@ -44,7 +44,7 @@
 
 .boldText {
   font-weight: 500;
-  margin-right: 8px;
+  margin-right: 30px;
 }
 
 @media screen and (min-width: 320px) and (max-width: 480px) {

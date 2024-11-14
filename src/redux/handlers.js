@@ -1,11 +1,11 @@
 export const handlePending = (state) => {
-    state.error = false;
-    state.loading = true;
+    state.isLoading = true;
+    state.isError = null;
 };
 export const handleRejected = (state, action) => {
-    state.error = action.payload;
-    state.loading = false;
+    state.isLoading = false;
+    state.isError = action.payload;
 };
-export const handleFulFilled = (state) => {
-    state.loading = false;
+export const handleFulfilled = (state) => {
+    state.isLoading = false;
 };
