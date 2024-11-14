@@ -39,6 +39,7 @@
   align-items: center;
   justify-content: center;
   background-color: #b8b8ff87;
+  border-radius: 0 0 8px 8px;
 }
 
 .messageContentWrapper {

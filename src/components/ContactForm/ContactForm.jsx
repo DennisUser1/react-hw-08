@@ -1,5 +1,5 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { useId } from "react";
+import { useId, useState } from "react";
 import clsx from "clsx";
 import { FaRegUser } from "react-icons/fa";
 import { MdPhoneIphone, MdAddIcCall } from "react-icons/md";
@@ -16,7 +16,7 @@ import { formatPhoneNumber } from "../../shared/utils/phoneUtils.js";
 import {
   Accordion as MuiAccordion,
   AccordionDetails,
-  AccordionSummary,
+  AccordionSummary as MuiAccordionSummary,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
@@ -32,11 +32,15 @@ const Accordion = styled(MuiAccordion)(() => ({
   },
   "& .MuiAccordionSummary-root .MuiAccordionSummary-expandIconWrapper": {
     position: "absolute",
-    top: "42px",
+    top: "53px",
     right: "0",
   },
+}));
+
+const AccordionSummary = styled(MuiAccordionSummary)(() => ({
+  padding: "0 16px",
   [`@media screen and (min-width: 320px) and (max-width: 359px)`]: {
-    "& .MuiAccordionSummary-root .MuiAccordionSummary-expandIconWrapper": {
+    "&[aria-expanded='true']": {
       padding: "0 12px 0 4px",
     },
   },
@@ -45,6 +49,7 @@ const Accordion = styled(MuiAccordion)(() => ({
 export default function ContactForm() {
   const dispatch = useDispatch();
   const contacts = useSelector(selectContacts);
+  const [showCategories, setShowCategories] = useState(false);
 
   const nameFieldId = useId();
   const numberFieldId = useId();
@@ -72,6 +77,7 @@ export default function ContactForm() {
         addContact({
           name: values.name,
           number: values.number,
+          categories: values.categories,
         })
       );
       actions.resetForm();
@@ -101,13 +107,18 @@ export default function ContactForm() {
         id="panel-accordion"
         className={styles.accordionSummary}
       >
-        <h2 className={styles.accordionText}>
-          <MdAddIcCall className={styles.iconAdded} /> Add new contact
-        </h2>
+        <div className={styles.iconWithText}>
+          <MdAddIcCall className={styles.iconAdded} />
+          <h2 className={styles.accordionText}>Add new contact</h2>
+        </div>
       </AccordionSummary>
       <AccordionDetails className={styles.accordionDetails}>
         <Formik
-          initialValues={{ name: "", number: "" }}
+          initialValues={{
+            name: "",
+            number: "",
+            categories: [],
+          }}
           validationSchema={validationContactSchema}
           onSubmit={handleSubmit}
         >
@@ -136,7 +147,6 @@ export default function ContactForm() {
                 component="span"
                 className={styles.error}
               />
-
               <div className={styles.numberLabelWrapper}>
                 <label className={styles.label} htmlFor={numberFieldId}>
                   Number
@@ -201,7 +211,6 @@ export default function ContactForm() {
                   </span>
                 </Tippy>
               </div>
-
               <div className={styles.inputWrapper}>
                 <Field
                   type="tel"
@@ -220,6 +229,55 @@ export default function ContactForm() {
                 component="span"
                 className={styles.error}
               />
+
+              <div className={styles.radioGroup}>
+                <label htmlFor="categorySwitch" className={styles.switchLabel}>
+                  <Field
+                    type="checkbox"
+                    id="categorySwitch"
+                    className={styles.switchInput}
+                    checked={showCategories}
+                    onChange={() => setShowCategories(!showCategories)}
+                  />
+                  <span className={styles.switchSlider}></span>
+                </label>
+                <span className={styles.radioButtonText}>
+                  {showCategories ? "Hide categories" : "Select categories"}
+                </span>
+              </div>
+
+              {showCategories && (
+                <div className={styles.checkboxGroup}>
+                  <label className={styles.label}>
+                    <Field type="checkbox" name="categories" value="friends" />
+                    Friends
+                  </label>
+                  <label className={styles.label}>
+                    <Field type="checkbox" name="categories" value="work" />
+                    Work
+                  </label>
+                  <label className={styles.label}>
+                    <Field type="checkbox" name="categories" value="family" />
+                    Family
+                  </label>
+                  <label className={styles.label}>
+                    <Field
+                      type="checkbox"
+                      name="categories"
+                      value="acquaintances"
+                    />
+                    Acquaintances
+                  </label>
+                  <label className={styles.label}>
+                    <Field type="checkbox" name="categories" value="business" />
+                    Business
+                  </label>
+                  <label className={styles.label}>
+                    <Field type="checkbox" name="categories" value="others" />
+                    Others
+                  </label>
+                </div>
+              )}
 
               <button type="submit" className={styles.addButton}>
                 Add Contact

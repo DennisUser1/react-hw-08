@@ -17,18 +17,25 @@ import storage from "redux-persist/lib/storage";
 import { combineReducers } from "redux";
 import logger from 'redux-logger';
 
+const contactsPersistConfig = {
+  key: "contacts",
+  version: 1,
+  storage,
+  whitelist: ["items", "addedCount", "deletedCount", "updatedCount"],
+};
+
 const authPersistConfig = {
   key: "auth",
-  version: 1,
   storage,
   whitelist: ["token"],
 };
 
 const persistedAuthReducer = persistReducer(authPersistConfig, authReducer);
+const persistedContactsReducer = persistReducer(contactsPersistConfig, contactsReducer);
 
 const rootReducer = combineReducers({
   auth: persistedAuthReducer,
-  contacts: contactsReducer,
+  contacts: persistedContactsReducer,
   filters: filtersReducer,
   scroll: scrollReducer,
 });

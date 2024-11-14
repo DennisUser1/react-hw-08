@@ -37,8 +37,13 @@ const contactsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(logOut.fulfilled, () => {
-        return initialState;
+      .addCase(logOut.fulfilled, (state) => {
+        return {
+          ...initialState,
+          addedCount: state.addedCount,
+          deletedCount: state.deletedCount,
+          updatedCount: state.updatedCount,
+        };
       })
       .addCase(fetchContacts.pending, (state) => {
         state.isLoading = true;

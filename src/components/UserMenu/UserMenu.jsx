@@ -4,6 +4,7 @@ import styles from "./UserMenu.module.css";
 
 export default function UserMenu() {
   const dispatch = useDispatch();
+  
   const handleClick = () => {
     dispatch(logOut());
   };
