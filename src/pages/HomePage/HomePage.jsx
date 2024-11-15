@@ -25,7 +25,7 @@ export default function HomePage() {
         <div className={styles.homePageWrapper}>
           {user.name ? (
             <>
-              <h1 className={styles.title}>Welcome {user.name}!</h1>
+              <h1 className={styles.title}>Welcome, {user.name}!</h1>
               <p className={styles.desc}>
                 Here you can add, edit and find your contacts
               </p>

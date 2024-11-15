@@ -230,7 +230,7 @@ export default function ContactForm() {
                 className={styles.error}
               />
 
-              <div className={styles.radioGroup}>
+              <div className={styles.toggleGroup}>
                 <label htmlFor="categorySwitch" className={styles.switchLabel}>
                   <Field
                     type="checkbox"
@@ -241,41 +241,95 @@ export default function ContactForm() {
                   />
                   <span className={styles.switchSlider}></span>
                 </label>
-                <span className={styles.radioButtonText}>
+                <span className={styles.toggleButtonText}>
                   {showCategories ? "Hide categories" : "Select categories"}
                 </span>
               </div>
 
               {showCategories && (
-                <div className={styles.checkboxGroup}>
-                  <label className={styles.label}>
-                    <Field type="checkbox" name="categories" value="friends" />
-                    Friends
-                  </label>
-                  <label className={styles.label}>
-                    <Field type="checkbox" name="categories" value="work" />
-                    Work
-                  </label>
-                  <label className={styles.label}>
-                    <Field type="checkbox" name="categories" value="family" />
+                 <div className={styles.checkboxWrapper}>
+                  <div className={styles.checkboxGroup}>
+                  <label className={styles.labelCheck}>
+                    <span
+                      className={styles.colorIndicatorLeft}
+                      style={{ backgroundColor: "#FF6384" }}
+                    ></span>
+                    <Field
+                      type="checkbox"
+                      name="categories"
+                      value="family"
+                      className={styles.categoryCheck}
+                    />
                     Family
                   </label>
-                  <label className={styles.label}>
+                  <label className={styles.labelCheck}>
+                    <span
+                      className={styles.colorIndicatorRight}
+                      style={{ backgroundColor: "#36A2EB" }}
+                    ></span>
+                    <Field
+                      type="checkbox"
+                      name="categories"
+                      value="work"
+                      className={styles.categoryCheck}
+                    />
+                    Work
+                  </label>
+                  <label className={styles.labelCheck}>
+                    <span
+                      className={styles.colorIndicatorLeft}
+                      style={{ backgroundColor: "#FFCE56" }}
+                    ></span>
+                    <Field
+                      type="checkbox"
+                      name="categories"
+                      value="friends"
+                      className={styles.categoryCheckTop}
+                    />
+                    <span className={styles.categoryTextTop}>Friends</span>
+                  </label>
+                  <label className={styles.labelCheck}>
+                    <span
+                      className={styles.colorIndicatorRight}
+                      style={{ backgroundColor: "#2C8A7C" }}
+                    ></span>
                     <Field
                       type="checkbox"
                       name="categories"
                       value="acquaintances"
+                      className={styles.categoryCheck}
                     />
-                    Acquaintances
+                    Acquaintan-
+                    <br />
+                    ces
                   </label>
-                  <label className={styles.label}>
-                    <Field type="checkbox" name="categories" value="business" />
+                  <label className={styles.labelCheck}>
+                    <span
+                      className={styles.colorIndicatorLeft}
+                      style={{ backgroundColor: "#9966FF" }}
+                    ></span>
+                    <Field
+                      type="checkbox"
+                      name="categories"
+                      value="business"
+                      className={styles.categoryCheck}
+                    />
                     Business
                   </label>
-                  <label className={styles.label}>
-                    <Field type="checkbox" name="categories" value="others" />
+                  <label className={styles.labelCheck}>
+                    <span
+                      className={styles.colorIndicatorRight}
+                      style={{ backgroundColor: "#B0B0B0" }}
+                    ></span>
+                    <Field
+                      type="checkbox"
+                      name="categories"
+                      value="others"
+                      className={styles.categoryCheck}
+                    />
                     Others
                   </label>
+                </div>    
                 </div>
               )}
 

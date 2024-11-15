@@ -132,7 +132,7 @@
   width: 220px;
 }
 
-.radioGroup {
+.toggleGroup {
   display: flex;
   align-items: center;
   margin-top: 12px;
@@ -184,7 +184,7 @@
   transform: translateX(22px);
 }
 
-.radioButtonText {
+.toggleButtonText {
   margin-left: 8px;
   font-size: 16px;
   font-weight: bold;
@@ -192,6 +192,65 @@
 
 .categories {
   margin-top: 20px;
+}
+
+.checkboxWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  width: 100%;
+}
+
+.checkboxGroup {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.labelCheck {
+  display: flex;
+  align-items: center;
+  font-weight: 400;
+  position: relative;
+}
+
+.colorIndicatorLeft {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  position: absolute;
+  top: 14%;
+  left: -25%;
+}
+
+.categoryTextTop {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 18%;
+}
+
+.colorIndicatorRight {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  position: absolute;
+  top: 14%;
+  right: -26%;
+}
+
+.categoryCheckTop {
+  position: absolute;
+  top: 82%;
+  margin: 0;
+}
+
+.categoryCheck {
+  margin: 0;
 }
 
 .addButton {
