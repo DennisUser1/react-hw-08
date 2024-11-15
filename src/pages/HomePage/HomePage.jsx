@@ -4,7 +4,6 @@ import { selectIsLoggedIn, selectUser } from "../../redux/auth/selectors.js";
 import styles from "./HomePage.module.css";
 import Creators from "../../components/Creators/Creators";
 import DocumentTitle from "../../components/DocumentTitle";
-import { Helmet } from "react-helmet-async";
 import { TypeAnimation } from "react-type-animation";
 
 export default function HomePage() {
@@ -13,13 +12,10 @@ export default function HomePage() {
 
   return (
     <>
-      <DocumentTitle>Home. Welcome to Your Personal Phonebook!</DocumentTitle>
-      <Helmet>
-        <meta
-          name="description"
-          content="Manage your contacts easily with this phonebook app."
-        />
-      </Helmet>
+      <DocumentTitle
+        title="Home. Welcome to Your Personal Phonebook!"
+        description="Manage your contacts easily with this phonebook app."
+      />
 
       <section className={styles.homePage}>
         <div className={styles.homePageWrapper}>
