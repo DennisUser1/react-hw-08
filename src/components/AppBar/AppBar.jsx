@@ -14,17 +14,19 @@ export default function AppBar() {
   return (
     <header className={styles.header}>
       {isLoggedIn ? (
-        <p className={styles.text}>Welcome, {user.name}</p>
+        <div className={styles.text}>Welcome, {user.name}</div>
       ) : (
         <Link className={styles.headerLogo} to="/">
-          <img src={logo} className={styles.logo} alt="Phonebook Logo" />
-          <p className={styles.phonebookText}>Phonebook</p>
+          <img src={logo} className={styles.logo} alt="PhoneBook Logo" />
+          <p className={styles.phoneBookText}>PhoneBook</p>
         </Link>
       )}
-      <div className={styles.navigationItems}>
-        <Navigation />
-        {isLoggedIn ? <UserMenu /> : <AuthNav />}
-      </div>
+  
+      {isLoggedIn ? <UserMenu /> : <AuthNav />}
+      <Navigation />
+
+      {/* <div className={styles.navigationItems}>
+      </div> */}
     </header>
   );
 }

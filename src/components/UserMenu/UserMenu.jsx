@@ -10,7 +10,7 @@ export default function UserMenu() {
   };
 
   return (
-    <div className={styles.wrapperButton}>
+    <div className={styles.wrapperButton}> 
       <button
         className={styles.buttonLogOut}
         type="button"

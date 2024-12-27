@@ -1,10 +1,115 @@
 .navigation {
   display: flex;
   align-items: center;
-  gap: 16px;
+  /* gap: 16px;
+  width: 100%; */
+  height: 3em;
 }
 
 .link {
   text-transform: uppercase;
   font-size: 18px;
+}
+
+.burgerMenu {
+  height: 72%; 
+  width: 3em;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  cursor: pointer;
+  position: relative;
+  z-index: 200;
+}
+
+.burgerBar {
+  width: 3em;
+  height: 0.4em;
+  background-color: #f8f7ff;;
+  border-radius: 0.2em;
+}
+
+.menu {
+  width: 330px;
+  height: 100vh;
+  background: linear-gradient(43deg, #313131 0%, #212121 46%, #313131 100%);
+  box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  right: 330px; 
+  z-index: 100;
+  padding: 82px 24px 64px 24px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 1rem;
+  transition: right .5s ease;
+}
+
+/* ------------------  sliding menu ------------------ */
+.hidden {
+  right: 0;
+}
+
+.visible {
+  display: block;
+  right: -330px; 
+}
+
+/* ------------------ animations ------------------ */
+/* clicked */
+.clicked:nth-child(1) {
+  transform: rotate(45deg) translate(0.5em, 0.8em);
+  transition: ease-out 0.5s;
+}
+
+.clicked:nth-child(2) {
+  transform: scale(0.1);
+  transition: ease-out 0.5s;
+}
+
+.clicked:nth-child(3) {
+  transform: rotate(135deg) translate(-0.4em, 0.8em);
+  transition: ease-out 0.5s;
+}
+
+.unClicked {
+  transform: rotate(0) translate(0);
+  transition: cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.5s;
+}
+
+.burgerMenuDesktop {
+  display: none;
+}
+
+.burgerMenuDesktopLogout {
+  display: flex;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .burgerMenu {
+    display: none;
+  }
+
+  .menu {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .burgerMenuDesktop {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    position: absolute;
+    top: 30px;
+    right: 174px;
+  }
+
+  .linkDesktop {
+    text-transform: uppercase;
+    font-size: 18px;
+  }
 }

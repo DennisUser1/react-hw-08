@@ -8,6 +8,7 @@
   border-radius: 8px;
   box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
   background: linear-gradient(43deg, #313131 0%, #212121 46%, #313131 100%);
+  position: relative;
 }
 
 .navigationItems {
@@ -32,13 +33,13 @@
   height: 45px;
 }
 
-.phonebookText {
+.phoneBookText {
   font-size: 10px;
 }
 
 @media screen and (max-width: 768px) {
   .header {
-    padding: 20px 8px;
+    padding: 20px 12px;
   }
 
   .navigationItems {
