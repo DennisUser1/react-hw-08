@@ -14,6 +14,10 @@ export default function Navigation() {
 
   return (
     <nav className={styles.navigation}>
+      {isMenuClicked && (
+        <div className={styles.overlay} onClick={updateMenu}></div>
+      )}
+      
       <div className={styles.burgerMenu} onClick={updateMenu}>
         <div
           className={`${styles.burgerBar} ${
