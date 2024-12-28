@@ -94,7 +94,7 @@ export default function Contact({ id, name, number, nameRef }) {
             Delete
           </button>
           {isDeleteOpen && (
-            <ConfirmDeleteModal id={id} onClose={closeDeleteModal} />
+            <ConfirmDeleteModal id={id} name={name} onClose={closeDeleteModal} />
           )}
           <button
             className={styles.updateButton}

@@ -45,7 +45,11 @@ export default function App() {
   return (
     <div className={styles.cardBox}>
       <FaAddressBook className={styles.iconBook} />
-      <h1 className={styles.mainTitle}>Phonebook</h1>
+      <h1 className={styles.mainTitle}>
+        {"PhoneBook".split("").map((letter, index) => (
+          <span key={index}>{letter}</span>
+        ))}
+      </h1>
       {currentContact ? (
         <ContactUpdateForm {...currentContact} />
       ) : (

@@ -6,7 +6,7 @@ import useCloseModal from "../../shared/hooks/useCloseModal";
 import styles from "./ConfirmDeleteContactModal.module.css";
 
 const modalRoot = document.querySelector("#modal-root");
-const ConfirmDeleteModal = ({ id, onClose }) => {
+const ConfirmDeleteModal = ({ id, name, onClose }) => {
   const dispatch = useDispatch();
 
   const handleDelete = (event) => {
@@ -26,7 +26,7 @@ const ConfirmDeleteModal = ({ id, onClose }) => {
     <div className={styles.modalBackdrop} onClick={handleBackdropClick}>
       <div className={styles.modalContent}>
         <p className={styles.message}>
-          Are you sure you want to <b>delete</b> this contact?
+          Are you sure you want to <b>delete</b> this contact — <b>{name}</b>?
         </p>
         <div className={styles.btnPanel}>
           <button className={styles.btn} type="button" onClick={handleDelete}>
