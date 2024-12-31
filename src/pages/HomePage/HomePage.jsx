@@ -25,7 +25,7 @@ export default function HomePage() {
               <h1 className={styles.title}>Welcome, {user.name}!</h1>
               <div className={styles.desc}>
                 <Wave
-                  text={`Here you can add, edit and find  your contacts!`}
+                  text={`Here you can add, edit, delete, restore and find your contacts!`}
                   effect="color"
                   effectChange="var(--first-color-animation-home)"
                   speed={15}

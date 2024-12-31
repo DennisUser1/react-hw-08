@@ -44,12 +44,12 @@
 .desc {
   position: absolute;
   top: 28%;
-  font-size: 16px;
+  font-size: 18px;
   text-align: center;
   color: #ffffff;
   background: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(1.25rem);
-  padding: 4px;
+  padding: 6px;
   margin-left: 16px;
   margin-right: 16px;
 }
