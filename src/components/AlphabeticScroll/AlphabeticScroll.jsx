@@ -1,4 +1,5 @@
 import styles from "./AlphabeticScroll.module.css";
+
 const AlphabeticScroll = ({ groupedContacts, onLetterClick, activeLetter }) => {
     const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
   

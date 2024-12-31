@@ -41,6 +41,19 @@
   margin-right: 16px;
 }
 
+.desc {
+  position: absolute;
+  top: 28%;
+  font-size: 16px;
+  text-align: center;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(1.25rem);
+  padding: 4px;
+  margin-left: 16px;
+  margin-right: 16px;
+}
+
 .button {
   position: absolute;
   top: 75%;

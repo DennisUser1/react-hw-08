@@ -5,6 +5,7 @@ import styles from "./HomePage.module.css";
 import Creators from "../../components/Creators/Creators";
 import DocumentTitle from "../../components/DocumentTitle";
 import { TypeAnimation } from "react-type-animation";
+import { Wave } from "react-animated-text";
 
 export default function HomePage() {
   const isLoggedIn = useSelector(selectIsLoggedIn);
@@ -22,9 +23,17 @@ export default function HomePage() {
           {user.name ? (
             <>
               <h1 className={styles.title}>Welcome, {user.name}!</h1>
-              <p className={styles.desc}>
-                Here you can add, edit and find your contacts
-              </p>
+              <div className={styles.desc}>
+                <Wave
+                  text={`Here you can add, edit and find  your contacts!`}
+                  effect="color"
+                  effectChange="var(--first-color-animation-home)"
+                  speed={15}
+                />
+              </div>
+              <Link className={styles.button} to="/contacts">
+                My contacts 
+              </Link>
             </>
           ) : (
             <>

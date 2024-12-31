@@ -89,7 +89,7 @@ export default function Navigation() {
       )}
 
       {!isLoggedIn && (
-        <ul className={styles.burgerMenuDesktopLogout}>
+        <ul className={styles.burgerMenuDesktopHome}>
           <li>
             <NavLink className={styles.linkDesktop} to="/">
               Home

@@ -26,6 +26,6 @@ export default defineConfig({
     },
   },
   optimizeDeps: {
-    include: ['react-icons'], 
+    include: ['react-icons', 'react-animated-text'], 
   },
 });
