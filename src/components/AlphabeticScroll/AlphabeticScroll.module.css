@@ -1,0 +1,43 @@
+/* AlphabeticScroll.module.css */
+.alphabeticScroll {
+    position: fixed;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    background-color: #fff;
+    border-radius: 30px;
+    border: 0.5px solid #b1b1b1;
+    padding: 8px 1px;
+    height: 430px;
+    z-index: 5;
+}
+
+.letterButton {
+    background: transparent;
+    border: none;
+    font-size: 10px;
+    font-weight: 500;
+    cursor: pointer;
+    color: #888;
+    transition: color 0.3s;
+}
+
+.letterButton.active {
+    color: #000;
+    font-weight: bold;
+}
+
+.letterButton.inactive {
+    color: #434343;
+    cursor: not-allowed;
+}
+
+.letterButton.current {
+    background-color: #000;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 50%;
+}

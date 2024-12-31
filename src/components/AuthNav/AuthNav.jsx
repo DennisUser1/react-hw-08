@@ -3,7 +3,6 @@ import styles from "./AuthNav.module.css";
 
 export default function AuthNav () {
   return (
-    <div className={styles.authNavWrapper}>
       <ul className={styles.authNavList}>
         <li>
           <NavLink className={styles.link} to="/register">
@@ -16,6 +15,5 @@ export default function AuthNav () {
           </NavLink>
         </li>
       </ul>
-    </div>
   );
 };

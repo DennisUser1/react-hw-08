@@ -18,9 +18,12 @@ export default function Navigation() {
         <div className={styles.overlay} onClick={updateMenu}></div>
       )}
 
-      <div className={`${styles.burgerMenu} ${
+      <div
+        className={`${styles.burgerMenu} ${
           isMenuClicked ? styles.menuOpen : styles.menuClosed
-        }`} onClick={updateMenu}>
+        }`}
+        onClick={updateMenu}
+      >
         <div
           className={`${styles.burgerBar} ${
             isMenuClicked ? styles.clicked : styles.unClicked
@@ -38,47 +41,61 @@ export default function Navigation() {
         ></div>
       </div>
 
-      <div
+      <ul
         className={`${styles.menu} ${
           isMenuClicked ? styles.hidden : styles.visible
         }`}
       >
-        <NavLink className={styles.link} to="/">
-          Home
-        </NavLink>
+        <li>
+          <NavLink className={styles.link} to="/">
+            Home
+          </NavLink>
+        </li>
 
         {isLoggedIn && (
           <>
-            <NavLink className={styles.link} to="/contacts">
-              Contacts
-            </NavLink>
-
-            <NavLink className={styles.link} to="/statistics">
-              Statistics
-            </NavLink>
+            <li>
+              <NavLink className={styles.link} to="/contacts">
+                Contacts
+              </NavLink>
+            </li>
+            <li>
+              <NavLink className={styles.link} to="/statistics">
+                Statistics
+              </NavLink>
+            </li>
           </>
         )}
-      </div>
+      </ul>
+
       {isLoggedIn && (
-        <div className={styles.burgerMenuDesktop}>
-          <NavLink className={styles.linkDesktop} to="/">
-            Home
-          </NavLink>
-          <NavLink className={styles.linkDesktop} to="/contacts">
-            Contacts
-          </NavLink>
-          <NavLink className={styles.linkDesktop} to="/statistics">
-            Statistics
-          </NavLink>
-        </div>
+        <ul className={styles.burgerMenuDesktop}>
+          <li>
+            <NavLink className={styles.linkDesktop} to="/">
+              Home
+            </NavLink>
+          </li>
+          <li>
+            <NavLink className={styles.linkDesktop} to="/contacts">
+              Contacts
+            </NavLink>
+          </li>
+          <li>
+            <NavLink className={styles.linkDesktop} to="/statistics">
+              Statistics
+            </NavLink>
+          </li>
+        </ul>
       )}
 
       {!isLoggedIn && (
-        <div className={styles.burgerMenuDesktopLogout}>
-          <NavLink className={styles.linkDesktop} to="/">
-            Home
-          </NavLink>
-        </div>
+        <ul className={styles.burgerMenuDesktopLogout}>
+          <li>
+            <NavLink className={styles.linkDesktop} to="/">
+              Home
+            </NavLink>
+          </li>
+        </ul>
       )}
     </nav>
   );

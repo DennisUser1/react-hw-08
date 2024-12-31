@@ -1,4 +1,5 @@
 import Contact from "../Contact/Contact";
+import AlphabeticScroll from "../AlphabeticScroll/AlphabeticScroll";
 import styles from "./ContactList.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -29,7 +30,6 @@ const groupContactsByLetter = (contacts) => {
 
 export default function ContactList() {
   const dispatch = useDispatch();
-  const filteredContacts = useSelector(selectFilteredContacts);
   const isLoading = useSelector(selectIsLoading);
   const contacts = useSelector(selectContacts);
   const deletedContact = useSelector((state) => state.contacts.deletedContact);
@@ -42,7 +42,34 @@ export default function ContactList() {
   const [contactHeights, setContactHeights] = useState({});
 
   const contactRefs = useRef({});
+  const filteredContacts = useSelector(selectFilteredContacts);
   const groupedContacts = groupContactsByLetter(filteredContacts);
+  const letterRefs = useRef({});
+  const [activeLetter, setActiveLetter] = useState("");
+
+  const handleLetterClick = (letter) => {
+    if (letterRefs.current[letter]) {
+      letterRefs.current[letter].scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const visibleLetter = Object.entries(letterRefs.current).find(
+        ([letter, ref]) => {
+          const rect = ref.getBoundingClientRect();
+          return rect.top >= 0 && rect.top <= window.innerHeight * 0.2;
+        }
+      );
+
+      if (visibleLetter) {
+        setActiveLetter(visibleLetter[0]);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const handleFlip = (id) => {
     setFlippedContacts((prev) => ({
@@ -170,52 +197,60 @@ export default function ContactList() {
           </div>
         )
       ) : (
-        <ul
-          className={`${styles.contactsList} ${
-            isSearching ? styles.contactsListCentered : ""
-          }`}
-        >
-          {Object.entries(groupedContacts).map(([letter, contacts]) => (
-            <div key={letter}>
-              <div className={styles.letterDivider}>
-                <span className={styles.letter}>{letter}</span>
-                <hr className={styles.dividerLine} />
+        <>
+          <AlphabeticScroll
+            groupedContacts={groupedContacts}
+            onLetterClick={handleLetterClick}
+            activeLetter={activeLetter}
+          />
+
+          <ul
+            className={`${styles.contactsList} ${
+              isSearching ? styles.contactsListCentered : ""
+            }`}
+          >
+            {Object.entries(groupedContacts).map(([letter, contacts]) => (
+              <div key={letter} ref={(el) => (letterRefs.current[letter] = el)}>
+                <div className={styles.letterDivider}>
+                  <span className={styles.letter}>{letter}</span>
+                  <hr className={styles.dividerLine} />
+                </div>
+                {contacts.map((contact, contactIndex) => {
+                  const nextItem =
+                    contactIndex + 1 < contacts.length
+                      ? contacts[contactIndex + 1]
+                      : null;
+
+                  const nextIsContact = nextItem && nextItem.id;
+                  const marginBottom = nextIsContact ? "-8px" : "0px";
+
+                  return (
+                    <li
+                      key={contact.id}
+                      className={`${styles.contactItem} ${
+                        flippedContacts[contact.id] ? styles.flipped : ""
+                      }`}
+                      style={{
+                        marginBottom,
+                        ...contactHeights[contact.id],
+                      }}
+                      onClick={() => handleFlip(contact.id)}
+                    >
+                      <Contact
+                        id={contact.id}
+                        name={contact.name}
+                        number={contact.number}
+                        avatar={contact.avatar}
+                        gender={contact.gender}
+                        nameRef={(el) => (contactRefs.current[contact.id] = el)}
+                      />
+                    </li>
+                  );
+                })}
               </div>
-              {contacts.map((contact, contactIndex) => {
-                const nextItem =
-                  contactIndex + 1 < contacts.length
-                    ? contacts[contactIndex + 1]
-                    : null;
-
-                const nextIsContact = nextItem && nextItem.id;
-                const marginBottom = nextIsContact ? "-8px" : "0px";
-
-                return (
-                  <li
-                    key={contact.id}
-                    className={`${styles.contactItem} ${
-                      flippedContacts[contact.id] ? styles.flipped : ""
-                    }`}
-                    style={{
-                      marginBottom,
-                      ...contactHeights[contact.id],
-                    }}
-                    onClick={() => handleFlip(contact.id)}
-                  >
-                    <Contact
-                      id={contact.id}
-                      name={contact.name}
-                      number={contact.number}
-                      avatar={contact.avatar}
-                      gender={contact.gender}                            
-                      nameRef={(el) => (contactRefs.current[contact.id] = el)}
-                    />
-                  </li>
-                );
-              })}
-            </div>
-          ))}
-        </ul>
+            ))}
+          </ul>
+        </>
       )}
     </>
   );

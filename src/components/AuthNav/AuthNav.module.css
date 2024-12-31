@@ -1,7 +1,11 @@
 .authNavList {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 25px;
+  position: absolute;  
+  left: 0;   
+  width: 100%;
 }
 
 li {
