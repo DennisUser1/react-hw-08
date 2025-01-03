@@ -28,6 +28,7 @@
   cursor: pointer;
   /* transform: translateZ(0); */
   will-change: transform;
+
 }
 
 .contactItem.flipped {

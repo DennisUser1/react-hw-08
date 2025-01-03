@@ -50,3 +50,7 @@ createRoot(document.getElementById("root")).render(
     </Provider>
   </StrictMode>
 );
+
+// Enable React Router v7 experimental flags to transition to new features:
+  // 1. `v7_startTransition` - allows you to wrap state updates in `React.startTransition` for smoother transitions.
+  // 2. `v7_relativeSplatPath` - changes the behavior of resolving relative routes within routes using an asterisk (splat).

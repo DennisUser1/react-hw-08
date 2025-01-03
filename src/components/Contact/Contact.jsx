@@ -1,5 +1,5 @@
-import { FaRegUser, FaIdCard } from "react-icons/fa";
-import { MdPhoneIphone } from "react-icons/md";
+import { FaRegUser, FaIdCard, FaTelegram } from "react-icons/fa";
+import { MdPhoneIphone, MdMarkunread } from "react-icons/md";
 import { GoKebabHorizontal } from "react-icons/go";
 import styles from "./Contact.module.css";
 import { useDispatch } from "react-redux";
@@ -57,7 +57,7 @@ export default function Contact({ id, name, number, nameRef }) {
 
   return (
     <>
-      <div className={styles.contactCardWrapper}>
+      <div className={styles.contactCardWrapperGeneral}>
         <div className={styles.frontSide}>
           <div className={styles.wrapperTitleCard}>
             <FaIdCard className={styles.iconIdCard} />
@@ -94,7 +94,11 @@ export default function Contact({ id, name, number, nameRef }) {
             Delete
           </button>
           {isDeleteOpen && (
-            <ConfirmDeleteModal id={id} name={name} onClose={closeDeleteModal} />
+            <ConfirmDeleteModal
+              id={id}
+              name={name}
+              onClose={closeDeleteModal}
+            />
           )}
           <button
             className={styles.updateButton}
@@ -105,8 +109,26 @@ export default function Contact({ id, name, number, nameRef }) {
           >
             Update
           </button>
+          <div className={styles.socialMedia}>
+            <a
+              href="#"
+              className={styles.emailButton}
+              onClick={handleAnchorClick}
+            >
+              <MdMarkunread className={styles.emailIcon} />
+            </a>
+            <a
+              href="https://react-icons.github.io/react-icons/icons/md/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.telegramButton}
+              onClick={handleAnchorClick}
+            >
+              <FaTelegram className={styles.telegramIcon} />
+            </a>
+          </div>
         </div>
-        <div className={styles.contactCardWrapper}>
+        <div className={styles.contactCardWrapperBack}>
           <div className={styles.backSide}>
             <div className={styles.wrapperTitleCard}>
               <FaIdCard className={styles.iconIdCard} />
@@ -138,15 +160,21 @@ export default function Contact({ id, name, number, nameRef }) {
         </div>
       </div>
       <button
-        className={`${styles.button} ${isMenuOpen ? styles.buttonActive : ""}`}
+        className={`${styles.kebabButton} ${
+          isMenuOpen ? styles.kebabButtonActive : ""
+        }`}
         onClick={(event) => {
-          handleButtonClick(event);
+          event.stopPropagation();
           isMenuOpen ? closeMenu() : openMenu();
         }}
       >
         <GoKebabHorizontal />
       </button>
-      <div className={`${styles.menu} ${isMenuOpen ? styles.open : ""}`}></div>
+      <div className={styles.menuWrapper}>
+        <div
+          className={`${styles.menu} ${isMenuOpen ? styles.open : ""}`}
+        ></div>
+      </div>
     </>
   );
 }
