@@ -19,6 +19,11 @@ export default function Contact({ id, name, number, nameRef }) {
   const dispatch = useDispatch();
   const [avatar, setAvatar] = useState("");
   const [gender, setGender] = useState("Unknown");
+  const [isOpen, setIsOpen] = useState(false); 
+  const toggleMenu = (event) => {
+    event.stopPropagation();
+    setIsOpen((prev) => !prev);
+  };
 
   const {
     isOpen: isMenuOpen,
@@ -57,7 +62,12 @@ export default function Contact({ id, name, number, nameRef }) {
 
   return (
     <>
-      <div className={styles.contactCardWrapperGeneral}>
+      <div
+        className={`${styles.contactCardWrapperGeneral} ${
+          isOpen ? styles.open : ""
+        }`}
+        style={{ zIndex: isOpen ? -2 : 0 }}
+      >
         <div className={styles.frontSide}>
           <div className={styles.wrapperTitleCard}>
             <FaIdCard className={styles.iconIdCard} />
@@ -109,30 +119,30 @@ export default function Contact({ id, name, number, nameRef }) {
           >
             Update
           </button>
-          <div className={styles.socialMedia}>
-            <a
-              href="#"
-              className={styles.emailButton}
-              onClick={handleAnchorClick}
-            >
-              <MdMarkunread className={styles.emailIcon} />
-            </a>
-            <a
-              href="https://react-icons.github.io/react-icons/icons/md/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.telegramButton}
-              onClick={handleAnchorClick}
-            >
-              <FaTelegram className={styles.telegramIcon} />
-            </a>
-          </div>
         </div>
         <div className={styles.contactCardWrapperBack}>
           <div className={styles.backSide}>
             <div className={styles.wrapperTitleCard}>
               <FaIdCard className={styles.iconIdCard} />
               <p className={styles.textBackSide}>Back Side</p>
+            </div>
+            <div className={styles.socialMedia}>
+              <a
+                href="#"
+                className={styles.emailButton}
+                onClick={handleAnchorClick}
+              >
+                <MdMarkunread className={styles.emailIcon} />
+              </a>
+              <a
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.telegramButton}
+                onClick={handleAnchorClick}
+              >
+                <FaTelegram className={styles.telegramIcon} />
+              </a>
             </div>
             <div className={styles.avatarWrapper}>
               <img
@@ -164,16 +174,36 @@ export default function Contact({ id, name, number, nameRef }) {
           isMenuOpen ? styles.kebabButtonActive : ""
         }`}
         onClick={(event) => {
-          event.stopPropagation();
+          handleButtonClick(event);
+          toggleMenu(event);
           isMenuOpen ? closeMenu() : openMenu();
         }}
       >
         <GoKebabHorizontal />
       </button>
-      <div className={styles.menuWrapper}>
+      <div className={`${styles.menuWrapper} ${isMenuOpen ? styles.open : ""}`}>
         <div
           className={`${styles.menu} ${isMenuOpen ? styles.open : ""}`}
-        ></div>
+        >
+          
+          <button
+            className={styles.favoriteButton} title="Favorites"
+            onClick={(event) => {
+              handleButtonClick(event);
+            }}
+          >
+            Favorites
+          </button>
+  
+          <button
+            className={styles.detailButton} title="Contact Detail"
+            onClick={(event) => {
+              handleButtonClick(event);
+            }}
+          >
+            Detail
+          </button>
+        </div>
       </div>
     </>
   );
