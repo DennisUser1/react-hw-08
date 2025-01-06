@@ -26,7 +26,7 @@ const ConfirmDeleteModal = ({ id, name, onClose }) => {
     <div className={styles.modalBackdrop} onClick={handleBackdropClick}>
       <div className={styles.modalContent}>
         <p className={styles.message}>
-          Are you sure you want to <b>delete</b> this contact — <b>{name}</b>?
+          Are you sure you want to <b>delete</b> this contact — <b className={styles.nameContact}>{name}</b>?
         </p>
         <div className={styles.btnPanel}>
           <button className={styles.btn} type="button" onClick={handleDelete}>

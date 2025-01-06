@@ -19,7 +19,7 @@ export default function Contact({ id, name, number, nameRef }) {
   const dispatch = useDispatch();
   const [avatar, setAvatar] = useState("");
   const [gender, setGender] = useState("Unknown");
-  const [isOpen, setIsOpen] = useState(false); 
+  const [isOpen, setIsOpen] = useState(false);
   const toggleMenu = (event) => {
     event.stopPropagation();
     setIsOpen((prev) => !prev);
@@ -182,21 +182,20 @@ export default function Contact({ id, name, number, nameRef }) {
         <GoKebabHorizontal />
       </button>
       <div className={`${styles.menuWrapper} ${isMenuOpen ? styles.open : ""}`}>
-        <div
-          className={`${styles.menu} ${isMenuOpen ? styles.open : ""}`}
-        >
-          
+        <div className={`${styles.menu} ${isMenuOpen ? styles.open : ""}`}>
           <button
-            className={styles.favoriteButton} title="Favorites"
+            className={styles.favoriteButton}
+            title="Favorites"
             onClick={(event) => {
               handleButtonClick(event);
             }}
           >
             Favorites
           </button>
-  
+
           <button
-            className={styles.detailButton} title="Contact Detail"
+            className={styles.detailButton}
+            title="Contact Detail"
             onClick={(event) => {
               handleButtonClick(event);
             }}
