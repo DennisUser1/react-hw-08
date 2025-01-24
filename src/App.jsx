@@ -31,7 +31,7 @@ const App = () => {
   }, [dispatch]);
 
   return isRefresh ? (
-    <Loader />
+    <Loader /> // Fixed 401 Unauthorized error in console
   ) : (
     <>
       <Suspense fallback={<Loader />}>
