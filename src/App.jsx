@@ -22,10 +22,17 @@ const App = () => {
   const isRefresh = useSelector(selectIsRefreshing);
 
   useEffect(() => {
-    dispatch(refreshUser());
+    dispatch(refreshUser())
+      .unwrap()
+      .then(() => {})
+      .catch(() => {});
   }, [dispatch]);
 
-  return isRefresh ? null : (
+  if (isRefresh) {
+    return <Loader />;
+  }
+
+  return (
     <>
       <Suspense fallback={<Loader />}>
         <Routes>

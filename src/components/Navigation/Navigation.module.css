@@ -107,13 +107,14 @@
   transition: cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.5s;
 }
 
-.burgerMenuDesktop {
+.menuDesktop {
   display: none;
 }
 
-.burgerMenuDesktopHome {
+.menuDesktopHome {
   display: flex;
   align-items: center;
+  z-index: 500;
 }
 
 @media (min-width: 768px) {
@@ -127,7 +128,7 @@
 }
 
 @media (min-width: 768px) {
-  .burgerMenuDesktop {
+  .menuDesktop {
     display: flex;
     align-items: center;
     gap: 16px;
@@ -143,7 +144,7 @@
 }
 
 @media screen and (max-width: 768px) {
-  .burgerMenuDesktopHome {
+  .menuDesktopHome {
     display: none;
   }
 }

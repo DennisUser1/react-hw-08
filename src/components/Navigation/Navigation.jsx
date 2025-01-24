@@ -69,7 +69,7 @@ export default function Navigation() {
       </ul>
 
       {isLoggedIn && (
-        <ul className={styles.burgerMenuDesktop}>
+        <ul className={styles.menuDesktop}>
           <li>
             <NavLink className={styles.linkDesktop} to="/">
               Home
@@ -89,7 +89,7 @@ export default function Navigation() {
       )}
 
       {!isLoggedIn && (
-        <ul className={styles.burgerMenuDesktopHome}>
+        <ul className={styles.menuDesktopHome}>
           <li>
             <NavLink className={styles.linkDesktop} to="/">
               Home
