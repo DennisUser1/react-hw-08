@@ -115,7 +115,7 @@ export async function determineGender(name) {
             },
         });
         // console.log(response.data);
-        if (response.data && response.data.gender) {
+        if (response.data && typeof response.data.gender === 'string' && response.data.gender.trim() !== '') {
             return response.data.gender;
         } else {
             return 'Unknown';  

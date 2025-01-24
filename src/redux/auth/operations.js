@@ -57,14 +57,17 @@ export const refreshUser = createAsyncThunk(
     const persistedToken = state.auth.token;
 
     if (!persistedToken) {
+      // console.warn("No token found. Skipping refresh.");
       return thunkAPI.rejectWithValue("Unable to fetch user");
     }
 
     try {
+      // console.log("Using token:", persistedToken);
       setAuthHeader(persistedToken);
       const { data } = await axios.get("/users/current");
       return data;
     } catch (error) {
+      // console.error("Failed to refresh user:", error.message);
       return thunkAPI.rejectWithValue(error.message);
     }
   }

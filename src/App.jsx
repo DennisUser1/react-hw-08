@@ -5,9 +5,7 @@ import PrivateRoute from "components/PrivateRoute";
 import RestrictedRoute from "components/RestrictedRoute";
 import Layout from "components/Layout/Layout";
 import Loader from "components/Loader/Loader";
-import {
-  selectIsRefreshing,
-} from "./redux/auth/selectors.js";
+import { selectIsRefreshing, selectToken } from "./redux/auth/selectors.js";
 import { refreshUser } from "./redux/auth/operations.js";
 
 const HomePage = lazy(() => import("./pages/HomePage/HomePage"));
@@ -22,13 +20,16 @@ const NotFoundPage = lazy(() => import("./pages/NotFoundPage/NotFoundPage"));
 const App = () => {
   const dispatch = useDispatch();
   const isRefresh = useSelector(selectIsRefreshing);
+  const token = useSelector(selectToken);
 
   useEffect(() => {
-    dispatch(refreshUser())
-      .unwrap()
-      .then(() => {})
-      .catch(() => {});
-  }, [dispatch]);
+    if (token) {
+      dispatch(refreshUser())
+        .unwrap()
+        .then(() => {})
+        .catch(() => {});
+    }
+  }, [dispatch, token]);
 
   return isRefresh ? (
     <Loader /> // Fixed 401 Unauthorized error in console
