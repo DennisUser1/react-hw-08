@@ -24,7 +24,7 @@ const App = () => {
 
   useEffect(() => {
     if (!token) {
-      return;    // Fixed 401 Unauthorized error in console
+      return;   // Fixed 401 Unauthorized error in console
     }
     dispatch(refreshUser())
       .unwrap()
@@ -32,9 +32,11 @@ const App = () => {
       .catch(() => {});
   }, [dispatch, token]);
 
-  return isRefresh ? (
-    <Loader /> 
-  ) : (
+  if (isRefresh) {
+    return <Loader />;
+  }
+
+  return (
     <>
       <Suspense fallback={<Loader />}>
         <Routes>
