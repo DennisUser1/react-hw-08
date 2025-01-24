@@ -7,10 +7,8 @@ import Layout from "components/Layout/Layout";
 import Loader from "components/Loader/Loader";
 import {
   selectIsRefreshing,
-  selectToken,
 } from "./redux/auth/selectors.js";
 import { refreshUser } from "./redux/auth/operations.js";
-import { GiThreePointedShuriken } from "react-icons/gi";
 
 const HomePage = lazy(() => import("./pages/HomePage/HomePage"));
 const RegistrationPage = lazy(() =>
@@ -24,21 +22,17 @@ const NotFoundPage = lazy(() => import("./pages/NotFoundPage/NotFoundPage"));
 const App = () => {
   const dispatch = useDispatch();
   const isRefresh = useSelector(selectIsRefreshing);
-  const token = useSelector(selectToken);
 
   useEffect(() => {
-    if (!token) return; // Fixed 401 Unauthorized error in console 
     dispatch(refreshUser())
       .unwrap()
       .then(() => {})
       .catch(() => {});
-  }, [dispatch, token]);
+  }, [dispatch]);
 
-  if (isRefresh) {
-    return <Loader />;
-  }
-
-  return (
+  return isRefresh ? (
+    <Loader />
+  ) : (
     <>
       <Suspense fallback={<Loader />}>
         <Routes>
