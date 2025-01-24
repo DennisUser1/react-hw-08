@@ -23,16 +23,17 @@ const App = () => {
   const token = useSelector(selectToken);
 
   useEffect(() => {
-    if (token) {
-      dispatch(refreshUser())
-        .unwrap()
-        .then(() => {})
-        .catch(() => {});
+    if (!token) {
+      return;    // Fixed 401 Unauthorized error in console
     }
+    dispatch(refreshUser())
+      .unwrap()
+      .then(() => {})
+      .catch(() => {});
   }, [dispatch, token]);
 
   return isRefresh ? (
-    <Loader /> // Fixed 401 Unauthorized error in console
+    <Loader /> 
   ) : (
     <>
       <Suspense fallback={<Loader />}>
