@@ -4,20 +4,23 @@ import {
   selectDeletedContactsCount,
   selectUpdatedContactsCount,
 } from "../../redux/contacts/selectors.js";
-import { useSelector } from "react-redux";
+import { fetchStatistics, fetchContacts } from "../../redux/contacts/operations.js";
+import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { GiChart } from "react-icons/gi";
 import styles from "./Statistics.module.css";
 
 export default function Statistics() {
+  const dispatch = useDispatch();
   const contacts = useSelector(selectFilteredContacts);
   const addedCount = useSelector(selectAddedContactsCount);
   const deletedCount = useSelector(selectDeletedContactsCount);
   const updatedCount = useSelector(selectUpdatedContactsCount);
 
   useEffect(() => {
-    if (contacts.length > 0) {
-    }
+    if (contacts.length > 0) {}
+    dispatch(fetchContacts());
+    dispatch(fetchStatistics());
   }, [contacts]);
 
   return (

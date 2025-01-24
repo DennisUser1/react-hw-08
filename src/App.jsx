@@ -32,11 +32,9 @@ const App = () => {
       .catch(() => {});
   }, [dispatch, token]);
 
-  if (isRefresh) {
-    return <Loader />;
-  }
-
-  return (
+  return isRefresh ? (
+    <Loader /> 
+  ) : (
     <>
       <Suspense fallback={<Loader />}>
         <Routes>
