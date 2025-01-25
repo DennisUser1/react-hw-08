@@ -5,6 +5,7 @@ import {
     deleteContact,
     undoDeleteContact,
     updateContact,
+    fetchStatistics,
 } from "./operations.js";
 import { logOut } from "../auth/operations.js";
 import { handlePending, handleRejected, handleFulfilled } from "../handlers.js";
@@ -21,6 +22,7 @@ const initialState = {
   addedCount: 0,  
   deletedCount: 0, 
   updatedCount: 0,
+  statistics: null,
 };
 
 const contactsSlice = createSlice({
@@ -34,6 +36,7 @@ const contactsSlice = createSlice({
       state.addedCount = 0;
       state.deletedCount = 0;
       state.updatedCount = 0;
+      state.statistics = null;
     },
   },
   extraReducers: (builder) => {
@@ -90,6 +93,10 @@ const contactsSlice = createSlice({
         );
         state.currentEditingContact = null;
         state.updatedCount += 1; 
+      })
+      .addCase(fetchStatistics.fulfilled, (state, action) => {
+        state.statistics = action.payload;
+        state.isLoading = false;
       })
       .addMatcher(({ type }) => type.endsWith("pending"), handlePending)
       .addMatcher(({ type }) => type.endsWith("rejected"), handleRejected)

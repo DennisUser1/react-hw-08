@@ -24,11 +24,16 @@ const App = () => {
 
   useEffect(() => {
     if (!token) {
+      // console.log("The token is missing. The request is not sent");
       return;   // Fixed 401 Unauthorized error in console
     }
+    // console.log("Token found:", token);
+
     dispatch(refreshUser())
       .unwrap()
-      .then(() => {})
+      .then(() => {
+        // console.log("User successfully updated");
+      })
       .catch(() => {});
   }, [dispatch, token]);
 

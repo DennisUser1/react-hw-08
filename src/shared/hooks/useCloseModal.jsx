@@ -16,6 +16,7 @@ const useCloseModal = (onClose) => {
 
   const handleBackdropClick = (e) => {
     if (e.target === e.currentTarget) {
+      e.stopPropagation(); 
       onClose();
     }
   };

@@ -106,15 +106,10 @@ export const fetchStatistics = createAsyncThunk(
   "contacts/fetchStatistics",
   async (_, { getState, rejectWithValue }) => {
     try {
-      const state = getState();
-      const contacts = state.contacts.items;
-      const addedCount = contacts.filter((contact) => contact.isAdded).length;
-      const deletedCount = contacts.filter(
-        (contact) => contact.isDeleted
-      ).length;
-      const updatedCount = contacts.filter(
-        (contact) => contact.isUpdated
-      ).length;
+      const { contacts } = getState();
+      const addedCount = contacts.addedCount;
+      const deletedCount = contacts.deletedCount;
+      const updatedCount = contacts.updatedCount;
 
       return { addedCount, deletedCount, updatedCount };
     } catch (error) {
@@ -128,6 +123,10 @@ const genderAxios = axios.create({
 });
 
 export async function determineGender(name) {
+  if (typeof name !== "string" || name.trim().length === 0 || name.length > 50 || !/^[a-zA-Z]+$/.test(name)) {
+    return "Unknown"; 
+  }
+
   try {
     const response = await genderAxios.get("", {
       params: {
