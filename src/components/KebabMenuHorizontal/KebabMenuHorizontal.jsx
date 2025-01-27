@@ -29,6 +29,7 @@ export default function KebabMenuHorizontal({ isOpen, setIsOpen }) {
           toggleMenu(event);
           isMenuOpen ? closeMenu() : openMenu();
         }}
+        title="Menu"
       >
         <GoKebabHorizontal />
       </button>

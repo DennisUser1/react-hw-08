@@ -85,6 +85,8 @@ export default function Contact({ id, name, number, nameRef }) {
                   href={`tel:${formatPhoneNumberForLink(number)}`}
                   className={styles.phoneLink}
                   onClick={handleAnchorClick}
+                  style={{ zIndex: frontButtonZIndex }}
+                  title="Click on number"
                 >
                   {formatPhoneNumber(number)}
                 </a>
@@ -99,6 +101,7 @@ export default function Contact({ id, name, number, nameRef }) {
               handleButtonClick(event);
               openDeleteModal();
             }}
+            title="Delete"
           >
             Delete
           </button>
@@ -116,6 +119,7 @@ export default function Contact({ id, name, number, nameRef }) {
               handleButtonClick(event);
               dispatch(setCurrentEditingContact({ id, name, number }));
             }}
+            title="Update"
           >
             Update
           </button>

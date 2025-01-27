@@ -104,6 +104,10 @@
   pointer-events: auto;
 }
 
+.phoneLink {
+  transition: z-index 0.3s ease-in-out;
+}
+
 .iconCardWrapper,
 .wrapperTitleCard {
   display: flex;
