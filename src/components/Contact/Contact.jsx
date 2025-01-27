@@ -1,6 +1,5 @@
 import { FaRegUser, FaIdCard, FaTelegram } from "react-icons/fa";
 import { MdPhoneIphone, MdMarkunread } from "react-icons/md";
-import { GoKebabHorizontal } from "react-icons/go";
 import styles from "./Contact.module.css";
 import { useDispatch } from "react-redux";
 import { setCurrentEditingContact } from "../../redux/contacts/slice.js";
@@ -11,6 +10,7 @@ import {
 import { stringAvatar } from "../../shared/utils/avatarUtils.js";
 import { formatPhoneNumber } from "../../shared/utils/phoneUtils.js";
 import ConfirmDeleteModal from "../ConfirmDeleteContactModal/ConfirmDeleteContactModal";
+import KebabMenuHorizontal from "../KebabMenuHorizontal/KebabMenuHorizontal";
 import { useToggle } from "../../shared/hooks/useToggleState";
 import { useState, useEffect } from "react";
 import { Avatar } from "@mui/material";
@@ -20,16 +20,7 @@ export default function Contact({ id, name, number, nameRef }) {
   const [avatar, setAvatar] = useState("");
   const [gender, setGender] = useState("Unknown");
   const [isOpen, setIsOpen] = useState(false);
-  const toggleMenu = (event) => {
-    event.stopPropagation();
-    setIsOpen((prev) => !prev);
-  };
-
-  const {
-    isOpen: isMenuOpen,
-    openModal: openMenu,
-    closeModal: closeMenu,
-  } = useToggle();
+  const buttonZIndex = isOpen ? 0 : 1;
 
   const {
     isOpen: isDeleteOpen,
@@ -69,6 +60,7 @@ export default function Contact({ id, name, number, nameRef }) {
         style={{ zIndex: isOpen ? -2 : 0 }}
       >
         <div className={styles.frontSide}>
+          <KebabMenuHorizontal isOpen={isOpen} setIsOpen={setIsOpen} />
           <div className={styles.wrapperTitleCard}>
             <FaIdCard className={styles.iconIdCard} />
             <p className={styles.textFrontSide}>Front Side</p>
@@ -96,6 +88,7 @@ export default function Contact({ id, name, number, nameRef }) {
 
           <button
             className={styles.deleteButton}
+            style={{ zIndex: buttonZIndex }}
             onClick={(event) => {
               handleButtonClick(event);
               openDeleteModal();
@@ -112,6 +105,7 @@ export default function Contact({ id, name, number, nameRef }) {
           )}
           <button
             className={styles.updateButton}
+            style={{ zIndex: buttonZIndex }}
             onClick={(event) => {
               handleButtonClick(event);
               dispatch(setCurrentEditingContact({ id, name, number }));
@@ -122,27 +116,30 @@ export default function Contact({ id, name, number, nameRef }) {
         </div>
         <div className={styles.contactCardWrapperBack}>
           <div className={styles.backSide}>
-            <div className={styles.wrapperTitleCard}>
-              <FaIdCard className={styles.iconIdCard} />
-              <p className={styles.textBackSide}>Back Side</p>
-            </div>
-            <div className={styles.socialMedia}>
-              <a
-                href="#"
-                className={styles.emailButton}
-                onClick={handleAnchorClick}
-              >
-                <MdMarkunread className={styles.emailIcon} />
-              </a>
-              <a
-                href="#"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.telegramButton}
-                onClick={handleAnchorClick}
-              >
-                <FaTelegram className={styles.telegramIcon} />
-              </a>
+            <KebabMenuHorizontal isOpen={isOpen} setIsOpen={setIsOpen} />
+            <div className={styles.wrapperBoxSide}>
+              <div className={styles.wrapperTitleCard}>
+                <FaIdCard className={styles.iconIdCard} />
+                <p className={styles.textBackSide}>Back Side</p>
+              </div>
+              <div className={styles.socialMedia}>
+                <a
+                  href="#"
+                  className={styles.emailButton}
+                  onClick={handleAnchorClick}
+                >
+                  <MdMarkunread className={styles.emailIcon} />
+                </a>
+                <a
+                  href="#"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.telegramButton}
+                  onClick={handleAnchorClick}
+                >
+                  <FaTelegram className={styles.telegramIcon} />
+                </a>
+              </div>
             </div>
             <div className={styles.avatarWrapper}>
               <img
@@ -167,41 +164,6 @@ export default function Contact({ id, name, number, nameRef }) {
               />
             </div>
           </div>
-        </div>
-      </div>
-      <button
-        className={`${styles.kebabButton} ${
-          isMenuOpen ? styles.kebabButtonActive : ""
-        }`}
-        onClick={(event) => {
-          handleButtonClick(event);
-          toggleMenu(event);
-          isMenuOpen ? closeMenu() : openMenu();
-        }}
-      >
-        <GoKebabHorizontal />
-      </button>
-      <div className={`${styles.menuWrapper} ${isMenuOpen ? styles.open : ""}`}>
-        <div className={`${styles.menu} ${isMenuOpen ? styles.open : ""}`}>
-          <button
-            className={styles.favoriteButton}
-            title="Favorites"
-            onClick={(event) => {
-              handleButtonClick(event);
-            }}
-          >
-            Favorites
-          </button>
-
-          <button
-            className={styles.detailButton}
-            title="Contact Detail"
-            onClick={(event) => {
-              handleButtonClick(event);
-            }}
-          >
-            Detail
-          </button>
         </div>
       </div>
     </>

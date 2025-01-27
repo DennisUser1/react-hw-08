@@ -1,9 +1,9 @@
-import { useEffect } from "react";
+import { useLayoutEffect } from "react";
 import { NavLink } from "react-router-dom";
 import styles from "./NotFoundPage.module.css";
 
 export default function NotFoundPage() {
-  useEffect(() => {
+  useLayoutEffect(() => {
     document.body.classList.add(styles.bodyNotFound);
     return () => {
       document.body.classList.remove(styles.bodyNotFound);
