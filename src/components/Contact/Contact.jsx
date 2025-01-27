@@ -20,7 +20,10 @@ export default function Contact({ id, name, number, nameRef }) {
   const [avatar, setAvatar] = useState("");
   const [gender, setGender] = useState("Unknown");
   const [isOpen, setIsOpen] = useState(false);
-  const buttonZIndex = isOpen ? 0 : 1;
+  const [isFrontOpen, setIsFrontOpen] = useState(false);
+  const [isBackOpen, setIsBackOpen] = useState(false);
+
+  const frontButtonZIndex = isFrontOpen ? 0 : 1;
 
   const {
     isOpen: isDeleteOpen,
@@ -60,7 +63,10 @@ export default function Contact({ id, name, number, nameRef }) {
         style={{ zIndex: isOpen ? -2 : 0 }}
       >
         <div className={styles.frontSide}>
-          <KebabMenuHorizontal isOpen={isOpen} setIsOpen={setIsOpen} />
+          <KebabMenuHorizontal
+            isOpen={isFrontOpen}
+            setIsOpen={setIsFrontOpen}
+          />
           <div className={styles.wrapperTitleCard}>
             <FaIdCard className={styles.iconIdCard} />
             <p className={styles.textFrontSide}>Front Side</p>
@@ -88,7 +94,7 @@ export default function Contact({ id, name, number, nameRef }) {
 
           <button
             className={styles.deleteButton}
-            style={{ zIndex: buttonZIndex }}
+            style={{ zIndex: frontButtonZIndex }}
             onClick={(event) => {
               handleButtonClick(event);
               openDeleteModal();
@@ -105,7 +111,7 @@ export default function Contact({ id, name, number, nameRef }) {
           )}
           <button
             className={styles.updateButton}
-            style={{ zIndex: buttonZIndex }}
+            style={{ zIndex: frontButtonZIndex }}
             onClick={(event) => {
               handleButtonClick(event);
               dispatch(setCurrentEditingContact({ id, name, number }));
@@ -116,7 +122,10 @@ export default function Contact({ id, name, number, nameRef }) {
         </div>
         <div className={styles.contactCardWrapperBack}>
           <div className={styles.backSide}>
-            <KebabMenuHorizontal isOpen={isOpen} setIsOpen={setIsOpen} />
+            <KebabMenuHorizontal
+              isOpen={isBackOpen}
+              setIsOpen={setIsBackOpen}
+            />
             <div className={styles.wrapperBoxSide}>
               <div className={styles.wrapperTitleCard}>
                 <FaIdCard className={styles.iconIdCard} />
