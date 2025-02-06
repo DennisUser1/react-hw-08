@@ -76,12 +76,44 @@
   transition: transform 0.8s ease, visibility 1s;
 }
 
+.kebabTitle {
+  position: absolute;
+  top: 16px;
+  left: 24px;
+  font-size: 18px;
+  font-weight: 500;
+  height: 20px;
+}
+
+.icon {
+  margin-right: 8px;
+}
+
 .favoriteButton,
 .detailButton {
-  width: 82px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 116px;
   height: 40px;
   border-radius: 8px;
   border: none;
   background-color: #6e57f4;
   color: #f8f7ff;
+}
+
+.favoriteActive {
+  background-color: #ccc; 
+  color: #666; 
+  cursor: not-allowed; 
+}
+
+@media screen and (min-width: 300px) and (max-width: 359px) {
+  .menu { 
+    padding: 10px;
+  }
+
+  .menu.open { 
+    padding: 10px;
+  }
 }

@@ -227,7 +227,7 @@
   color: #f8f7ff;
   cursor: pointer;
   position: absolute;
-  top: 38px;
+  top: 42px;
   right: 10px;
   /* z-index: 1; */
   transition: all 0.25s cubic-bezier(0.7, 0.98, 0.86, 0.98);
@@ -252,7 +252,7 @@
   color: #f8f7ff;
   cursor: pointer;
   position: absolute;
-  top: 84px;
+  top: 88px;
   right: 10px;
   /* z-index: 1; */
   transition: all 0.25s cubic-bezier(0.7, 0.98, 0.86, 0.98);
@@ -324,11 +324,11 @@
 
   .deleteButton {
     position: absolute;
-    top: 36px;
+    top: 42px;
   }
 
   .updateButton {
-    top: 82px;
+    top: 88px;
   }
 
   .wrapperTitleCard {

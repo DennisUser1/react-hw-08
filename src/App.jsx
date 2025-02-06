@@ -40,7 +40,6 @@ const App = () => {
   return isRefresh ? (
     <Loader /> 
   ) : (
-    <>
       <Suspense fallback={<Loader />}>
         <Routes>
           <Route path="/" element={<Layout />}>
@@ -81,7 +80,6 @@ const App = () => {
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Suspense>
-    </>
   );
 };
 

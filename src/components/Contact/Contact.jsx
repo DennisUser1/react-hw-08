@@ -22,6 +22,8 @@ export default function Contact({ id, name, number, nameRef }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isFrontOpen, setIsFrontOpen] = useState(false);
   const [isBackOpen, setIsBackOpen] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false);
+
 
   const frontButtonZIndex = isFrontOpen ? 0 : 1;
 
@@ -55,7 +57,6 @@ export default function Contact({ id, name, number, nameRef }) {
   };
 
   return (
-    <>
       <div
         className={`${styles.contactCardWrapperGeneral} ${
           isOpen ? styles.open : ""
@@ -66,6 +67,9 @@ export default function Contact({ id, name, number, nameRef }) {
           <KebabMenuHorizontal
             isOpen={isFrontOpen}
             setIsOpen={setIsFrontOpen}
+            title="On Front" 
+            isFavorite={isFavorite}
+            setIsFavorite={setIsFavorite}
           />
           <div className={styles.wrapperTitleCard}>
             <FaIdCard className={styles.iconIdCard} />
@@ -129,6 +133,9 @@ export default function Contact({ id, name, number, nameRef }) {
             <KebabMenuHorizontal
               isOpen={isBackOpen}
               setIsOpen={setIsBackOpen}
+              title="On Back" 
+              isFavorite={isFavorite}
+              setIsFavorite={setIsFavorite}
             />
             <div className={styles.wrapperBoxSide}>
               <div className={styles.wrapperTitleCard}>
@@ -179,6 +186,5 @@ export default function Contact({ id, name, number, nameRef }) {
           </div>
         </div>
       </div>
-    </>
   );
 }
