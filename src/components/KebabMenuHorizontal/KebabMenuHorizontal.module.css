@@ -52,7 +52,7 @@
   height: 100%;
   width: 100%;
   border-radius: 16px;
-  padding: 24px;
+  padding: 24px 12px;
   /* padding: 14px 60px 14px 24px; */
   background-color: #f8f7ff;
   z-index: 2;
@@ -68,7 +68,7 @@
   justify-content: space-around;
   height: 100%;
   width: 100%;
-  padding: 24px;
+  padding: 24px 12px;
   background-color: #f8f7ff;
   visibility: visible;
   z-index: 2;
@@ -79,7 +79,7 @@
 .kebabTitle {
   position: absolute;
   top: 16px;
-  left: 24px;
+  left: 12px;
   font-size: 18px;
   font-weight: 500;
   height: 20px;
@@ -94,7 +94,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 116px;
+  width: 112px;
   height: 40px;
   border-radius: 8px;
   border: none;

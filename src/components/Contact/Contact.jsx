@@ -15,7 +15,7 @@ import { useToggle } from "../../shared/hooks/useToggleState";
 import { useState, useEffect } from "react";
 import { Avatar } from "@mui/material";
 
-export default function Contact({ id, name, number, nameRef }) {
+export default function Contact({ id, name, number, nameRef, cardHeight }) {
   const dispatch = useDispatch();
   const [avatar, setAvatar] = useState("");
   const [gender, setGender] = useState("Unknown");
@@ -60,7 +60,8 @@ export default function Contact({ id, name, number, nameRef }) {
       <div
         className={`${styles.contactCardWrapperGeneral} ${
           isOpen ? styles.open : ""
-        }`}
+        }
+        ${cardHeight === "max190" ? styles.cardHeight190 : ""}`}
         style={{ zIndex: isOpen ? -2 : 0 }}
       >
         <div className={styles.frontSide}>

@@ -58,7 +58,7 @@ export default function KebabMenuHorizontal({ isOpen, setIsOpen, title, isFavori
             ) : (
               <FaRegHeart className={styles.icon} />
             )}
-            Favorites
+            Favorite
           </button>
 
           <button

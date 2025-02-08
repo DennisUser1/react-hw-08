@@ -322,14 +322,14 @@
     height: 13px;
   }
 
-  .deleteButton {
+  /* .deleteButton {
     position: absolute;
     top: 42px;
   }
 
   .updateButton {
     top: 88px;
-  }
+  } */
 
   .wrapperTitleCard {
     padding-bottom: 20px;
@@ -341,3 +341,21 @@
     padding-bottom: 10px;
   }
 }
+
+
+.cardHeight190 .deleteButton {
+  top: 54px;  
+}
+
+.cardHeight190 .updateButton {
+  top: 100px;  
+}
+
+/* @media screen and (min-width: 300px) and (max-width: 359px) {
+  .cardHeight190 .deleteButton {
+    top: 54px;  
+  }
+  .cardHeight190 .updateButton {
+    top: 100px;  
+  }
+} */

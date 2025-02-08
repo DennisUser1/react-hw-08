@@ -243,6 +243,7 @@ export default function ContactList() {
                         avatar={contact.avatar}
                         gender={contact.gender}
                         nameRef={(el) => (contactRefs.current[contact.id] = el)}
+                        cardHeight={contactHeights[contact.id]?.maxHeight === "190px" ? "max190" : "default"}
                       />
                     </li>
                   );
