@@ -109,6 +109,64 @@ export default function ContactList() {
     dispatch(undoDeleteContact(deletedContact));
   };
 
+  const renderNoContactsMessage = () => {
+    if (isSearching) {
+      return (
+        <div className={styles.messageWrapper}>
+          <div className={styles.messageContentWrapper}>
+            <GiBoomerang className={styles.messageIconWarning} size="24" />
+            <p className={styles.messageWarning}>
+              No contacts found matching your search criteria.
+              <br />
+              Try refining your search.
+            </p>
+          </div>
+        </div>
+      );
+    } else {
+      return (
+        <div className={styles.messageWrapper}>
+          <div className={styles.messageContentWrapper}>
+            <FaChess className={styles.messageIconInfo} size="16" />
+            <p className={styles.messageInfo}>
+              No contacts are available at the moment.
+              <br />
+              <span style={{ color: textColor }}>
+                <TypeAnimation
+                  sequence={[
+                    "Please,",
+                    800,
+                    () => setTextColor("#313131"),
+                    "Please, add",
+                    800,
+                    () => setTextColor("#0000ff"),
+                    "Please, add some",
+                    800,
+                    () => setTextColor("#ff00ff"),
+                    "Please, add some contacts",
+                    800,
+                    () => setTextColor("#7b2cb3"),
+                    "Please, add some contacts to view",
+                    800,
+                    () => setTextColor("#ff0000"),
+                    "Please, add some contacts to view them",
+                    800,
+                    () => setTextColor("#b91b6a"),
+                    "Please, add some contacts to view them here.",
+                    1000,
+                    () => setTextColor("#000000"),
+                    "",
+                  ]}
+                  repeat={Infinity}
+                />
+              </span>
+            </p>
+          </div>
+        </div>
+      );
+    }
+  };
+
   return (
     <>
       <div className={styles.boxBackground}>
@@ -141,63 +199,7 @@ export default function ContactList() {
       </div>
 
       {!isLoading && filteredContacts.length === 0 ? (
-        <>
-        isSearching ? (
-          <div className={styles.messageWrapper}>
-            <div className={styles.messageContentWrapper}>
-              <GiBoomerang className={styles.messageIconWarning} size="24" />
-              <p className={styles.messageWarning}>
-                No contacts found matching your search criteria.
-                <br />
-                Try refining your search.
-              </p>
-            </div>
-          </div>
-        ) : (
-          <div className={styles.messageWrapper}>
-            <div className={styles.messageContentWrapper}>
-              <FaChess className={styles.messageIconInfo} size="16" />
-              <p className={styles.messageInfo}>
-                No contacts are available at the moment.
-                <br />
-                <span
-                  style={{
-                    color: textColor,
-                  }}
-                >
-                  <TypeAnimation
-                    sequence={[
-                      "Please,",
-                      800,
-                      () => setTextColor("#313131"),
-                      "Please, add",
-                      800,
-                      () => setTextColor("#0000ff"),
-                      "Please, add some",
-                      800,
-                      () => setTextColor("#ff00ff"),
-                      "Please, add some contacts",
-                      800,
-                      () => setTextColor("#7b2cb3"),
-                      "Please, add some contacts to view",
-                      800,
-                      () => setTextColor("#ff0000"),
-                      "Please, add some contacts to view them",
-                      800,
-                      () => setTextColor("#b91b6a"),
-                      "Please, add some contacts to view them here.",
-                      1000,
-                      () => setTextColor("#000000"),
-                      "",
-                    ]}
-                    repeat={Infinity}
-                  />
-                </span>
-              </p>
-            </div>
-          </div>
-        )
-    </>
+        renderNoContactsMessage()
       ) : (
         <>
           <AlphabeticScroll
@@ -245,7 +247,11 @@ export default function ContactList() {
                         avatar={contact.avatar}
                         gender={contact.gender}
                         nameRef={(el) => (contactRefs.current[contact.id] = el)}
-                        cardHeight={contactHeights[contact.id]?.maxHeight === "190px" ? "max190" : "default"}
+                        cardHeight={
+                          contactHeights[contact.id]?.maxHeight === "190px"
+                            ? "max190"
+                            : "default"
+                        }
                       />
                     </li>
                   );
