@@ -25,3 +25,4 @@ export const selectFilteredContacts = createSelector(
       .sort((a, b) => a.name.localeCompare(b.name));
   }  
 );
+

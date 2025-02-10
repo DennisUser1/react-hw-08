@@ -141,6 +141,7 @@ export default function ContactList() {
       </div>
 
       {!isLoading && filteredContacts.length === 0 ? (
+        <>
         isSearching ? (
           <div className={styles.messageWrapper}>
             <div className={styles.messageContentWrapper}>
@@ -196,6 +197,7 @@ export default function ContactList() {
             </div>
           </div>
         )
+    </>
       ) : (
         <>
           <AlphabeticScroll

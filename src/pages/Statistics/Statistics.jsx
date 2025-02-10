@@ -18,11 +18,12 @@ export default function Statistics() {
   const updatedCount = useSelector(selectUpdatedContactsCount);
 
   useEffect(() => {
-    if (contacts.length > 0) {}
-    dispatch(fetchContacts());
-    dispatch(fetchStatistics());
-  }, [contacts]);
-
+    if (contacts.length === 0) {
+      dispatch(fetchContacts());
+      dispatch(fetchStatistics());
+    }
+  }, [contacts.length, dispatch]);
+  
   return (
     <div className={styles.statisticsContainer}>
       <GiChart className={styles.statisticsIcon} />

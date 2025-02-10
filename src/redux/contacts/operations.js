@@ -64,6 +64,7 @@ export const undoDeleteContact = createAsyncThunk(
   async (contact, thunkAPI) => {
     try {
       const response = await axios.post("/contacts", contact);
+      toastSuccess("Contact successfully restored!");
       return response.data;
     } catch (error) {
       toastError("Error undoing contact deletion.");
@@ -107,12 +108,14 @@ export const fetchStatistics = createAsyncThunk(
   async (_, { getState, rejectWithValue }) => {
     try {
       const { contacts } = getState();
+      // console.log(contacts.nonExistentProperty.test);  // error message for test
       const addedCount = contacts.addedCount;
       const deletedCount = contacts.deletedCount;
       const updatedCount = contacts.updatedCount;
 
       return { addedCount, deletedCount, updatedCount };
     } catch (error) {
+      toastError("Failed to fetch contact statistics. Please try again.");
       return rejectWithValue(error.message);
     }
   }
