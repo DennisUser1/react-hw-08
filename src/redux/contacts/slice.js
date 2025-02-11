@@ -7,7 +7,7 @@ import {
     updateContact,
     fetchStatistics,
 } from "./operations.js";
-import { logOut } from "../auth/operations.js";
+import { logOut, register } from "../auth/operations.js";
 import { handlePending, handleRejected, handleFulfilled } from "../handlers.js";
 
 const initialState = {
@@ -47,6 +47,11 @@ const contactsSlice = createSlice({
           addedCount: state.addedCount,
           deletedCount: state.deletedCount,
           updatedCount: state.updatedCount,
+        };
+      })
+      .addCase(register.fulfilled, (state) => {
+        return {
+          ...initialState,
         };
       })
       .addCase(fetchContacts.fulfilled, (state, action) => {

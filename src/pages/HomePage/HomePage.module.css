@@ -18,6 +18,13 @@
   gap: 20px;
 }
 
+.centerContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 .typeText {
   position: absolute;
   top: 35%;
@@ -39,6 +46,8 @@
   max-width: 1000px;
   margin-left: 16px;
   margin-right: 16px;
+  word-wrap: break-word;
+  word-break: break-all;
 }
 
 .desc {
@@ -56,7 +65,7 @@
 
 .button {
   position: absolute;
-  top: 75%;
+  top: 80%;
   width: 200px;
   display: flex;
   justify-content: center;
@@ -91,11 +100,18 @@
   }
 }
 
-@media screen and (max-width: 800px) {
+@media screnn and (min-width: 300px) and (max-width: 359px) {
+.title {
+    font-size: 38px;
+  }
+}
+
+@media screen and (min-width: 360px) and (max-width: 800px) {
   .title {
     font-size: 38px;
   }
 }
+
 @media screen and (min-width: 800px) {
   .title {
     font-size: 64px;
