@@ -6,7 +6,13 @@ body,
 html {
   overflow-x: hidden;
   background-color: #313131;
+  /* height: 100%;
+  margin: 0; */
 }
+
+/* .main {
+  min-height: 100vh;
+} */
 
 .active {
   border-bottom: 1px solid #f8f7ff;
@@ -27,7 +33,7 @@ html {
 }
 
 .registrationPageWrapper {
-  height: 94vh;
+  height: 100vh;
 }
 
 .pageTitle {

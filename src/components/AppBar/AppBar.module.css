@@ -2,13 +2,16 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #212121;
+  /* background-color: #212121; */
   color: #f8f7ff;
   padding: 20px 40px;
   border-radius: 8px;
   box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
   background: linear-gradient(43deg, #313131 0%, #212121 46%, #313131 100%);
   position: relative;
+  /* position: sticky;
+  top: 0;
+  left: 0; */
 }
 
 .navigationItems {
