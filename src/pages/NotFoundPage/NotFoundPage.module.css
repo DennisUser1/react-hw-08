@@ -1,9 +1,9 @@
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@800&family=Roboto:wght@100;300&display=swap");
 
+/*
 * {
   box-sizing: border-box;
   transform-style: preserve-3d;
-}
+} */
 
 .noBorder {
   border-bottom: none;
@@ -213,6 +213,7 @@ p {
   text-align: center;
   line-height: 1.5;
   max-width: clamp(26rem, 90vmin, 25rem);
+  color:#e6e6e6;
 }
 
 .info > p {

@@ -1,4 +1,4 @@
-import { lazy, useEffect } from "react";
+import { Suspense, lazy, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import PrivateRoute from "components/PrivateRoute";
@@ -40,7 +40,7 @@ const App = () => {
   return isRefresh ? (
     <Loader /> 
   ) : (
-      // <Suspense fallback={<Loader />}>
+      <Suspense fallback={<Loader />}>
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<HomePage />} />
@@ -79,7 +79,7 @@ const App = () => {
           </Route>
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
-      // </Suspense>
+      </Suspense>
   );
 };
 

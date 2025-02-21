@@ -1,12 +1,24 @@
-import { useLayoutEffect } from "react";
+import { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import styles from "./NotFoundPage.module.css";
 
 export default function NotFoundPage() {
-  useLayoutEffect(() => {
-    document.body.classList.add(styles.bodyNotFound);
+  useEffect(() => {
+    const style = document.createElement("style");
+    style.id = "notfound-styles";
+    style.innerHTML = `
+      * {
+        box-sizing: border-box;
+        transform-style: preserve-3d;
+      }
+    `;
+    document.head.appendChild(style);
+
     return () => {
-      document.body.classList.remove(styles.bodyNotFound);
+      const existingStyle = document.getElementById("notfound-styles");
+      if (existingStyle) {
+        existingStyle.remove();
+      }
     };
   }, []);
 
