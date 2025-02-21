@@ -1,17 +1,21 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useDispatch } from "react-redux";
+import { useState } from "react";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { logIn } from "../../redux/auth/operations.js";
 import { schemaLogin } from "../../shared/helpers/loginSchema.js";
 import styles from "./LoginForm.module.css";
 
 export default function LoginForm() {
+  const [showPassword, setShowPassword] = useState(false);
+  const dispatch = useDispatch();
+
   const initialValues = {
     email: "",
     password: "",
   };
-  const dispatch = useDispatch();
-
+  
   const handleSubmit = (values, options) => {
     dispatch(logIn(values));
     options.resetForm();
@@ -43,13 +47,22 @@ export default function LoginForm() {
 
           <label className={styles.label}>
             Password
-            <Field
-              type="password"
-              name="password"
-              id="password"
-              autoComplete="off"
-              className={styles.input}
-            />
+            <div className={styles.passwordWrapper}>
+              <Field
+                type={showPassword ? "password" : "text"}
+                name="password"
+                id="password"
+                autoComplete="off"
+                className={styles.input}
+              />
+              <button
+                type="button"
+                className={styles.eyeIcon}
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? <FaEyeSlash /> : <FaEye />}
+              </button>
+            </div>
             <ErrorMessage
               name="password"
               component="span"

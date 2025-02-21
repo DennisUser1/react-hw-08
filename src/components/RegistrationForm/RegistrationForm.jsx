@@ -1,18 +1,23 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useDispatch } from "react-redux";
+import { useState } from "react";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { schemaRegistration } from "../../shared/helpers/registrationSchema.js";
 import { register } from "../../redux/auth/operations.js";
 import styles from "./RegistrationForm.module.css";
 
 export default function RegistrationForm() {
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const dispatch = useDispatch();
+
   const initialValues = {
     name: "",
     email: "",
     password: "",
     confirmPassword: "",
   };
-  const dispatch = useDispatch();
 
   const handleSubmit = (values, options) => {
     dispatch(register(values));
@@ -60,13 +65,22 @@ export default function RegistrationForm() {
           </label>
           <label className={styles.label}>
             Password
-            <Field
-              type="password"
-              name="password"
-              id="password"
-              autoComplete="off"
-              className={styles.input}
-            />
+            <div className={styles.passwordWrapper}>
+              <Field
+                type={showPassword ? "password" : "text"}
+                name="password"
+                id="password"
+                autoComplete="off"
+                className={styles.input}
+              />
+              <button
+                type="button"
+                className={styles.eyeIcon}
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? <FaEyeSlash /> : <FaEye />}
+              </button>
+            </div>
             <ErrorMessage
               name="password"
               component="span"
@@ -75,13 +89,22 @@ export default function RegistrationForm() {
           </label>
           <label className={styles.label}>
             Confirm Password
-            <Field
-              type="password"
-              name="confirmPassword"
-              id="confirmPassword"
-              autoComplete="off"
-              className={styles.input}
-            />
+            <div className={styles.passwordWrapper}>
+              <Field
+                type={showConfirmPassword ? "password" : "text"}
+                name="confirmPassword"
+                id="confirmPassword"
+                autoComplete="off"
+                className={styles.input}
+              />
+              <button
+                type="button"
+                className={styles.eyeIcon}
+                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+              >
+                {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
+              </button>
+            </div>
             <ErrorMessage
               name="confirmPassword"
               component="span"
