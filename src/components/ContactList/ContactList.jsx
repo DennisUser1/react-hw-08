@@ -55,21 +55,27 @@ export default function ContactList() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const visibleLetter = Object.entries(letterRefs.current).find(
-        ([letter, ref]) => {
-          const rect = ref.getBoundingClientRect();
-          return rect.top >= 0 && rect.top <= window.innerHeight * 0.2;
-        }
-      );
-
-      if (visibleLetter) {
-        setActiveLetter(visibleLetter[0]);
+      let lastVisibleLetter = null;
+  
+      Object.entries(letterRefs.current).forEach(([letter, ref]) => {
+        const rect = ref.getBoundingClientRect();
+        if (
+          (rect.top >= 0 && rect.top <= window.innerHeight * 0.2) || 
+          (rect.bottom <= window.innerHeight && rect.top < window.innerHeight)
+        ) {
+          lastVisibleLetter = letter;
+        }        
+      });
+  
+      if (lastVisibleLetter) {
+        setActiveLetter(lastVisibleLetter);
       }
     };
-
+  
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+  
 
   const handleFlip = (id) => {
     setFlippedContacts((prev) => ({
