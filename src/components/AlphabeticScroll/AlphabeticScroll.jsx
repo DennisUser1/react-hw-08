@@ -7,7 +7,7 @@ const AlphabeticScroll = ({ groupedContacts, onLetterClick, activeLetter }) => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.innerWidth <= 768 && window.scrollY > 800) {
+      if (window.innerWidth <= 768 && window.scrollY > 500) {
         setIsVisible(true);
       } else {
         setIsVisible(false);
