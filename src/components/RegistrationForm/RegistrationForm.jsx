@@ -67,7 +67,7 @@ export default function RegistrationForm() {
             Password
             <div className={styles.passwordWrapper}>
               <Field
-                type={showPassword ? "password" : "text"}
+                type={showPassword ? "text" : "password"}
                 name="password"
                 id="password"
                 autoComplete="off"
@@ -78,7 +78,7 @@ export default function RegistrationForm() {
                 className={styles.eyeIcon}
                 onClick={() => setShowPassword(!showPassword)}
               >
-                {showPassword ? <FaEyeSlash /> : <FaEye />}
+                {showPassword ? <FaEye /> : <FaEyeSlash />}
               </button>
             </div>
             <ErrorMessage
@@ -91,7 +91,7 @@ export default function RegistrationForm() {
             Confirm Password
             <div className={styles.passwordWrapper}>
               <Field
-                type={showConfirmPassword ? "password" : "text"}
+                type={showConfirmPassword ? "text" : "password"}
                 name="confirmPassword"
                 id="confirmPassword"
                 autoComplete="off"
@@ -102,7 +102,7 @@ export default function RegistrationForm() {
                 className={styles.eyeIcon}
                 onClick={() => setShowConfirmPassword(!showConfirmPassword)}
               >
-                {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
+                {showConfirmPassword ? <FaEye /> : <FaEyeSlash />}
               </button>
             </div>
             <ErrorMessage

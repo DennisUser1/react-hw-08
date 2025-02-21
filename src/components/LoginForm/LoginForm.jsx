@@ -49,7 +49,7 @@ export default function LoginForm() {
             Password
             <div className={styles.passwordWrapper}>
               <Field
-                type={showPassword ? "password" : "text"}
+                type={showPassword ? "text" : "password"}
                 name="password"
                 id="password"
                 autoComplete="off"
@@ -60,7 +60,7 @@ export default function LoginForm() {
                 className={styles.eyeIcon}
                 onClick={() => setShowPassword(!showPassword)}
               >
-                {showPassword ? <FaEyeSlash /> : <FaEye />}
+                {showPassword ? <FaEye /> : <FaEyeSlash />}
               </button>
             </div>
             <ErrorMessage
