@@ -7,7 +7,10 @@ const AlphabeticScroll = ({ groupedContacts, onLetterClick, activeLetter }) => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.innerWidth <= 768 && window.scrollY > 500) {
+      const numberOfElements = Object.keys(groupedContacts).length;
+      const threshold = numberOfElements <= 3 ? 500 : 800;
+
+      if (window.innerWidth <= 768 && window.scrollY > threshold) {
         setIsVisible(true);
       } else {
         setIsVisible(false);
@@ -21,7 +24,7 @@ const AlphabeticScroll = ({ groupedContacts, onLetterClick, activeLetter }) => {
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("resize", handleScroll);
     };
-  }, []);
+  }, [groupedContacts]); 
 
   const hasContacts = Object.keys(groupedContacts).length > 0;
 
