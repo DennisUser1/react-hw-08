@@ -55,11 +55,11 @@ export default function ContactForm() {
   const numberFieldId = useId();
 
   const handleSubmit = (values, actions) => {
-    const existingContactByNameAndNumber = contacts.some(
+    const existingContactByNameAndNumber = contacts.find(
       (contact) =>
         contact.name === values.name && contact.number === values.number
     );
-    const existingContactByNumber = contacts.some(
+    const existingContactByNumber = contacts.find(
       (contact) =>
         contact.number === values.number && contact.name !== values.name
     );
@@ -68,10 +68,24 @@ export default function ContactForm() {
       toastInfoDuplicate(
         `The contact already exists with this name: <strong>${values.name}</strong> and number: <strong>${values.number}</strong>.`
       );
+      setTimeout(() => {
+        window.dispatchEvent(
+          new CustomEvent("scrollToContact", {
+            detail: { contactId: existingContactByNameAndNumber.id },
+          })
+        );
+      }, 300);
     } else if (existingContactByNumber) {
       toastInfoDuplicate(
         `This number: <strong>${values.number}</strong> is already in the system.`
       );
+      setTimeout(() => {
+        window.dispatchEvent(
+          new CustomEvent("scrollToContact", {
+            detail: { contactId: existingContactByNumber.id },
+          })
+        );
+      }, 300);
     } else {
       dispatch(
         addContact({

@@ -57,32 +57,35 @@ export default function ContactList() {
     const handleScroll = () => {
       let lastVisibleLetter = null;
       let closestBottomLetter = null;
-  
+
       Object.entries(letterRefs.current).forEach(([letter, ref]) => {
         if (!ref) return;
-  
+
         const rect = ref.getBoundingClientRect();
         const viewportHeight = window.innerHeight;
-  
+
         if (
-          (rect.top >= 0 && rect.top <= viewportHeight * 0.2) || 
+          (rect.top >= 0 && rect.top <= viewportHeight * 0.2) ||
           (rect.bottom <= viewportHeight && rect.top < viewportHeight)
         ) {
           lastVisibleLetter = letter;
         }
-  
-        if (rect.bottom > viewportHeight * 0.8 && rect.bottom < viewportHeight + 50) {
+
+        if (
+          rect.bottom > viewportHeight * 0.8 &&
+          rect.bottom < viewportHeight + 50
+        ) {
           closestBottomLetter = letter;
         }
       });
-  
+
       setActiveLetter(lastVisibleLetter || closestBottomLetter);
     };
-  
+
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-   
+
   const handleFlip = (id) => {
     setFlippedContacts((prev) => ({
       ...prev,
@@ -98,7 +101,7 @@ export default function ContactList() {
     if (numberOfLines === 2) {
       return { maxHeight: "230px", height: "170px" };
     } else if (numberOfLines === 3) {
-      return { maxHeight: "190px", height: "300px" };
+      return { maxHeight: "200px", height: "300px" };
     }
     return {};
   };
@@ -116,6 +119,34 @@ export default function ContactList() {
       }
     });
   }, [filteredContacts]);
+
+  useEffect(() => {
+    const handleScrollToContact = (event) => {
+      const { contactId } = event.detail;
+      const element = contactRefs.current[contactId];
+
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({
+            behavior: "smooth",
+            block: "center",
+          });
+        }, 100);
+        const contactItem = element.closest("li"); 
+        if (contactItem) {
+          contactItem.classList.add(styles.shake);
+          setTimeout(() => {
+            contactItem.classList.remove(styles.shake);
+          }, 7000);
+        }
+      }
+    };
+
+    window.addEventListener("scrollToContact", handleScrollToContact);
+    return () => {
+      window.removeEventListener("scrollToContact", handleScrollToContact);
+    };
+  }, []);
 
   const handleUndoDelete = () => {
     dispatch(undoDeleteContact(deletedContact));
@@ -244,8 +275,8 @@ export default function ContactList() {
                     <li
                       key={contact.id}
                       className={`${styles.contactItem} ${
-                        flippedContacts[contact.id] ? styles.flipped : ""
-                      }`}
+                        styles.shakeAnimation
+                      } ${flippedContacts[contact.id] ? styles.flipped : ""}`}
                       style={{
                         marginBottom,
                         ...contactHeights[contact.id],

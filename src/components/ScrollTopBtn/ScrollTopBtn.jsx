@@ -12,7 +12,7 @@ const ScrollTopBtn = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 300 && ! isOnClick) {
+      if (window.scrollY > 400 && ! isOnClick) {
         dispatch(setVisible(true));
       } else {
         dispatch(setVisible(false));

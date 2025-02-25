@@ -34,6 +34,22 @@
   transform: rotateY(180deg);
 }
 
+/* ContactList.module.css */
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0) rotate(0); }
+  20% { transform: translateX(-4px) rotate(-2deg); }
+  40% { transform: translateX(4px) rotate(2deg); }
+  60% { transform: translateX(-4px) rotate(-2deg); }
+  80% { transform: translateX(4px) rotate(2deg); }
+}
+
+.shake {
+  animation: shake 0.7s ease-in-out;
+  animation-duration: 7s;
+  animation-iteration-count: 1;
+}
+
 .messageWrapper {
   display: flex;
   align-items: center;
